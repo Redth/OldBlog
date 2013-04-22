@@ -1,49 +1,47 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>
-            http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview
-        </loc>
+        <loc>http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview</loc>
         <lastmod>2013-04-22T15:34:12-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/why-we-needed-facebook-messenger</loc>
+        <loc>http://redth.info/why-we-needed-facebook-messenger</loc>
         <lastmod>2013-04-22T15:29:36-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/using-the-android-contact-picker-with-xamarin</loc>
+        <loc>http://redth.info/using-the-android-contact-picker-with-xamarin</loc>
         <lastmod>2013-04-22T15:34:42-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser</loc>
+        <loc>http://redth.info/the-problem-with-apples-push-notification-ser</loc>
         <lastmod>2013-04-22T15:34:59-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today</loc>
+        <loc>http://redth.info/get-your-monotouch-apps-ready-for-iphone-5-today</loc>
         <lastmod>2013-04-22T15:35:28-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/why-i-am-looking-forward-to-android</loc>
+        <loc>http://redth.info/why-i-am-looking-forward-to-android</loc>
         <lastmod>2013-04-22T15:31:21-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/month-with-android</loc>
+        <loc>http://redth.info/month-with-android</loc>
         <lastmod>2013-04-22T15:19:43-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/xamarin-evolve-2013</loc>
+        <loc>http://redth.info/xamarin-evolve-2013</loc>
         <lastmod>2013-04-22T15:42:45-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/blog/archives/</loc>
+        <loc>http://redth.info/blog/archives/</loc>
         <lastmod>2013-04-22T15:42:45-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/</loc>
+        <loc>http://redth.info/</loc>
         <lastmod>2013-04-22T15:42:45-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/robots.txt</loc>
+        <loc>http://redth.info/robots.txt</loc>
         <lastmod>2013-04-22T15:02:08-04:00</lastmod>
     </url>
 </urlset>

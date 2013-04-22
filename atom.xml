@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Redth]]></title>
-  <link href="http://Redth.github.io/Blog/atom.xml" rel="self"/>
-  <link href="http://Redth.github.io/Blog/"/>
-  <updated>2013-04-22T15:45:19-04:00</updated>
-  <id>http://Redth.github.io/Blog/</id>
+  <link href="http://redth.info/atom.xml" rel="self"/>
+  <link href="http://redth.info/"/>
+  <updated>2013-04-22T15:47:13-04:00</updated>
+  <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Xamarin Evolve 2013]]></title>
-    <link href="http://Redth.github.io/Blog/xamarin-evolve-2013"/>
+    <link href="http://redth.info/xamarin-evolve-2013"/>
     <updated>2013-04-20T00:00:00-04:00</updated>
-    <id>http://Redth.github.io/Blog/xamarin-evolve-2013</id>
+    <id>http://redth.info/xamarin-evolve-2013</id>
     <content type="html"><![CDATA[<p>Xamarin Evolve 2013 was an Awesome conference!  I got to see a lot of familiar faces, and meet plenty of new ones!  It&#8217;s such a great experience to see and talk with such great people who I&#8217;d only otherwise know online!</p>
 
 <p>I also had the great privilege to do some speaking at Evolve!  I&#8217;ve posted my slides below and will update the post with links to the videos when they are available!</p>
@@ -30,7 +30,7 @@
 
 <p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-push-notifications-with-pushsharp">Speaker Deck - Push Notifications with PushSharp</a></p>
 
-<script async="true" class="speakerdeck-embed" data-id="bea8f1408c130130cb61123138155451" src="http://Redth.github.io/Blog//speakerdeck.com/assets/embed.js"> </script>
+<script async="true" class="speakerdeck-embed" data-id="bea8f1408c130130cb61123138155451" src="http://redth.info//speakerdeck.com/assets/embed.js"> </script>
 
 
 <h2>Barcode Scanning with ZXing</h2>
@@ -39,17 +39,17 @@
 
 <p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-cross-platform-barcode-scanning-with-zxing#">Speaker Deck - Cross Platform Barcode Scanning with ZXing</a></p>
 
-<script async="true" class="speakerdeck-embed" data-id="4640de208c160130007512313d181421" src="http://Redth.github.io/Blog//speakerdeck.com/assets/embed.js"> </script>
+<script async="true" class="speakerdeck-embed" data-id="4640de208c160130007512313d181421" src="http://redth.info//speakerdeck.com/assets/embed.js"> </script>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[A Month With Android]]></title>
-    <link href="http://Redth.github.io/Blog/month-with-android"/>
+    <link href="http://redth.info/month-with-android"/>
     <updated>2013-02-28T00:00:00-05:00</updated>
-    <id>http://Redth.github.io/Blog/a-month-with-android</id>
-    <content type="html"><![CDATA[<p>Just before the new year, <a href="http://Redth.github.io/Blog/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
+    <id>http://redth.info/a-month-with-android</id>
+    <content type="html"><![CDATA[<p>Just before the new year, <a href="http://redth.info/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
 
 <p>Well, it’s been about a month now since I’ve switched back to Android, and I’m not looking back anytime soon!  I’m going to do a quick recap about the things I love, and the things I miss:</p>
 
@@ -63,28 +63,28 @@
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Quick-Toggles.png" alt="Quick Toggle Settings" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/Android-Love/Quick-Toggles.png" alt="Quick Toggle Settings" /></p></blockquote>
 
 <ul>
 <li><strong>Apps without Borders</strong> One thing that always bugged me about iOS as an end user was how each app felt like the lonely island it was.  I love in Android how when I tap a link, or perform some action, I’ll get a little menu asking me which App I’d like to have handle this action.  iOS does this to an extent now, but Android is better at it, and Android effectively lets me choose a default App to deal with the content type.  I love not being forced into using the default Mail app or Browser, if I don’t want to!</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Share-Content.png" alt="Sharing Content" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/Android-Love/Share-Content.png" alt="Sharing Content" /></p></blockquote>
 
 <ul>
 <li><strong>Google Now</strong> Siri is great, but Google Now is better in almost all respects.  I find the voice transcription way faster and more accurate, and Google Now’s ‘card’ design really works for me.  If you can get over the fact Google is in your email, you can learn to love having a card pop up with tracking info on the package you just ordered, or movie tickets you bought.  There’s so much depth to Google Now it could be its own post, but it’s safe to say I really like it.</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Google-Now-Cards.png" alt="Google Now Cards" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/Android-Love/Google-Now-Cards.png" alt="Google Now Cards" /></p></blockquote>
 
 <ul>
 <li><strong>Notifications</strong> I’ve always liked Google’s notification bar way better than how iOS deals with it, so I’m not surprised to feel right at home with it.  I am pleasantly surprised, however, at how useful having an LED indicator for notifications is.  The LED basically allows me to decide if I need to even turn my screen on or not.  I also really like how apps are starting to take advantage of rich notifications in the pull down tray.  Music apps allow me to skip next, twitter notifications allow me to tap reply right from in the tray.  This is a really strong point for Android, and I find myself wasting much less time on Notifications than I did in iOS</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Rich-Notification.png" alt="Rich Notifications" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/Android-Love/Rich-Notification.png" alt="Rich Notifications" /></p></blockquote>
 
 <ul>
 <li><strong>UI</strong> This is where many of you will disagree with me.  I actually have taken a strong liking to the Android UI, or at least the apps that do a good job of it.  If you haven’t played with Android recently, you may not realize that developers have started to take care with how they design their apps.  There’s still a lot of junk out there, but for nearly any App I use on a regular basis, there’s a very nicely designed app Available now.</li>
@@ -92,7 +92,7 @@
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Lock-Screen.png" alt="Lock Screen" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/Android-Love/Lock-Screen.png" alt="Lock Screen" /></p></blockquote>
 
 <ul>
 <li><strong>FREEEDOM!!!</strong> Seriously though, it’s really liberating not being told you can’t do something on your device.  If I want to use a different keyboard, I can.  If I want to use a different default Mail app, I can.  I am sick of Apple telling me to do things a certain way.  I realize for most users, that is fine, but I’m a power user darnit, let me tweak!</li>
@@ -133,10 +133,10 @@
   
   <entry>
     <title type="html"><![CDATA[Why I'm Looking forward to Android]]></title>
-    <link href="http://Redth.github.io/Blog/why-i-am-looking-forward-to-android"/>
+    <link href="http://redth.info/why-i-am-looking-forward-to-android"/>
     <updated>2012-12-28T00:00:00-05:00</updated>
-    <id>http://Redth.github.io/Blog/why-i-am-looking-forward-to-android</id>
-    <content type="html"><![CDATA[<p><img src="http://Redth.github.io/Blog/Android-And-Back/iOS-to-Android.jpg" alt="Mou icon" /></p>
+    <id>http://redth.info/why-i-am-looking-forward-to-android</id>
+    <content type="html"><![CDATA[<p><img src="http://redth.info/Android-And-Back/iOS-to-Android.jpg" alt="Mou icon" /></p>
 
 <h2>The Back Story</h2>
 
@@ -168,7 +168,7 @@
 
 <h2>What I&#8217;ll Miss</h2>
 
-<p><img src="http://Redth.github.io/Blog/images/Android-And-Back/iphone-sad.jpg" alt="Mou icon" /></p>
+<p><img src="http://redth.info/images/Android-And-Back/iphone-sad.jpg" alt="Mou icon" /></p>
 
 <p>Let&#8217;s be honest.  There&#8217;s some things iOS just does right.  I&#8217;ll no doubt miss several things about my iPhone, but I think we&#8217;re finally at the stage the things I miss on Android are greater than those I miss on iPhone:</p>
 
@@ -188,9 +188,9 @@
   
   <entry>
     <title type="html"><![CDATA[Get your MonoTouch apps ready for iPhone 5 / iOS 6 today!]]></title>
-    <link href="http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today"/>
+    <link href="http://redth.info/get-your-monotouch-apps-ready-for-iphone-5-today"/>
     <updated>2012-09-13T00:00:00-04:00</updated>
-    <id>http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today</id>
+    <id>http://redth.info/get-your-monotouch-apps-ready-for-iphone-5-today</id>
     <content type="html"><![CDATA[<p>So the new iPhone 5 has arrived, as well as the Gold Master iOS6 SDK!  Hurray!</p>
 
 <p>Unless you&#8217;ve been under a rock, you know that the iPhone 5 has a taller screen, which means a new screen resolution to deal with for us developers!  Apple is lacking  bit in their own documentation, but a few developers have figured out how to best handle the new resolution.</p>
@@ -210,13 +210,13 @@
 <p>This file must actually be <em>640x1136</em> pixels in size.
 Add this file to your MonoTouch Application Project, and make sure the Build mode is set to Content.</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/MonoTouch-iPhone5/Default-568h.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/MonoTouch-iPhone5/Default-568h.png" alt="" /></p></blockquote>
 
 <h3>Change the Simulator to iPhone (Retina 4-inch)</h3>
 
 <p>After your MonoTouch Application starts in debug mode, you may need to change the Simulator to use the new hardware type.  Go to the Hardware -> Device menu, and select “<em>iPhone (Retina 4-inch)</em>”.  You may need to re-launch your app after doing this.</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/MonoTouch-iPhone5/iPhone5-Simulator.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/MonoTouch-iPhone5/iPhone5-Simulator.png" alt="" /></p></blockquote>
 
 <p>Presto, your app now runs in ‘Tall&#8217; mode!</p>
 
@@ -358,9 +358,9 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
   
   <entry>
     <title type="html"><![CDATA[The problem with Apples Push Notification Service... Solutions and Workarounds...]]></title>
-    <link href="http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser"/>
+    <link href="http://redth.info/the-problem-with-apples-push-notification-ser"/>
     <updated>2012-09-06T00:00:00-04:00</updated>
-    <id>http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser</id>
+    <id>http://redth.info/the-problem-with-apples-push-notification-ser</id>
     <content type="html"><![CDATA[<p>Push Notifications have intrigued me since Apple first introduced them in iOS years ago.  RIM had been doing this for a while, but as a platform it never excited me.  As soon as the documentation for their APNs protocol was released I started busily implementing a solution to send push notifications in C#.  The first version of the protocol was already terrible, but I’m not going to harp on that as we’ve got a newer version that’s only slightly better to tear apart.</p>
 
 <p>I’m the author of PushSharp (https://github.com/Redth/PushSharp) which is a .NET library to assist developers in delivering push notifications on as many platforms as possible (iOS, Android, Windows, Windows Phone, and HTML5).  This library was the culmination of my previous efforts in individual libraries (APNS-Sharp and C2DM-Sharp mostly), and represents a more abstracted, standardized, easier way to support push notifications on all the platforms you may target as a developer.</p>
@@ -372,10 +372,10 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 <p>I had great hopes that Apple finally fixed its protocol when they introduced the Enhanced format (basically v2 of their protocol).  Both the original and the enhanced format are binary protocols.  You can quickly see the differences between the two in the diagrams below:</p>
 
 <blockquote><p>Original Protocol:
-<img src="http://Redth.github.io/Blog/images/Problem-With-APNS/Original-Binary-Protocol.png" alt="" /></p>
+<img src="http://redth.info/images/Problem-With-APNS/Original-Binary-Protocol.png" alt="" /></p>
 
 <p>Enhanced Protocol:
-<img src="http://Redth.github.io/Blog/images/Problem-With-APNS/Enhanced-Binary-Protocol.png" alt="" /></p></blockquote>
+<img src="http://redth.info/images/Problem-With-APNS/Enhanced-Binary-Protocol.png" alt="" /></p></blockquote>
 
 <p>You’ll notice that in the enhanced protocol, there’s two additional bits of information (besides the first byte being 1, indicating that it’s the new protocol as opposed to 0 in the original).  These are two very good additions to the protocol:</p>
 
@@ -390,7 +390,7 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 <p>With the enhanced protocol also handles bad notifications it receives a bit differently. It still closes the connection to you when there’s an error, but before it does so, it sends back an error response packet.  You can see the format in the diagram below, along with a list of status codes and their meanings:</p>
 
 <blockquote><p>Error Response Packet:
-<img src="http://Redth.github.io/Blog/images/Problem-With-APNS/Error-Response-Packet.png" alt="" /></p></blockquote>
+<img src="http://redth.info/images/Problem-With-APNS/Error-Response-Packet.png" alt="" /></p></blockquote>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -455,7 +455,7 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 <p>Each time a notification is written to the connection stream, it is then added to a ‘Sent’ queue.  If an error response is received, the corresponding notification is located in the ‘Sent’ queue (by its identifier).  Anything before the error-causing notification in the queue is removed and assumed to be successfully sent.  Anything after the error-causing notification is assumed to be lost, and re-queued to the ‘To Send’ queue to be tried again.  There is also a cleanup thread running that constantly checks the oldest notification in the ‘Sent’ queue to see if it’s older than a few seconds and if so, it is assumed to have been successfully sent and is removed from the ‘Sent’ queue.  This effectively moves the waiting period for an error response outside of the scope of the connection to the APNS servers.  The diagram below illustrates how the Sent queue works:</p>
 
 <blockquote><p>PushSharp Sent Queue
-<img src="http://Redth.github.io/Blog/images/Problem-With-APNS/PushSharp-Sent-Queue.png" alt="" /></p></blockquote>
+<img src="http://redth.info/images/Problem-With-APNS/PushSharp-Sent-Queue.png" alt="" /></p></blockquote>
 
 <h3>Conclusion</h3>
 
@@ -465,9 +465,9 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
   
   <entry>
     <title type="html"><![CDATA[Using the Android Contact Picker with Xamarin.Mobile to Send an SMS in Mono for Android 4.0]]></title>
-    <link href="http://Redth.github.io/Blog/using-the-android-contact-picker-with-xamarin"/>
+    <link href="http://redth.info/using-the-android-contact-picker-with-xamarin"/>
     <updated>2011-12-08T00:00:00-05:00</updated>
-    <id>http://Redth.github.io/Blog/using-the-android-contact-picker-with-xamarin.mobile</id>
+    <id>http://redth.info/using-the-android-contact-picker-with-xamarin.mobile</id>
     <content type="html"><![CDATA[<p>First and foremost: Xamarin has been doing an awesome job with their MonoTouch and Mono for Android product line!  Huge kudos to the entire team for allowing us some much needed obj-c and java mobile platform escapism!</p>
 
 <p>If you don&#8217;t know about Xamarin, they are the company behind products allowing developers to write TRUELY NATIVE applications for Android and iOS in C#!  I honestly can&#8217;t say enough good things about these products, but you should check them out for yourself: http://xamarin.com</p>
@@ -590,17 +590,17 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
   
   <entry>
     <title type="html"><![CDATA[Why we needed Facebook Messenger]]></title>
-    <link href="http://Redth.github.io/Blog/why-we-needed-facebook-messenger"/>
+    <link href="http://redth.info/why-we-needed-facebook-messenger"/>
     <updated>2011-08-10T00:00:00-04:00</updated>
-    <id>http://Redth.github.io/Blog/why-we-needed-facebook-messenger</id>
-    <content type="html"><![CDATA[<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/01.png" alt="" /></p></blockquote>
+    <id>http://redth.info/why-we-needed-facebook-messenger</id>
+    <content type="html"><![CDATA[<blockquote><p><img src="http://redth.info/images/FB-MSG/01.png" alt="" /></p></blockquote>
 
 <p>So if you haven’t heard yet, Facebook has come out with their own BBM slash iMessage slash Kik slash WhatsApp slash slash slash…  Oh great, another messenger app that we don’t need?
 I live in a world where I’m geeked out for every new gadget and service on the planet.  I sign up first, I play around with the service, and I daydream about how wonderful my life would be if all my friends got onboard and started using this newfangled, awesome, life altering service!  Unfortunately, that’s all just a daydream.</p>
 
 <h3>My friends aren’t all Geeks</h3>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/02.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/FB-MSG/02.png" alt="" /></p></blockquote>
 
 <p>In the real world, most of my friends don’t care.  They are normal people, who can still sleep at night without a Google+ invite.  At the end of the day, if tech makes their life better, easier, or otherwise more fulfilling, they will use it.  If it doesn’t meet these requirements, why should they care?  I can’t disagree with this sentiment either looking at things from their perspective.  In fact I’ve made it a priority lately to not try and get all my family and friends using the latest and greatest new thing, or trying to get them to buy this device or that device.  Instead, I’m trying to practice restraint, and help them get what best suits THEIR needs, not my own desires projected onto their experiences.
 I recently bit my tongue as my sister decided a blackberry was the best device for her, simply because her husband has one for work, and they could chat for free over BBM.  I tried to explain to her that data is data, and they could easily use WhatsApp or Google Talk to chat no matter which device she picked.  In the end, I realized BBM would just work for them.  It wouldn’t matter if Whatsapp’s servers went down, or if her work’s firewall would block WhatsApp, it would JUST WORK, period.</p>
@@ -621,18 +621,18 @@ at all.  This problem seems to be amplified on weekends, when reliability is mos
 
 <h3>Data for the masses:  This changes everything.  Again.</h3>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/03.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/FB-MSG/03.png" alt="" /></p></blockquote>
 
 <p>Data has become fairly ubiquitous now for mobile users.  Almost all of my close friends have smartphones, and most of them have some sort of data plan.  Companies such as Kik or WhatsApp have tried to stick it to the man by making applications that replace traditional SMS’ing which use data instead of SMS.  They’re better, stronger, faster, and usually more reliable (or at least as reliable as Amazon’s cloud services).
 These applications are great.  I’ve even got some of my friends using them, and why not?  They seem to be more reliable, and have better features (like not having to pay $0.25 to send a picture!).  This fixes the problems of Reliability and Price, but it introduces a new problem: Ubiquity.  Check out this compatibility matrix, there is not one data based messenger app that covers all platforms.  How can I expect to get all my friends on board with this?</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/table.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/FB-MSG/table.png" alt="" /></p></blockquote>
 
 <p>Even if one app covered all the platforms, there’s still the difficulty of getting friend buy-in.  They need to get the app, register, and start using it.  Not an easy feat.  Plus, I’d still be stuck using SMS for the few friends still without data plans or smartphones.  This scenario would be better, but not perfect.</p>
 
 <h3>Your mom is on facebook</h3>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/04.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/FB-MSG/04.png" alt="" /></p></blockquote>
 
 <p>And your aunt, and your grandma!  Seriously, facebook has taken the world by storm.  It’s like one of those geek daydreams that actually came true, where ALL my friends actually signed up for and used the new geeky service (ok there’s a few stragglers and defiant friends, but heck, it’s their loss!).</p>
 
@@ -641,7 +641,7 @@ These applications are great.  I’ve even got some of my friends using them, an
 <p>In my world, once the Blackberry app is released, all my friends (who have smartphones and data plans) have no excuse not to use Facebook Messenger.  In addition, all my friends who text can still be included, as the Facebook Messenger creators were smart enough to incorporate the ability to include normal SMS numbers in your chats.  That means ideally, I still have to go into one app only to communicate with all my friends.
 Finally, Facebook Messenger integrates with Facebook Messages and Chat on the regular website.  I can finally transition from my desktop, to my phone, to my iPad, and back to my desktop seamlessly, without my friends knowing any different, and without losing my conversation history.  This is a big win for me!</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/FB-MSG/05.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/FB-MSG/05.png" alt="" /></p></blockquote>
 
 <h3>Ok Fanboy, settle down!</h3>
 
@@ -651,12 +651,12 @@ Finally, Facebook Messenger integrates with Facebook Messages and Chat on the re
   
   <entry>
     <title type="html"><![CDATA[MonoDroid - Custom ListAdapter for your ListView]]></title>
-    <link href="http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview"/>
+    <link href="http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview"/>
     <updated>2010-05-13T00:00:00-04:00</updated>
-    <id>http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview</id>
+    <id>http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview</id>
     <content type="html"><![CDATA[<p>I don’t know about you, but the main thing I’m interested in on any new mobile development platform for some reason, is LISTS. I think I’m so fixated on lists is because of the way the iPhone so successfully introduced the paradigm of list based navigation. Everything can be done in a series of lists (ok not really, but they are crucial to many apps!).</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/images/MonoDroid-Custom-ListAdapter/CustomList.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://redth.info/images/MonoDroid-Custom-ListAdapter/CustomList.png" alt="" /></p></blockquote>
 
 <p>Naturally then, the first thing I sought out to do on MonoDroid was to create a list. Easy, piece of cake… If you want to create a boring old list with a single line of text for each item. This is no doubt, an important part of every developer’s Hello World development phase, but it doesn’t take long before you’re craving images, several text elements, and possibly even some checkboxes and/or buttons (easy there tiger). For every ListView in Android, there is a prince charming Listview Adapter to save the day.</p>
 
