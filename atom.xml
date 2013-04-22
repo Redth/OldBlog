@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://Redth.github.io/Blog/atom.xml" rel="self"/>
   <link href="http://Redth.github.io/Blog/"/>
-  <updated>2013-04-22T15:39:53-04:00</updated>
+  <updated>2013-04-22T15:42:53-04:00</updated>
   <id>http://Redth.github.io/Blog/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -30,11 +30,17 @@
 
 <p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-push-notifications-with-pushsharp">Speaker Deck - Push Notifications with PushSharp</a></p>
 
+<script async="true" class="speakerdeck-embed" data-id="bea8f1408c130130cb61123138155451" src="http://Redth.github.io/Blog//speakerdeck.com/assets/embed.js"> </script>
+
+
 <h2>Barcode Scanning with ZXing</h2>
 
 <p>Barcodes have become increasingly popular in the Mobile space.  Learn how you can easily include scanning support with custom overlays using the ZXing.Net.Mobile component.  You will also learn how to generate barcodes from within your apps.  This session will also discuss various barcode scanning options, and the making of the ZXing.Net.Mobile component.</p>
 
 <p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-cross-platform-barcode-scanning-with-zxing#">Speaker Deck - Cross Platform Barcode Scanning with ZXing</a></p>
+
+<script async="true" class="speakerdeck-embed" data-id="4640de208c160130007512313d181421" src="http://Redth.github.io/Blog//speakerdeck.com/assets/embed.js"> </script>
+
 ]]></content>
   </entry>
   
