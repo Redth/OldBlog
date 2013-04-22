@@ -355,132 +355,226 @@
 
 <p>Here is what the layout xml looks like for my custom list item:</p>
 
-<p>~~~~{.xml}
-&lt;?xml version=&#8221;1.0&#8221; encoding=&#8221;utf-8&#8221;?>
-&lt;LinearLayout xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/widget28&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;80px&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ImageView</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/imageItem&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_gravity=</span><span class="s">&quot;center_vertical&quot;</span>
+</span><span class='line'>      <span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ImageView&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;LinearLayout</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/linearText&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_marginLeft=</span><span class="s">&quot;10px&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_marginTop=</span><span class="s">&quot;10px&quot;</span>
+</span><span class='line'>      <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;TextView</span>
+</span><span class='line'>      <span class="na">android:id=</span><span class="s">&quot;@+id/textTop&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:text=</span><span class="s">&quot;TextView&quot;</span>
+</span><span class='line'>          <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/TextView&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;TextView</span>
+</span><span class='line'>      <span class="na">android:id=</span><span class="s">&quot;@+id/textBottom&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:text=</span><span class="s">&quot;TextView&quot;</span>
+</span><span class='line'>          <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/TextView&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/LinearLayout&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>android:id="@+id/widget28"
-android:layout_width="fill_parent"
-android:layout_height="80px"
-</code></pre>
-
-<blockquote><pre><code>&lt;ImageView
-android:id="@+id/imageItem"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_vertical"
-    &gt;
-&lt;/ImageView&gt;
-&lt;LinearLayout
-android:id="@+id/linearText"
-android:layout_width="wrap_content"
-android:layout_height="fill_parent"
-android:orientation="vertical"
-android:layout_marginLeft="10px"
-android:layout_marginTop="10px"
-    &gt;
-    &lt;TextView
-    android:id="@+id/textTop"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="TextView"
-        &gt;
-    &lt;/TextView&gt;
-    &lt;TextView
-    android:id="@+id/textBottom"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="TextView"
-        &gt;
-    &lt;/TextView&gt;
-&lt;/LinearLayout&gt;
-</code></pre>
-
-<p></LinearLayout>
-~~~~</p></blockquote>
 
 <p>Once I have found references to these, I can set their text and image. Finally, I can return the <em>LinearLayout</em> View that I’ve been working on for this row. That wasn’t so hard, was it? Last, but not least, we need to actually deal with our <em>Activity</em> that holds the <em>ListView</em>. Up until now we had just created the adapter that our <em>ListView</em> was going to use. Now we need to actually hook an adapta’ up.</p>
 
 <p>Here’s what my Activity code looks like:</p>
 
-<p>~~~~{.csharp}
-using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.App</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Content</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Runtime</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Views</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Widget</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.OS</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">MonoDroid.CustomList</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="na"> [Activity(Label = &quot;1 CustomList&quot;, MainLauncher = true)]</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">CustomList</span> <span class="p">:</span> <span class="n">Activity</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">CustomListAdapter</span> <span class="n">listAdapter</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">CustomList</span><span class="p">(</span><span class="n">IntPtr</span> <span class="n">handle</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span><span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Set the Activity&#39;s view to our list layout       </span>
+</span><span class='line'>          <span class="n">SetContentView</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">customlist</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Create our adapter</span>
+</span><span class='line'>          <span class="n">listAdapter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CustomListAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Find the listview reference</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">listView</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ListView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">listView</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Hook up our adapter to our ListView</span>
+</span><span class='line'>          <span class="n">listView</span><span class="p">.</span><span class="n">Adapter</span> <span class="p">=</span> <span class="n">listAdapter</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Wire up the click event</span>
+</span><span class='line'>          <span class="n">listView</span><span class="p">.</span><span class="n">ItemClick</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">EventHandler</span><span class="p">&lt;</span><span class="n">ItemEventArgs</span><span class="p">&gt;(</span><span class="n">listView_ItemClick</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">void</span> <span class="nf">listView_ItemClick</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">ItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="c1">//Get our item from the list adapter</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">item</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">listAdapter</span><span class="p">.</span><span class="n">GetItemAtPosition</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Make a toast with the item name just to show it was clicked</span>
+</span><span class='line'>          <span class="n">Toast</span><span class="p">.</span><span class="n">MakeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; Clicked!&quot;</span><span class="p">,</span> <span class="n">ToastLength</span><span class="p">.</span><span class="n">Short</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>namespace MonoDroid.CustomList
-{</p>
-
-<pre><code>[Activity(Label = "1 CustomList", MainLauncher = true)]
-public class CustomList : Activity
-{
-    CustomListAdapter listAdapter;
-
-    public CustomList(IntPtr handle)
-        : base(handle)
-    {
-    }
-
-    protected override void OnCreate(Bundle bundle)
-    {
-        base.OnCreate(bundle);
-
-        //Set the Activity's view to our list layout        
-        SetContentView(Resource.layout.customlist);
-
-        //Create our adapter
-        listAdapter = new CustomListAdapter(this);
-
-        //Find the listview reference
-        var listView = FindViewById&lt;ListView&gt;(Resource.id.listView);
-
-        //Hook up our adapter to our ListView
-        listView.Adapter = listAdapter;
-
-        //Wire up the click event
-        listView.ItemClick += new EventHandler&lt;ItemEventArgs&gt;(listView_ItemClick);
-    }
-
-    void listView_ItemClick(object sender, ItemEventArgs e)
-    {
-        //Get our item from the list adapter
-        var item = this.listAdapter.GetItemAtPosition(e.Position);
-
-        //Make a toast with the item name just to show it was clicked
-        Toast.MakeText(this, item.Name + " Clicked!", ToastLength.Short).Show();
-    }
-}
-</code></pre>
-
-<p>}
-~~~~</p>
 
 <p>Here’s the layout xml behind this activity:</p>
 
-<p>~~~~{.xml}
-&lt;?xml version=&#8221;1.0&#8221; encoding=&#8221;utf-8&#8221;?>
-&lt;LinearLayout
-android:id=&#8221;@+id/widget28&#8221;
-android:layout_width=&#8221;fill_parent&#8221;
-android:layout_height=&#8221;fill_parent&#8221;
-android:orientation=&#8221;vertical&#8221;
-xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span>
+</span><span class='line'><span class="na">android:id=</span><span class="s">&quot;@+id/widget28&quot;</span>
+</span><span class='line'><span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ListView</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/listView&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/ListView&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<blockquote><pre><code>&lt;ListView
-android:id="@+id/listView"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-</code></pre></blockquote>
-
-<pre><code>&lt;/ListView&gt;
-</code></pre>
-
-<p></LinearLayout>
-~~~~</p>
 
 <p>So you can see in my Activity’s <em>OnCreate</em>, I’m calling the base method (important), and then setting the activity’s content view to the layout xml that I showed you above. I’m also creating an instance of the <em>CustomListAdapter</em> I made earlier, and finding a reference to my ListView, so that I can set my <em>ListView</em>’s .<em>Adapter</em> property to the instance of the <em>CustomListAdapter</em>. As a bonus, I register the <em>ItemClick</em> event of my <em>ListView</em>, and in it, retrieve the item for the given position, from my <em>CustomListAdapter</em>, using the method I added to the adapter (<em>GetItemPositionAt</em>). I then display a Toast with the name of the Animal clicked.</p>
 

@@ -103,66 +103,111 @@
 
 <p>PS - A special thanks to @ermau who has been hard at work creating Xamarin.Mobile, and has been super helpful (how cliche of Xamarin folks!) in using it!</p>
 
-<p>~~~~{.csharp}
-void button_Click(object sender, EventArgs e)
-{</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">void</span> <span class="nf">button_Click</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//Create a new intent for choosing a contact</span>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">contactPickerIntent</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="n">ActionPick</span><span class="p">,</span>
+</span><span class='line'>      <span class="n">Android</span><span class="p">.</span><span class="n">Provider</span><span class="p">.</span><span class="n">ContactsContract</span><span class="p">.</span><span class="n">Contacts</span><span class="p">.</span><span class="n">ContentUri</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//Start the contact picker expecting a result</span>
+</span><span class='line'>  <span class="c1">// with the resultCode &#39;101&#39;</span>
+</span><span class='line'>  <span class="n">StartActivityForResult</span><span class="p">(</span><span class="n">contactPickerIntent</span><span class="p">,</span> <span class="m">101</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>//Create a new intent for choosing a contact
-var contactPickerIntent = new Intent(Intent.ActionPick,
-    Android.Provider.ContactsContract.Contacts.ContentUri);
 
-//Start the contact picker expecting a result
-// with the resultCode '101'
-StartActivityForResult(contactPickerIntent, 101);
-</code></pre>
 
-<p>}
-~~~~</p>
 
-<p>~~~~{.csharp}
-public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-{</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnActivityResult</span><span class="p">(</span><span class="kt">int</span> <span class="n">requestCode</span><span class="p">,</span> <span class="n">Result</span> <span class="n">resultCode</span><span class="p">,</span> <span class="n">Intent</span> <span class="n">data</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//See if we are handling the contact picker request code</span>
+</span><span class='line'>  <span class="c1">//  and that the result code is ok!</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">requestCode</span> <span class="p">==</span> <span class="m">101</span> <span class="p">&amp;&amp;</span> <span class="n">resultCode</span> <span class="p">==</span> <span class="n">Result</span><span class="p">.</span><span class="n">Ok</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Ensure we have data returned</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="p">==</span> <span class="k">null</span> <span class="p">||</span> <span class="n">data</span><span class="p">.</span><span class="n">Data</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>          <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Xamarin.Mobile code here :)</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">addressBook</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Xamarin</span><span class="p">.</span><span class="n">Contacts</span><span class="p">.</span><span class="n">AddressBook</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>      <span class="c1">//Note: This is important </span>
+</span><span class='line'>      <span class="n">addressBook</span><span class="p">.</span><span class="n">PreferContactAggregation</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Load the contact via the android contact id</span>
+</span><span class='line'>      <span class="c1">// in the last segment of the Uri returned by the </span>
+</span><span class='line'>      <span class="c1">// android contact picker</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">contact</span> <span class="p">=</span> <span class="n">addressBook</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">LastPathSegment</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Use linq to find a mobile number</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">mobile</span> <span class="p">=</span> <span class="p">(</span><span class="k">from</span> <span class="n">p</span> <span class="k">in</span> <span class="n">contact</span><span class="p">.</span><span class="n">Phones</span> <span class="k">where</span>
+</span><span class='line'>                      <span class="n">p</span><span class="p">.</span><span class="n">Type</span> <span class="p">==</span> <span class="n">Xamarin</span><span class="p">.</span><span class="n">Contacts</span><span class="p">.</span><span class="n">PhoneType</span><span class="p">.</span><span class="n">Mobile</span>
+</span><span class='line'>                      <span class="k">select</span> <span class="n">p</span><span class="p">.</span><span class="n">Number</span><span class="p">).</span><span class="n">FirstOrDefault</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//See if the contact has a mobile number</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">mobile</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">Toast</span><span class="p">.</span><span class="n">MakeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&quot;No Mobile Number for contact!&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="n">ToastLength</span><span class="p">.</span><span class="n">Short</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+</span><span class='line'>          <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Send SMS!</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">smsMgr</span> <span class="p">=</span> <span class="n">Android</span><span class="p">.</span><span class="n">Telephony</span><span class="p">.</span><span class="n">SmsManager</span><span class="p">.</span><span class="n">Default</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">smsMgr</span><span class="p">.</span><span class="n">SendTextMessage</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>//See if we are handling the contact picker request code
-//  and that the result code is ok!
-if (requestCode == 101 &amp;&amp; resultCode == Result.Ok)
-{
-    //Ensure we have data returned
-    if (data == null || data.Data == null)
-        return;
-
-    //Xamarin.Mobile code here :)
-    var addressBook = new Xamarin.Contacts.AddressBook(this);
-    //Note: This is important 
-    addressBook.PreferContactAggregation = true;
-
-    //Load the contact via the android contact id
-    // in the last segment of the Uri returned by the 
-    // android contact picker
-    var contact = addressBook.Load(data.Data.LastPathSegment);
-
-    //Use linq to find a mobile number
-    var mobile = (from p in contact.Phones where 
-                    p.Type == Xamarin.Contacts.PhoneType.Mobile
-                    select p.Number).FirstOrDefault();
-
-    //See if the contact has a mobile number
-    if (string.IsNullOrEmpty(mobile))
-    {
-        Toast.MakeText(this, "No Mobile Number for contact!", 
-            ToastLength.Short).Show();
-        return;
-    }
-
-    //Send SMS!
-    var smsMgr = Android.Telephony.SmsManager.Default;
-
-    smsMgr.SendTextMessage(mobile, null, "Hello World!", null, null);
-}
-</code></pre>
-
-<p>}
-~~~~</p>
 </div>
 
 

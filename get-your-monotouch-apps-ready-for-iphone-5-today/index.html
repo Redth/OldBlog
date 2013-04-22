@@ -145,42 +145,59 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 
 <p>Here&#8217;s some sample code to detect whether or not we have an iPhone 5.  I&#8217;ve elected to call it ‘Tall&#8217; detection, as the iPhone 6 will likely use this tall resolution too. <strong>NOTE:</strong> Thanks to <a href="http://twitter.com/jtclancey" title="@jtclancey">@Clancey</a> for some additions to the IsTall detection!</p>
 
-<p>~~~csharp
-public static bool IsTall
-{
-  get
-  {</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="kt">bool</span> <span class="n">IsTall</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">get</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">CurrentDevice</span><span class="p">.</span><span class="n">UserInterfaceIdiom</span>
+</span><span class='line'>             <span class="p">==</span> <span class="n">UIUserInterfaceIdiom</span><span class="p">.</span><span class="n">Phone</span>
+</span><span class='line'>           <span class="p">&amp;&amp;</span> <span class="n">UIScreen</span><span class="p">.</span><span class="n">MainScreen</span><span class="p">.</span><span class="n">Bounds</span><span class="p">.</span><span class="n">Height</span>
+</span><span class='line'>             <span class="p">*</span> <span class="n">UIScreen</span><span class="p">.</span><span class="n">MainScreen</span><span class="p">.</span><span class="n">Scale</span> <span class="p">&gt;=</span> <span class="m">1136</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>return UIDevice.CurrentDevice.UserInterfaceIdiom 
-         == UIUserInterfaceIdiom.Phone 
-       &amp;&amp; UIScreen.MainScreen.Bounds.Height 
-         * UIScreen.MainScreen.Scale &gt;= 1136;
-</code></pre>
-
-<p>  }   <br/>
-}
-~~~</p>
 
 <p>Finally, the approach I take in my applications is to use a common property for the image, and make that property getter decide on the height of the device, and which image to return:</p>
 
-<p>~~~~{.csharp}
-static UIImage tableViewBackgroundImage = null;
-public static UIImage TableViewBackgroundImage
-{</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">static</span> <span class="n">UIImage</span> <span class="n">tableViewBackgroundImage</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">UIImage</span> <span class="n">TableViewBackgroundImage</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">get</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">tableViewBackgroundImage</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>          <span class="n">tableViewBackgroundImage</span> <span class="p">=</span> <span class="n">IsTall</span>
+</span><span class='line'>              <span class="p">?</span> <span class="n">UIImage</span><span class="p">.</span><span class="n">FromFile</span><span class="p">(</span><span class="s">&quot;Images/TableViewBackground-568h@2x.png&quot;</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">:</span> <span class="n">UIImage</span><span class="p">.</span><span class="n">FromFile</span><span class="p">(</span><span class="s">&quot;Images/TableViewBackground.png&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="n">tableViewBackgroundImage</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>get
-{
-    if (tableViewBackgroundImage == null)
-        tableViewBackgroundImage = IsTall 
-            ? UIImage.FromFile("Images/TableViewBackground-568h@2x.png")
-            : UIImage.FromFile("Images/TableViewBackground.png");
-
-    return tableViewBackgroundImage;
-}
-</code></pre>
-
-<p>}
-~~~~</p>
 
 <p>In this example, I keep a single static instance of my background image around, and lazy load it based on whether or not it&#8217;s a tall device.  This way the same image instance is shared for multiple viewcontrollers that use it!  In the case where it&#8217;s not a tall device, Apple still obeys the @2x.png naming convention to load retina graphics automatically, so you still don&#8217;t have to do that detection, it&#8217;s done for you.</p>
 
@@ -196,30 +213,46 @@ public static UIImage TableViewBackgroundImage
 
 <p><a href="http://twitter.com/martinbowling" title="@martinbowling">@martinbowling</a> contributed another nice method to add to your &#8216;helper&#8217; class shortly after this post was originally published.  It will help you select the right Image in code, easily!  It expects that you name your &#8216;Tall&#8217; image files with the <em>-568h@2x</em> convention.  This is another, even better technique than I&#8217;ve illustrated above.  Perhaps Xamarin will adopt this method in the future&#8230;</p>
 
-<p>~~~~{.csharp}
-private static string tallMagic = &#8220;-568h@2x&#8221;;
-public static UIImage FromBundle16x9(string path)
-{</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">private</span> <span class="k">static</span> <span class="kt">string</span> <span class="n">tallMagic</span> <span class="p">=</span> <span class="s">&quot;-568h@2x&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">UIImage</span> <span class="nf">FromBundle16x9</span><span class="p">(</span><span class="kt">string</span> <span class="n">path</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//adopt the -568h@2x naming convention</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">IsTall</span><span class="p">())</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">imagePath</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetDirectoryName</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">imageFile</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetFileNameWithoutExtension</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">imageExt</span> <span class="p">=</span> <span class="n">Path</span><span class="p">.</span><span class="n">GetExtension</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="n">imageFile</span> <span class="p">=</span> <span class="n">imageFile</span> <span class="p">+</span> <span class="n">tallMagic</span> <span class="p">+</span> <span class="n">imageExt</span><span class="p">;</span>
+</span><span class='line'>      
+</span><span class='line'>      <span class="k">return</span> <span class="n">UIImage</span><span class="p">.</span><span class="n">FromFile</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">imagePath</span><span class="p">,</span><span class="n">imageFile</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">UIImage</span><span class="p">.</span><span class="n">FromBundle</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>//adopt the -568h@2x naming convention
-if(IsTall())
-{
-    var imagePath = Path.GetDirectoryName(path.ToString());
-    var imageFile = Path.GetFileNameWithoutExtension(path.ToString());
-    var imageExt = Path.GetExtension(path.ToString());
-
-    imageFile = imageFile + tallMagic + imageExt;
-
-    return UIImage.FromFile(Path.Combine(imagePath,imageFile));
-}
-else 
-{
-    return UIImage.FromBundle(path.ToString());
-}
-</code></pre>
-
-<p>}
-~~~~</p>
 </div>
 
 
