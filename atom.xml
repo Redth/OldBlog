@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://Redth.github.io/Blog/atom.xml" rel="self"/>
   <link href="http://Redth.github.io/Blog/"/>
-  <updated>2013-04-22T15:11:35-04:00</updated>
+  <updated>2013-04-22T15:14:27-04:00</updated>
   <id>http://Redth.github.io/Blog/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -106,6 +106,143 @@
 
 
 <p>So, to sum it all up, I’m very happy with my Nexus 4.  Both from a hardware perspective, but I’m also really enjoying Android 4.2, it feels much more polished, useful, functional, efficient, etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Get your MonoTouch apps ready for iPhone 5 / iOS 6 today!]]></title>
+    <link href="http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today"/>
+    <updated>2012-09-13T00:00:00-04:00</updated>
+    <id>http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today</id>
+    <content type="html"><![CDATA[<p>So the new iPhone 5 has arrived, as well as the Gold Master iOS6 SDK!  Hurray!</p>
+
+<p>Unless you’ve been under a rock, you know that the iPhone 5 has a taller screen, which means a new screen resolution to deal with for us developers!  Apple is lacking  bit in their own documentation, but a few developers have figured out how to best handle the new resolution.</p>
+
+<p>First of all, the new resolution is <em>640x1136</em>, that’s 640 pixels wide, by 1136 high.  Now, just like the Retina display, even though this is the resolution, many parts of the iOS API report back the sizes in points rather than pixels, which means the new size in points is really <em>320x568</em>.  I’d like to share with you how you can get your MonoTouch apps up and running to be compatible with the new resolution today!</p>
+
+<h3>First, Install the X-Code 4.5 GM iOS6 SDK from the Apple Developer site</h3>
+
+<p>It’s listed as the iOS6 beta at the time of writing this post, but it’s really GM once you get to the download section.  You must be part of the paid Apple Developer program to be able to access this.  Download the .dmg, mount it, and drag XCode into your Applications folder.  You may want to rename the old one so you can revert to it if need be.  I renamed the old one <em>XCode 4.4.1.app</em>.</p>
+
+<h3>Create a Default.png of the correct size</h3>
+
+<p>The way that iOS6 determines if your app is Tall compatible or not is by looking for a specifically sized and named image file for your splash/default screen.  The name of this file is:</p>
+
+<blockquote><p>Default-568h@2x.png</p></blockquote>
+
+<p>This file must actually be <em>640x1136</em> pixels in size.
+Add this file to your MonoTouch Application Project, and make sure the Build mode is set to Content.</p>
+
+<blockquote><p><img src="http://Redth.github.io/Blog/MonoTouch-iPhone5/Default-568h.png" alt="" /></p></blockquote>
+
+<h3>Change the Simulator to iPhone (Retina 4-inch)</h3>
+
+<p>After your MonoTouch Application starts in debug mode, you may need to change the Simulator to use the new hardware type.  Go to the Hardware -> Device menu, and select “<em>iPhone (Retina 4-inch)</em>”.  You may need to re-launch your app after doing this.</p>
+
+<blockquote><p><img src="http://Redth.github.io/Blog/MonoTouch-iPhone5/iPhone5-Simulator.png" alt="" /></p></blockquote>
+
+<p>Presto, your app now runs in ‘Tall’ mode!</p>
+
+<h3>Create new sizes of other Image assets</h3>
+
+<p>Unfortunately, the image naming convention of -568h@2x.png only seems to extend to the Default image, but not other images in your application.  This means if you’re using a custom background image for your view (eg: UITableView background), you will likely need to create a new background image of the correct resolution, and determine in your application when to use each image.</p>
+
+<p>For example, in my non-4inch compatible app, I have two images:</p>
+
+<ol>
+<li>Images/TableViewBackground.png – <em>320x358</em></li>
+<li>Images/TableViewBackground@2x.png – <em>640x716</em></li>
+</ol>
+
+
+<p>With the new resolution, I’ll need to create a third image (I’ve decided to use the -568h@2x.png naming convention even though it isn’t observed by Apple):</p>
+
+<ol>
+<li>Images/TableViewBackground-568h@2x.png</li>
+</ol>
+
+
+<h3>Write some code to detect iPhone 5 and use the new Image Assets</h3>
+
+<p>Now as I mentioned, even though I’ve named the image just like the way Apple detects the new default image, iOS6 (at least currently) doesn’t know to use it automatically, so we have to write some code to detect when the app is running on an iPhone 5, and then to use the correct image when that’s the case.</p>
+
+<p>Here’s some sample code to detect whether or not we have an iPhone 5.  I’ve elected to call it ‘Tall’ detection, as the iPhone 6 will likely use this tall resolution too. <strong>NOTE:</strong> Thanks to <a href="http://twitter.com/jtclancey" title="@jtclancey">@Clancey</a> for some additions to the IsTall detection!</p>
+
+<p>~~~~{.csharp}
+public static bool IsTall
+{
+  get
+  {</p>
+
+<pre><code>return UIDevice.CurrentDevice.UserInterfaceIdiom 
+         == UIUserInterfaceIdiom.Phone 
+       &amp;&amp; UIScreen.MainScreen.Bounds.Height 
+         * UIScreen.MainScreen.Scale &gt;= 1136;
+</code></pre>
+
+<p>  }   <br/>
+}
+~~~~</p>
+
+<p>Finally, the approach I take in my applications is to use a common property for the image, and make that property getter decide on the height of the device, and which image to return:</p>
+
+<p>~~~~{.csharp}
+static UIImage tableViewBackgroundImage = null;
+public static UIImage TableViewBackgroundImage
+{</p>
+
+<pre><code>get
+{
+    if (tableViewBackgroundImage == null)
+        tableViewBackgroundImage = IsTall 
+            ? UIImage.FromFile("Images/TableViewBackground-568h@2x.png")
+            : UIImage.FromFile("Images/TableViewBackground.png");
+
+    return tableViewBackgroundImage;
+}
+</code></pre>
+
+<p>}
+~~~~</p>
+
+<p>In this example, I keep a single static instance of my background image around, and lazy load it based on whether or not it’s a tall device.  This way the same image instance is shared for multiple viewcontrollers that use it!  In the case where it’s not a tall device, Apple still obeys the @2x.png naming convention to load retina graphics automatically, so you still don’t have to do that detection, it’s done for you.</p>
+
+<h3>Other considerations</h3>
+
+<p>If you have any other code that does anything with height calculations, or maybe creating a view to be a certain height, you may also need to update this code.  The general rule is you should now be calculating heights and y-coordinates based on the UIScreen.MainScreen.ApplicationFrame or UIScreen.MainScreen.Bounds.  This is probably a good practice anyway, and hopefully you don’t need to do too much work since you’ve already been following that good practice, right?</p>
+
+<p>Hopefully that helps get your MonoTouch apps prepared for iPhone 5, before it’s even out!</p>
+
+<h2>UPDATE:</h2>
+
+<h3>Select the right Image!</h3>
+
+<p><a href="http://twitter.com/martinbowling" title="@martinbowling">@martinbowling</a> contributed another nice method to add to your &#8216;helper&#8217; class shortly after this post was originally published.  It will help you select the right Image in code, easily!  It expects that you name your &#8216;Tall&#8217; image files with the <em>-568h@2x</em> convention.  This is another, even better technique than I&#8217;ve illustrated above.  Perhaps Xamarin will adopt this method in the future&#8230;</p>
+
+<p>~~~~{.csharp}
+private static string tallMagic = &#8220;-568h@2x&#8221;;
+public static UIImage FromBundle16x9(string path)
+{</p>
+
+<pre><code>//adopt the -568h@2x naming convention
+if(IsTall())
+{
+    var imagePath = Path.GetDirectoryName(path.ToString());
+    var imageFile = Path.GetFileNameWithoutExtension(path.ToString());
+    var imageExt = Path.GetExtension(path.ToString());
+
+    imageFile = imageFile + tallMagic + imageExt;
+
+    return UIImage.FromFile(Path.Combine(imagePath,imageFile));
+}
+else 
+{
+    return UIImage.FromBundle(path.ToString());
+}
+</code></pre>
+
+<p>}
+~~~~</p>
 ]]></content>
   </entry>
   
