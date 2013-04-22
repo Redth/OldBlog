@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>MonoDroid - Custom ListAdapter for your ListView - Redth</title>
+  <meta name="author" content="Jon">
+
+  
+  <meta name="description" content="I don’t know about you, but the main thing I’m interested in on any new mobile development platform for some reason, is LISTS. I think I’m so fixated &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview">
+  <link href="/Blog/favicon.png" rel="icon">
+  <link href="/Blog/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/Blog/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
+  <script src="/Blog/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/Blog/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/Blog/">Redth</a></h1>
+  
+    <h2>code, ramblings, and other fun activities</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/Blog/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Redth.github.io/Blog" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/Blog/">Blog</a></li>
+  <li><a href="/Blog/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">MonoDroid - Custom ListAdapter for Your ListView</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-13T00:00:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I don’t know about you, but the main thing I’m interested in on any new mobile development platform for some reason, is LISTS. I think I’m so fixated on lists is because of the way the iPhone so successfully introduced the paradigm of list based navigation. Everything can be done in a series of lists (ok not really, but they are crucial to many apps!).</p>
+
+<blockquote><p><img src="/Blog/images/MonoDroid-Custom-ListAdapter/CustomList.png" alt="" /></p></blockquote>
+
+<p>Naturally then, the first thing I sought out to do on MonoDroid was to create a list. Easy, piece of cake… If you want to create a boring old list with a single line of text for each item. This is no doubt, an important part of every developer’s Hello World development phase, but it doesn’t take long before you’re craving images, several text elements, and possibly even some checkboxes and/or buttons (easy there tiger). For every ListView in Android, there is a prince charming Listview Adapter to save the day.</p>
+
+<p>The most basic of examples which you’ve no doubt seen involve an ArrayAdapter of some sort, with the default <em>Android.R.Layout.SimpleListItem</em> or whatever it is called. BOOORING. What we need to do to make something exciting is create our own custom ListView Adapter. Now, you could use a SimpleAdapter to map fields to certain resource id’s of a layout, but if you look at a java example of this, ‘Simple’ quickly becomes a relative term. What I like to do is create my own adapter deriving from the BaseAdapter class (how fitting).</p>
+
+<p>Here’s some code for my custom list adapter (explanation to follow):</p>
+
+<p>~~~~{.csharp}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;</p>
+
+<p>using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.Graphics.Drawables;</p>
+
+<p>namespace MonoDroid.CustomList
+{</p>
+
+<pre><code>public class CustomListAdapter : BaseAdapter
+{
+    Activity context;
+
+    public List&lt;Animal&gt; items;
+
+    public CustomListAdapter(Activity context) //We need a context to inflate our row view from
+        : base()
+    {
+        this.context = context;
+
+        //For demo purposes we hard code some data here
+        this.items = new List&lt;Animal&gt;() {
+            new Animal() { Name = "Elephant", Description = "Big and Gray, but what the hey", Image = Resource.drawable.elephant },
+            new Animal() { Name = "Chinchilla", Description = "Little people of the andes", Image = Resource.drawable.chinchilla },
+            new Animal() { Name = "Lion", Description = "Cowardly lion, anyone?", Image = Resource.drawable.lion },
+            new Animal() { Name = "Skunk", Description = "Ello, baby. I am ze locksmith of love, no?", Image = Resource.drawable.skunk },
+            new Animal() { Name = "Rhino", Description = "Most live to about 60, pretty old eh?", Image = Resource.drawable.rhino },
+            new Animal() { Name = "Zebra", Description = "Stripes maybe not so great for hiding", Image = Resource.drawable.zebra },
+            new Animal() { Name = "Squirrel", Description = "Nuts nuts, where's my nuts?!", Image = Resource.drawable.squirrel },
+            new Animal() { Name = "Walrus", Description = "I am he as you are he as you are me", Image = Resource.drawable.walrus },
+            new Animal() { Name = "Giraffe", Description = "Bigger than your ford pinto", Image = Resource.drawable.giraffe },
+            new Animal() { Name = "Chicken", Description = "I'll take 2 eggs over easy", Image = Resource.drawable.chicken },
+            new Animal() { Name = "Duck", Description = "He's all quacked up", Image = Resource.drawable.duck },
+            new Animal() { Name = "Hawk", Description = "He needs to be on a t-shirt", Image = Resource.drawable.hawk },
+            new Animal() { Name = "Lobster", Description = "We were at the beach...", Image = Resource.drawable.lobster },
+            new Animal() { Name = "Pig", Description = "Babe, Orson, Piglet, whatever", Image = Resource.drawable.pig },
+            new Animal() { Name = "Rabbit", Description = "Thumper is the best rabbit name ever", Image = Resource.drawable.rabbit },
+            new Animal() { Name = "Turtle", Description = "Slow and steady wins the race", Image = Resource.drawable.turtle },
+        };
+    }
+
+    public override int Count
+    {
+        get { return items.Count; }
+    }
+
+    public override Java.Lang.Object GetItem(int position)
+    {
+        return position;
+    }
+
+    public override long GetItemId(int position)
+    {
+        return position;
+    }
+
+    public override View GetView(int position, View convertView, ViewGroup parent)
+    {
+        //Get our object for this position
+        var item = items[position];         
+
+        //Try to reuse convertView if it's not  null, otherwise inflate it from our item layout
+        // This gives us some performance gains by not always inflating a new view
+        // This will sound familiar to MonoTouch developers with UITableViewCell.DequeueReusableCell()
+        var view = (convertView ?? 
+            context.LayoutInflater.Inflate(
+                Resource.layout.customlistitem, 
+                parent, 
+                false)) as LinearLayout;
+
+        //Find references to each subview in the list item's view
+        var imageItem = view.FindViewById(Resource.id.imageItem) as ImageView;
+        var textTop = view.FindViewById(Resource.id.textTop) as TextView;
+        var textBottom = view.FindViewById(Resource.id.textBottom) as TextView;
+
+        //Assign this item's values to the various subviews
+        imageItem.SetImageResource(item.Image);
+        textTop.SetText(item.Name, TextView.BufferType.Normal);
+        textBottom.SetText(item.Description, TextView.BufferType.Normal);
+
+        //Finally return the view
+        return view;
+    }
+
+    public Animal GetItemAtPosition(int position)
+    {
+        return items[position];
+    }
+}
+</code></pre>
+
+<p>}
+~~~~</p>
+
+<p>Oh, and here’s the Animal class if you’re curious:</p>
+
+<p>~~~~{.csharp}
+namespace MonoDroid.CustomList
+{</p>
+
+<pre><code>public class Animal
+{
+    public string Name
+    {
+        get;
+        set;
+    }
+
+    public string Description
+    {
+        get;
+        set;
+    }
+
+    public int Image
+    {
+        get;
+        set;
+    }
+}
+</code></pre>
+
+<p>}
+~~~~</p>
+
+<p>Now for the sake of the demo, I create my own data inside the adapter, and of course nothing is stopping you from getting that data from a webservice, or somewhere more fashionable. The first thing to note is that I’m requiring an Activity object in the <em>ctor</em>. This really is only used to get the <em>LayoutInflator</em> for the given Activity so that we can inflate our row’s View later on, but it is important to have it. Next thing of interest is the overrides. All we really need to override is the <em>Count</em> property, <em>GetItem</em> method, <em>GetItemId</em> method, and <em>GetView</em> method. The last method (<em>GetItemAtPosition</em>) is my own addition so that I can read out the object for a given position elsewhere in the project (in this case, when a <em>ListView.ItemClicked</em> event is fired).</p>
+
+<p><em>Count</em> is easy, just return your object list’s count (duh). <em>GetItem</em> and <em>GetItemId</em> I’m still not convinced are necessary, but I override them anyways and just return the position in each case. The only significance I know of so far with these properties is in some ListView events, the item Id is passed as an event arg. However, in these same events, we also get the item’s position, which is why I have the <em>GetItemAtPosition</em> method, so I can retrieve the relevant object for the event. I’d love to hear from anyone who knows more about why I might want to pay more attention to the GetItem and <em>GetItemId</em> methods.</p>
+
+<p><em>GetView</em> is where the magic happens. Basically, I get the item for the given position first. Next, I determine if the <em>convertView</em> parameter is null or not, and inflate my CustomListItem’s layout into a usable View (<em>LinearLayout</em> to be specific). This is basically a way for us to reuse resources. Anyone familiar with MonoTouch and the Reusable <em>UITableViewCell</em> will feel right at home here. We could inflate the resource every time, but that would waste unnecessary resources. So, best practice here is to always reuse if the <em>convertView</em> is not null. Now then, with my <em>LinearLayout</em> instance, I can locate all of the views within that I want to assign information to, for the given row. As you can see in this case, I have an <em>ImageView</em>, and two <em>TextView</em>’s.</p>
+
+<p>Here is what the layout xml looks like for my custom list item:</p>
+
+<p>~~~~{.xml}
+&lt;?xml version=&#8221;1.0&#8221; encoding=&#8221;utf-8&#8221;?>
+&lt;LinearLayout xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;</p>
+
+<pre><code>android:id="@+id/widget28"
+android:layout_width="fill_parent"
+android:layout_height="80px"
+</code></pre>
+
+<blockquote><pre><code>&lt;ImageView
+android:id="@+id/imageItem"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_vertical"
+    &gt;
+&lt;/ImageView&gt;
+&lt;LinearLayout
+android:id="@+id/linearText"
+android:layout_width="wrap_content"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+android:layout_marginLeft="10px"
+android:layout_marginTop="10px"
+    &gt;
+    &lt;TextView
+    android:id="@+id/textTop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="TextView"
+        &gt;
+    &lt;/TextView&gt;
+    &lt;TextView
+    android:id="@+id/textBottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="TextView"
+        &gt;
+    &lt;/TextView&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p></LinearLayout>
+~~~~</p></blockquote>
+
+<p>Once I have found references to these, I can set their text and image. Finally, I can return the <em>LinearLayout</em> View that I’ve been working on for this row. That wasn’t so hard, was it? Last, but not least, we need to actually deal with our <em>Activity</em> that holds the <em>ListView</em>. Up until now we had just created the adapter that our <em>ListView</em> was going to use. Now we need to actually hook an adapta’ up.</p>
+
+<p>Here’s what my Activity code looks like:</p>
+
+<p>~~~~{.csharp}
+using System;
+using Android.App;
+using Android.Content;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;</p>
+
+<p>namespace MonoDroid.CustomList
+{</p>
+
+<pre><code>[Activity(Label = "1 CustomList", MainLauncher = true)]
+public class CustomList : Activity
+{
+    CustomListAdapter listAdapter;
+
+    public CustomList(IntPtr handle)
+        : base(handle)
+    {
+    }
+
+    protected override void OnCreate(Bundle bundle)
+    {
+        base.OnCreate(bundle);
+
+        //Set the Activity's view to our list layout        
+        SetContentView(Resource.layout.customlist);
+
+        //Create our adapter
+        listAdapter = new CustomListAdapter(this);
+
+        //Find the listview reference
+        var listView = FindViewById&lt;ListView&gt;(Resource.id.listView);
+
+        //Hook up our adapter to our ListView
+        listView.Adapter = listAdapter;
+
+        //Wire up the click event
+        listView.ItemClick += new EventHandler&lt;ItemEventArgs&gt;(listView_ItemClick);
+    }
+
+    void listView_ItemClick(object sender, ItemEventArgs e)
+    {
+        //Get our item from the list adapter
+        var item = this.listAdapter.GetItemAtPosition(e.Position);
+
+        //Make a toast with the item name just to show it was clicked
+        Toast.MakeText(this, item.Name + " Clicked!", ToastLength.Short).Show();
+    }
+}
+</code></pre>
+
+<p>}
+~~~~</p>
+
+<p>Here’s the layout xml behind this activity:</p>
+
+<p>~~~~{.xml}
+&lt;?xml version=&#8221;1.0&#8221; encoding=&#8221;utf-8&#8221;?>
+&lt;LinearLayout
+android:id=&#8221;@+id/widget28&#8221;
+android:layout_width=&#8221;fill_parent&#8221;
+android:layout_height=&#8221;fill_parent&#8221;
+android:orientation=&#8221;vertical&#8221;
+xmlns:android=&#8221;http://schemas.android.com/apk/res/android&#8221;</p>
+
+<blockquote><pre><code>&lt;ListView
+android:id="@+id/listView"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+</code></pre></blockquote>
+
+<pre><code>&lt;/ListView&gt;
+</code></pre>
+
+<p></LinearLayout>
+~~~~</p>
+
+<p>So you can see in my Activity’s <em>OnCreate</em>, I’m calling the base method (important), and then setting the activity’s content view to the layout xml that I showed you above. I’m also creating an instance of the <em>CustomListAdapter</em> I made earlier, and finding a reference to my ListView, so that I can set my <em>ListView</em>’s .<em>Adapter</em> property to the instance of the <em>CustomListAdapter</em>. As a bonus, I register the <em>ItemClick</em> event of my <em>ListView</em>, and in it, retrieve the item for the given position, from my <em>CustomListAdapter</em>, using the method I added to the adapter (<em>GetItemPositionAt</em>). I then display a Toast with the name of the Animal clicked.</p>
+
+<p>Hopefully this little tutorial enlightens you on how to make some fancy lists (not those boring default ones). I’ve also made the source code of the entire project available:</p>
+
+<p>http://goo.gl/AcGI</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jon</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-13T00:00:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview" data-via="" data-counturl="http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/Blog/the-problem-with-apples-push-notification-ser" title="Next Post: The problem with Apples Push Notification Service... Solutions and Workarounds...">The problem with Apples Push Notification Service... Solutions and Workarounds... &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/Blog/month-with-android">A Month With Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/get-your-monotouch-apps-ready-for-iphone-5-today">Get your MonoTouch apps ready for iPhone 5 / iOS 6 today!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/the-problem-with-apples-push-notification-ser">The problem with Apples Push Notification Service... Solutions and Workarounds...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview">MonoDroid - Custom ListAdapter for your ListView</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

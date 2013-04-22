@@ -1,6 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>
+            http://Redth.github.io/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview
+        </loc>
+        <lastmod>2013-04-22T15:24:53-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser</loc>
+        <lastmod>2013-04-22T15:24:04-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://Redth.github.io/Blog/get-your-monotouch-apps-ready-for-iphone-5-today</loc>
         <lastmod>2013-04-22T15:19:12-04:00</lastmod>
     </url>
@@ -9,16 +19,12 @@
         <lastmod>2013-04-22T15:19:43-04:00</lastmod>
     </url>
     <url>
-        <loc>http://Redth.github.io/Blog/blog/2013/04/22/test/</loc>
-        <lastmod>2013-04-22T15:07:02-04:00</lastmod>
-    </url>
-    <url>
         <loc>http://Redth.github.io/Blog/blog/archives/</loc>
-        <lastmod>2013-04-22T15:19:43-04:00</lastmod>
+        <lastmod>2013-04-22T15:24:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://Redth.github.io/Blog/</loc>
-        <lastmod>2013-04-22T15:19:43-04:00</lastmod>
+        <lastmod>2013-04-22T15:24:53-04:00</lastmod>
     </url>
     <url>
         <loc>http://Redth.github.io/Blog/robots.txt</loc>

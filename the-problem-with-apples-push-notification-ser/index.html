@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The problem with Apples Push Notification Service... Solutions and Workarounds... - Redth</title>
+  <meta name="author" content="Jon">
+
+  
+  <meta name="description" content="Push Notifications have intrigued me since Apple first introduced them in iOS years ago. RIM had been doing this for a while, but as a platform it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser">
+  <link href="/Blog/favicon.png" rel="icon">
+  <link href="/Blog/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/Blog/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
+  <script src="/Blog/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/Blog/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/Blog/">Redth</a></h1>
+  
+    <h2>code, ramblings, and other fun activities</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/Blog/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Redth.github.io/Blog" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/Blog/">Blog</a></li>
+  <li><a href="/Blog/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">The Problem With Apples Push Notification Service... Solutions and Workarounds...</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T00:00:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Push Notifications have intrigued me since Apple first introduced them in iOS years ago.  RIM had been doing this for a while, but as a platform it never excited me.  As soon as the documentation for their APNs protocol was released I started busily implementing a solution to send push notifications in C#.  The first version of the protocol was already terrible, but I’m not going to harp on that as we’ve got a newer version that’s only slightly better to tear apart.</p>
+
+<p>I’m the author of PushSharp (https://github.com/Redth/PushSharp) which is a .NET library to assist developers in delivering push notifications on as many platforms as possible (iOS, Android, Windows, Windows Phone, and HTML5).  This library was the culmination of my previous efforts in individual libraries (APNS-Sharp and C2DM-Sharp mostly), and represents a more abstracted, standardized, easier way to support push notifications on all the platforms you may target as a developer.</p>
+
+<p>This post is a chance for me to vent, to explore my frustrations with Apple’s APNS protocol, and hope that they somehow listen and change it.  You’ll notice how there’s no complaining about the way the other platforms implement their protocols.  This is because they aren’t terrible (though they aren’t perfect either).</p>
+
+<h3>Apple’s Enhanced Format for Push Notifications</h3>
+
+<p>I had great hopes that Apple finally fixed its protocol when they introduced the Enhanced format (basically v2 of their protocol).  Both the original and the enhanced format are binary protocols.  You can quickly see the differences between the two in the diagrams below:</p>
+
+<blockquote><p>Original Protocol:
+<img src="/Blog/images/Problem-With-APNS/Original-Binary-Protocol.png" alt="" /></p>
+
+<p>Enhanced Protocol:
+<img src="/Blog/images/Problem-With-APNS/Enhanced-Binary-Protocol.png" alt="" /></p></blockquote>
+
+<p>You’ll notice that in the enhanced protocol, there’s two additional bits of information (besides the first byte being 1, indicating that it’s the new protocol as opposed to 0 in the original).  These are two very good additions to the protocol:</p>
+
+<ol>
+<li><p>Identifier – Your own 4 byte data to uniquely identify the notification – this is important as it’s returned to you in the error response packet if there’s a problem.</p></li>
+<li><p>Expiry – A point in time after which the message is no longer valid if it has not already been delivered and can be discarded from Apple’s servers</p></li>
+</ol>
+
+
+<p>In the original protocol, whenever you send Apple a notification that has a problem with it (maybe it’s too big, or it has an invalid device token or malformed payload, etc.), it simply closes the TCP connection without any warning.  You are left to assume something is corrupt in your notification.</p>
+
+<p>With the enhanced protocol also handles bad notifications it receives a bit differently. It still closes the connection to you when there’s an error, but before it does so, it sends back an error response packet.  You can see the format in the diagram below, along with a list of status codes and their meanings:</p>
+
+<blockquote><p>Error Response Packet:
+<img src="/Blog/images/Problem-With-APNS/Error-Response-Packet.png" alt="" /></p></blockquote>
+
+<p><del>
+Status Codes &amp; Meanings
+0  - No errors encountered
+1   - Processing error
+2   - Missing device token
+3   - Missing topic
+4   - Missing payload
+5   - Invalid token size
+6   - Invalid topic size
+7   - Invalid payload size
+8   - Invalid token
+255 - None (unknown)
+</del></p>
+
+<p>This packet is quite simple, with the first byte presumably indicating the protocol version, the second byte being the status or error code (Apple provides us with a list of status codes and what they mean – interestingly enough one of the status codes is ‘0 – No errors encountered’ – just keep this in mind for later).  The final piece of info is the Identifier.  This identifier will correspond to the identifier of the notification you sent which caused the error condition.</p>
+
+<h3>What’s the problem here?</h3>
+
+<p>So far so good, right? Well, not so much.  In theory this all sounds very good.  Finally, we get an error response from the service, and some additional functionality.  But there are still two major issues with the protocol that you would discover very quickly if you decided to try and implement a client for it yourself:</p>
+
+<ol>
+<li><p>Apple never sends a response for messages that succeeded.</p></li>
+<li><p>An error response may not immediately be returned before you have a chance to send more notifications to the stream, but before Apple closes the connection.  These notifications that might still ‘make it through’ are left in limbo.  They are never acknowledged or delivered, and never have error responses returned for them.</p></li>
+</ol>
+
+
+<h3>How could Apple fix this?</h3>
+
+<p>Remember how I told you to keep in mind the error response status code of ‘0 – No errors encountered’?  This is the silver bullet.  If Apple simply always returned an error response, for every notification, even if the notification succeeded, we could simply build a library that wrote a notification to the stream, waited for a response, and then moved onto the next notification, over and over.  There’d be no business of waiting around for an error response that might never come, and greatly simplify the pains of implementing this protocol.  Apple might argue that this would consume more bandwidth, and while they may be right, in this day and age it would only amount to another ~6 MB per 1,000,000 notifications delivered.  Considering that Google and Windows Phone both use HTTP protocols and generate significantly more bandwidth based on the underlying protocol alone, and are able to keep their infrastructure running, an extra 6 bytes per notification should be pocket change to Apple in the cost of maybe a few additional servers and bandwidth allocation.</p>
+
+<p>It’s such a simple answer.  It’s even in Apple’s own documentation.  Yet, it’s not our reality.</p>
+
+<h3>So what is the workaround?</h3>
+
+<p>I’ve looked at many libraries, written in many different languages, to see how they worked around this problem.  In about 99% of the cases I’ve observed, they all use the same, sadly inefficient approach: Waiting.</p>
+
+<p>So again, we have a connection to Apple’s APNS server, and we want to send notifications over that connection repeatedly, and as fast as possible.  Apple never sends us a response if a notification was sent successfully, but if one failed, they will send us an error response and close our connection.</p>
+
+<p>The problem is, if we keep sending notifications over and over again, we might send a second, or third notification before Apple ever sends us an error response for the first one that failed.  If this happens, the second and third notifications are never delivered, and are lost forever.</p>
+
+<p>The easiest way to solve this is to asynchronously read from the connection stream, waiting for an error response.  In doing so, however, this means you must also wait a little while after you write each notification to the stream to see if your asynchronous read ever receives anything.  You can’t just do a synchronous blocking read on the stream since you’d be waiting indefinitely if the notification succeeded (since Apple sends no response in this case).  To make matters worse, Apple doesn’t guarantee how quickly an error response will be sent to us. I’ve seen libraries wait for an error response from anywhere between 100 to 500 milliseconds.</p>
+
+<p>It should be painfully obvious to you by now why this approach is flawed.  If you have to wait even 100 milliseconds after sending every notification, that would take you almost 28 hours to send 1,000,000 notifications over a single connection!</p>
+
+<p>Most libraries employ the use of multiple connections to circumvent this new issue they’ve created for themselves by waiting between each notification.  If you use 10 connections to apple’s servers, that cuts your time down to 2.8 hours.  This is better, but why should it take 10 connections 2.8 hours to deliver a theoretical maximum of only 300MB of data (1,000,000 notifications * 301 bytes maximum size per notification)?  This is asinine!</p>
+
+<h3>A better workaround</h3>
+
+<p>I just couldn’t stand the thought of wasting 100-500 milliseconds per notification sent.  I figured there had to be a better way, and I think I’ve found it!  PushSharp employs a technique that is fairly easy in theory, and was a bit more difficult to implement in code.</p>
+
+<p>Each time a notification is written to the connection stream, it is then added to a ‘Sent’ queue.  If an error response is received, the corresponding notification is located in the ‘Sent’ queue (by its identifier).  Anything before the error-causing notification in the queue is removed and assumed to be successfully sent.  Anything after the error-causing notification is assumed to be lost, and re-queued to the ‘To Send’ queue to be tried again.  There is also a cleanup thread running that constantly checks the oldest notification in the ‘Sent’ queue to see if it’s older than a few seconds and if so, it is assumed to have been successfully sent and is removed from the ‘Sent’ queue.  This effectively moves the waiting period for an error response outside of the scope of the connection to the APNS servers.  The diagram below illustrates how the Sent queue works:</p>
+
+<blockquote><p>PushSharp Sent Queue
+<img src="/Blog/images/Problem-With-APNS/PushSharp-Sent-Queue.png" alt="" /></p></blockquote>
+
+<h3>Conclusion</h3>
+
+<p>So that’s it, that’s my big speech on why Apple’s Push Notifications are so troublesome, how they could make my life a lot easier with a couple small changes, and how I’ve learned to cope with the situation for now.  I hope you enjoyed my ramble, and do please check out PushSharp!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jon</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-06T00:00:00-04:00" pubdate data-updated="true">Sep 6<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser" data-via="" data-counturl="http://Redth.github.io/Blog/the-problem-with-apples-push-notification-ser" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview" title="Previous Post: MonoDroid - Custom ListAdapter for your ListView">&laquo; MonoDroid - Custom ListAdapter for your ListView</a>
+      
+      
+        <a class="basic-alignment right" href="/Blog/get-your-monotouch-apps-ready-for-iphone-5-today" title="Next Post: Get your MonoTouch apps ready for iPhone 5 / iOS 6 today!">Get your MonoTouch apps ready for iPhone 5 / iOS 6 today! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/Blog/month-with-android">A Month With Android</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/get-your-monotouch-apps-ready-for-iphone-5-today">Get your MonoTouch apps ready for iPhone 5 / iOS 6 today!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/the-problem-with-apples-push-notification-ser">The problem with Apples Push Notification Service... Solutions and Workarounds...</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Blog/2010/10/12/monodroid-custom-listadapter-for-your-listview">MonoDroid - Custom ListAdapter for your ListView</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Jon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
