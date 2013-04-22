@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://Redth.github.io/Blog/atom.xml" rel="self"/>
   <link href="http://Redth.github.io/Blog/"/>
-  <updated>2013-04-22T15:17:21-04:00</updated>
+  <updated>2013-04-22T15:19:56-04:00</updated>
   <id>http://Redth.github.io/Blog/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -27,7 +27,7 @@
     <link href="http://Redth.github.io/Blog/month-with-android"/>
     <updated>2013-02-28T00:00:00-05:00</updated>
     <id>http://Redth.github.io/Blog/a-month-with-android</id>
-    <content type="html"><![CDATA[<p>Just before the new year, <a href="http://redth.info/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
+    <content type="html"><![CDATA[<p>Just before the new year, <a href="http://Redth.github.io/Blog/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
 
 <p>Well, it’s been about a month now since I’ve switched back to Android, and I’m not looking back anytime soon!  I’m going to do a quick recap about the things I love, and the things I miss:</p>
 
@@ -41,28 +41,28 @@
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/Android-Love/Quick-Toggles.png" alt="Quick Toggle Settings" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Quick-Toggles.png" alt="Quick Toggle Settings" /></p></blockquote>
 
 <ul>
 <li><strong>Apps without Borders</strong> One thing that always bugged me about iOS as an end user was how each app felt like the lonely island it was.  I love in Android how when I tap a link, or perform some action, I’ll get a little menu asking me which App I’d like to have handle this action.  iOS does this to an extent now, but Android is better at it, and Android effectively lets me choose a default App to deal with the content type.  I love not being forced into using the default Mail app or Browser, if I don’t want to!</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/Android-Love/Share-Content.png" alt="Sharing Content" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Share-Content.png" alt="Sharing Content" /></p></blockquote>
 
 <ul>
 <li><strong>Google Now</strong> Siri is great, but Google Now is better in almost all respects.  I find the voice transcription way faster and more accurate, and Google Now’s ‘card’ design really works for me.  If you can get over the fact Google is in your email, you can learn to love having a card pop up with tracking info on the package you just ordered, or movie tickets you bought.  There’s so much depth to Google Now it could be its own post, but it’s safe to say I really like it.</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/Android-Love/Google-Now-Cards.png" alt="Google Now Cards" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Google-Now-Cards.png" alt="Google Now Cards" /></p></blockquote>
 
 <ul>
 <li><strong>Notifications</strong> I’ve always liked Google’s notification bar way better than how iOS deals with it, so I’m not surprised to feel right at home with it.  I am pleasantly surprised, however, at how useful having an LED indicator for notifications is.  The LED basically allows me to decide if I need to even turn my screen on or not.  I also really like how apps are starting to take advantage of rich notifications in the pull down tray.  Music apps allow me to skip next, twitter notifications allow me to tap reply right from in the tray.  This is a really strong point for Android, and I find myself wasting much less time on Notifications than I did in iOS</li>
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/Android-Love/Rich-Notification.png" alt="Rich Notifications" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Rich-Notification.png" alt="Rich Notifications" /></p></blockquote>
 
 <ul>
 <li><strong>UI</strong> This is where many of you will disagree with me.  I actually have taken a strong liking to the Android UI, or at least the apps that do a good job of it.  If you haven’t played with Android recently, you may not realize that developers have started to take care with how they design their apps.  There’s still a lot of junk out there, but for nearly any App I use on a regular basis, there’s a very nicely designed app Available now.</li>
@@ -70,7 +70,7 @@
 </ul>
 
 
-<blockquote><p><img src="http://Redth.github.io/Blog/Android-Love/Lock-Screen.png" alt="Lock Screen" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/Android-Love/Lock-Screen.png" alt="Lock Screen" /></p></blockquote>
 
 <ul>
 <li><strong>FREEEDOM!!!</strong> Seriously though, it’s really liberating not being told you can’t do something on your device.  If I want to use a different keyboard, I can.  If I want to use a different default Mail app, I can.  I am sick of Apple telling me to do things a certain way.  I realize for most users, that is fine, but I’m a power user darnit, let me tweak!</li>
@@ -133,13 +133,13 @@
 <p>This file must actually be <em>640x1136</em> pixels in size.
 Add this file to your MonoTouch Application Project, and make sure the Build mode is set to Content.</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/MonoTouch-iPhone5/Default-568h.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/MonoTouch-iPhone5/Default-568h.png" alt="" /></p></blockquote>
 
 <h3>Change the Simulator to iPhone (Retina 4-inch)</h3>
 
 <p>After your MonoTouch Application starts in debug mode, you may need to change the Simulator to use the new hardware type.  Go to the Hardware -> Device menu, and select “<em>iPhone (Retina 4-inch)</em>”.  You may need to re-launch your app after doing this.</p>
 
-<blockquote><p><img src="http://Redth.github.io/Blog/MonoTouch-iPhone5/iPhone5-Simulator.png" alt="" /></p></blockquote>
+<blockquote><p><img src="http://Redth.github.io/Blog/images/MonoTouch-iPhone5/iPhone5-Simulator.png" alt="" /></p></blockquote>
 
 <p>Presto, your app now runs in ‘Tall&#8217; mode!</p>
 
