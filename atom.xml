@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://Redth.github.io/Blog/atom.xml" rel="self"/>
   <link href="http://Redth.github.io/Blog/"/>
-  <updated>2013-04-22T15:24:59-04:00</updated>
+  <updated>2013-04-22T15:26:50-04:00</updated>
   <id>http://Redth.github.io/Blog/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -159,7 +159,7 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 
 <p>Here&#8217;s some sample code to detect whether or not we have an iPhone 5.  I&#8217;ve elected to call it ‘Tall&#8217; detection, as the iPhone 6 will likely use this tall resolution too. <strong>NOTE:</strong> Thanks to <a href="http://twitter.com/jtclancey" title="@jtclancey">@Clancey</a> for some additions to the IsTall detection!</p>
 
-<p>~~~~{.csharp}
+<p>~~~csharp
 public static bool IsTall
 {
   get
@@ -173,7 +173,7 @@ public static bool IsTall
 
 <p>  }   <br/>
 }
-~~~~</p>
+~~~</p>
 
 <p>Finally, the approach I take in my applications is to use a common property for the image, and make that property getter decide on the height of the device, and which image to return:</p>
 
