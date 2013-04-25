@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-04-23T13:19:47-04:00</updated>
+  <updated>2013-04-25T13:57:36-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -23,6 +23,9 @@
 <p>I also had the great privilege to do some speaking at Evolve!  I&#8217;ve posted my slides below and will update the post with links to the videos when they are available!</p>
 
 <p>Thanks to Xamarin and everyone who made this such a great event!</p>
+
+<!-- more -->
+
 
 <h2>Push Notifications with PushSharp</h2>
 
@@ -52,6 +55,9 @@
     <content type="html"><![CDATA[<p>Just before the new year, <a href="http://redth.info/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
 
 <p>Well, it’s been about a month now since I’ve switched back to Android, and I’m not looking back anytime soon!  I’m going to do a quick recap about the things I love, and the things I miss:</p>
+
+<!-- more -->
+
 
 <h2>What I Love</h2>
 
@@ -148,6 +154,9 @@
 
 <p>The primary reasn I&#8217;m switching back to Android, is my Galaxy S just doesn&#8217;t cut it for development anymore.  My wonderful wife will inherit my iPhone 5 (like she does all my devices), and I&#8217;ll have a Nexus 4 to test on soon.</p>
 
+<!-- more -->
+
+
 <h2>Why I&#8217;m looking forward to Android</h2>
 
 <p>I have a Nexus 7.  It&#8217;s quite nice.  I like it better than the iPad, with the exception of a lack of apps in some areas (games).  Android 4.2, I feel, finally starts to get things right.  Sure there&#8217;s still issues, but by and large it&#8217;s a good operating system.  The eco-system is also quite mature now.  Most, if not all the apps I use daily on iOS (which seems to be less nowadays) all exist in a reasonably good form on Android (save for maybe a really good Twitter client, but that&#8217;s something I&#8217;m currently working to fix!).</p>
@@ -192,6 +201,9 @@
     <updated>2012-09-13T00:00:00-04:00</updated>
     <id>http://redth.info/get-your-monotouch-apps-ready-for-iphone-5-today</id>
     <content type="html"><![CDATA[<p>So the new iPhone 5 has arrived, as well as the Gold Master iOS6 SDK!  Hurray!</p>
+
+<!-- more -->
+
 
 <p>Unless you&#8217;ve been under a rock, you know that the iPhone 5 has a taller screen, which means a new screen resolution to deal with for us developers!  Apple is lacking  bit in their own documentation, but a few developers have figured out how to best handle the new resolution.</p>
 
@@ -367,6 +379,9 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 
 <p>This post is a chance for me to vent, to explore my frustrations with Apple’s APNS protocol, and hope that they somehow listen and change it.  You’ll notice how there’s no complaining about the way the other platforms implement their protocols.  This is because they aren’t terrible (though they aren’t perfect either).</p>
 
+<!-- more -->
+
+
 <h3>Apple’s Enhanced Format for Push Notifications</h3>
 
 <p>I had great hopes that Apple finally fixed its protocol when they introduced the Enhanced format (basically v2 of their protocol).  Both the original and the enhanced format are binary protocols.  You can quickly see the differences between the two in the diagrams below:</p>
@@ -473,6 +488,9 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 <p>If you don&#8217;t know about Xamarin, they are the company behind products allowing developers to write TRUELY NATIVE applications for Android and iOS in C#!  I honestly can&#8217;t say enough good things about these products, but you should check them out for yourself: http://xamarin.com</p>
 
 <p>Onto the goodies.  If it wasn&#8217;t enough for us to be able to access native iOS and Android API&#8217;s via C#, Xamarin has gone ahead and started building a cross mobile platform set of libraries which aim to help us developers even more in creating sets of code to be reused on all the great mobile platforms.  You can check out more about this initiative here: http://blog.xamarin.com/2011/11/22/introducing-the-xamarin-mobile-api/</p>
+
+<!-- more -->
+
 
 <p>The latest preview version of Xamarin.Mobile just hit the intertubes, and I was keen to try it out as a replacement to some awful code I had to write to deal with the Android API&#8217;s for Contacts.  This latest preview now contains Contacts and Location API support for both MonoTouch and Mono for Android.  In the sample below, you can see some Android specific code, so I&#8217;m not truely writing cross platform code here, but with a bit of abstraction from the UI layer, this would be possible.  However, the purpose of this example is more to show you just how bleeping easy it is to work with Contacts in Mono for Android using Xamarin.Mobile!</p>
 
@@ -598,6 +616,9 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 <p>So if you haven’t heard yet, Facebook has come out with their own BBM slash iMessage slash Kik slash WhatsApp slash slash slash…  Oh great, another messenger app that we don’t need?
 I live in a world where I’m geeked out for every new gadget and service on the planet.  I sign up first, I play around with the service, and I daydream about how wonderful my life would be if all my friends got onboard and started using this newfangled, awesome, life altering service!  Unfortunately, that’s all just a daydream.</p>
 
+<!-- more -->
+
+
 <h3>My friends aren’t all Geeks</h3>
 
 <blockquote><p><img src="http://redth.info/images/FB-MSG/02.png" alt="" /></p></blockquote>
@@ -659,6 +680,9 @@ Finally, Facebook Messenger integrates with Facebook Messages and Chat on the re
 <blockquote><p><img src="http://redth.info/images/MonoDroid-Custom-ListAdapter/CustomList.png" alt="" /></p></blockquote>
 
 <p>Naturally then, the first thing I sought out to do on MonoDroid was to create a list. Easy, piece of cake… If you want to create a boring old list with a single line of text for each item. This is no doubt, an important part of every developer’s Hello World development phase, but it doesn’t take long before you’re craving images, several text elements, and possibly even some checkboxes and/or buttons (easy there tiger). For every ListView in Android, there is a prince charming Listview Adapter to save the day.</p>
+
+<!-- more -->
+
 
 <p>The most basic of examples which you’ve no doubt seen involve an ArrayAdapter of some sort, with the default <em>Android.R.Layout.SimpleListItem</em> or whatever it is called. BOOORING. What we need to do to make something exciting is create our own custom ListView Adapter. Now, you could use a SimpleAdapter to map fields to certain resource id’s of a layout, but if you look at a java example of this, ‘Simple’ quickly becomes a relative term. What I like to do is create my own adapter deriving from the BaseAdapter class (how fitting).</p>
 
