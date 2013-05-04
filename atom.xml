@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-04-25T13:57:36-04:00</updated>
+  <updated>2013-05-04T13:18:17-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -14,10 +14,35 @@
 
   
   <entry>
+    <title type="html"><![CDATA[MobiDevDay Detroit 2013]]></title>
+    <link href="http://redth.info/MobiDevDay-Detroit-2013"/>
+    <updated>2013-05-04T00:00:00-04:00</updated>
+    <id>http://redth.info/mobidevday-detroit</id>
+    <content type="html"><![CDATA[<p>Had a great turnout and lots of solid questions at my talk on Xamarin and C# at <a href="http://mobidevdaydetroit.com">Detroit MobiDevDay 2013</a>.  I&#8217;ve got my slides posted for anyone who cares to have a look!</p>
+
+<p>Thanks to <a href="http://twitter.com/@MobiDevDay">@MobiDevDay</a> for having me, and to all those who came out!</p>
+
+<!-- more -->
+
+
+<h2>MobiDevDay Detorit - Native Cross Platform Mobile with Xamarin and C</h2>
+
+<p>Create iOS, Android, Mac, and Windows Phone apps in C#.  Reuse code, and leverage existing .NET libraries and frameworks, while applying the same C# skillset everywhere to create truly native apps across mobile platforms.  This session looks at why you&#8217;ll love using Xamarin&#8217;s popular mobile development tools to create native applications to increase productivity, while creating a first class native user experience across the most popular mobile platforms.  This isn&#8217;t your grandmother&#8217;s hybrid web app, this is real native, platform API&#8217;s, and raw power.</p>
+
+<p><a href="https://speakerdeck.com/redth/mobidevday-detorit-native-cross-platform-mobile-with-xamarin-and-c-number">Speaker Deck - MobiDevDay Detorit - Native Cross Platform Mobile with Xamarin and C#</a></p>
+
+<script async="true" class="speakerdeck-embed" data-id="871ea670970b013068950e97ee62c877" src="http://redth.info//speakerdeck.com/assets/embed.js"> </script>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Xamarin Evolve 2013]]></title>
     <link href="http://redth.info/xamarin-evolve-2013"/>
     <updated>2013-04-20T00:00:00-04:00</updated>
-    <id>http://redth.info/xamarin-evolve-2013</id>
+    <id>http://redth.info/xamarin-evolve-2013 copy</id>
     <content type="html"><![CDATA[<p>Xamarin Evolve 2013 was an Awesome conference!  I got to see a lot of familiar faces, and meet plenty of new ones!  It&#8217;s such a great experience to see and talk with such great people who I&#8217;d only otherwise know online!</p>
 
 <p>I also had the great privilege to do some speaking at Evolve!  I&#8217;ve posted my slides below and will update the post with links to the videos when they are available!</p>
