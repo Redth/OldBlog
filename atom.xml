@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-05-24T08:54:54-04:00</updated>
+  <updated>2013-05-31T07:23:09-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio Launcher]]></title>
+    <link href="http://redth.info/Xamarin-Studio-Launcher"/>
+    <updated>2013-05-31T00:00:00-04:00</updated>
+    <id>http://redth.info/xamarin-studio-launcher</id>
+    <content type="html"><![CDATA[<p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
+
+<p>I&#8217;ve recently converted to a Mac.  As a long time Windows user, one thing I was very accustomed to was keeping multiple visual studio, or more recently, Xamarin Studio instances open at any given time.  Switching to a Mac I found this isn&#8217;t so easy, so I decided to make a nice little Launcher application to open new Xamarin Studio instances at will!</p>
+
+<p>So, without further adieu, please download the Xamarin Studio Launcher!</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/56106/Xamarin.Studio.Launcher.dmg">Download Xamarin Studio Launcher</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MobiDevDay Detroit 2013]]></title>
