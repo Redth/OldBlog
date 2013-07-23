@@ -151,11 +151,11 @@
 </pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
 </span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span>    <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
 </span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
@@ -192,7 +192,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now that&#8217;s a lot of code to do something really simple.  Something so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
+<p>Now that&#8217;s a lot of code to do something really simple.  Plumbing code that&#8217;s so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -218,11 +218,11 @@
 </pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
 </span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
 </span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span>    <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span>    <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
 </span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
