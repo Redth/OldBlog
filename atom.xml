@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-07-23T14:51:18-04:00</updated>
+  <updated>2013-07-23T14:57:33-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -18,7 +18,7 @@
     <link href="http://redth.info/Auto-Wire-Up-Views-Xamarin-Activity"/>
     <updated>2013-07-23T00:00:00-04:00</updated>
     <id>http://redth.info/auto-wire-up-android-activity-views-xamarin</id>
-    <content type="html"><![CDATA[<p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbose monstrosity:</p>
+    <content type="html"><![CDATA[<p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbosity monstrosity:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -105,7 +105,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now that&#8217;s a lot of code to do something really simple.  Something so simple I&#8217;d rather not waste my time on it!  How about this instead:</p>
+<p>Now that&#8217;s a lot of code to do something really simple.  Something so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -213,9 +213,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared in code field.  There&#8217;s also room for improvement in my extension method.  What if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  I don&#8217;t want to do ALL your work for you ;)</p>
+<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared as a code field.  There&#8217;s also room for improvement in my extension method, for example, what if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  Well, I don&#8217;t want to do <strong><em>ALL</em></strong> your work for you ;)</p>
 
-<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!</p>
+<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!  Happy Coding!</p>
 ]]></content>
   </entry>
   

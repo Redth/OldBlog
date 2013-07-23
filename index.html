@@ -108,7 +108,7 @@
   </header>
 
 
-  <div class="entry-content"><p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbose monstrosity:</p>
+  <div class="entry-content"><p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbosity monstrosity:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -195,7 +195,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now that&#8217;s a lot of code to do something really simple.  Something so simple I&#8217;d rather not waste my time on it!  How about this instead:</p>
+<p>Now that&#8217;s a lot of code to do something really simple.  Something so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -303,9 +303,9 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared in code field.  There&#8217;s also room for improvement in my extension method.  What if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  I don&#8217;t want to do ALL your work for you ;)</p>
+<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared as a code field.  There&#8217;s also room for improvement in my extension method, for example, what if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  Well, I don&#8217;t want to do <strong><em>ALL</em></strong> your work for you ;)</p>
 
-<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!</p>
+<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!  Happy Coding!</p>
 </div>
   
   
@@ -760,7 +760,19 @@ I live in a world where I’m geeked out for every new gadget and service on the
       <a href="http://ca.linkedin.com/pub/jonathan-dick/3/a60/2b5"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Jonathan Dick's profile on LinkedIn"></a>
       </p>
 
-      <p><a href="http://xamarin.com/consulting-partners" target="_blank"><img src="/images/Site/Xamarin-Certified-Developer.png" alt="Xamarin Certified Developer" /></a></p>
+
+      <p>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <a href="http://xamarin.com/consulting-partners" target="_blank"><img src="/images/Site/Xamarin-Certified-Developer.png" alt="Xamarin Certified Developer" /></a>
+          </td>
+          <td>
+            <a href="http://xamarin.com/mvp" target="_blank"><img src="/images/Site/Xamarin-MVP-Badge.png" alt="Xamarin Most Valuable Professional" />
+          </td>
+        </tr>
+      </table>
+      </p>
 
       <a class="twitter-timeline" data-dnt=true href="https://twitter.com/redth" data-widget-id="253917988271562752">Tweets by @redth</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
