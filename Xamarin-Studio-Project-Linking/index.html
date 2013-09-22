@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Xamarin Evolve 2013 - Redth</title>
+  <title>Xamarin Studio: Project Linking - Redth</title>
   <meta name="author" content="Jon">
 
   
-  <meta name="description" content="A good time was had by all! Check out my slides from my talks!">
+  <meta name="description" content="A little known way to 'link' projects in Xamarin Studio">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://redth.info/xamarin-evolve-2013">
+  <link rel="canonical" href="http://redth.info/Xamarin-Studio-Project-Linking">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Xamarin Evolve 2013</h1>
+      <h1 class="entry-title">Xamarin Studio: Project Linking</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2013-04-20T00:00:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+<time datetime="2013-08-29T00:00:00-04:00" pubdate data-updated="true">Aug 29<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,32 +105,29 @@
   </header>
 
 
-<div class="entry-content"><p>Xamarin Evolve 2013 was an Awesome conference!  I got to see a lot of familiar faces, and meet plenty of new ones!  It&#8217;s such a great experience to see and talk with such great people who I&#8217;d only otherwise know online!</p>
+<div class="entry-content"><p>I hope to blow some minds here today.  At least, that&#8217;s what happened to my mind when Clancey showed me this neat little trick awhile back.  I find most people still aren&#8217;t aware of it, so I thought I&#8217;d share it!  It&#8217;s not quite as powerful as the Visual Studio project linker add-in, but it&#8217;s pretty close!</p>
 
-<p>I also had the great privilege to do some speaking at Evolve!  I&#8217;ve posted my slides below and will update the post with links to the videos when they are available!</p>
+<p>PCL&#8217;s are the up and coming.  I&#8217;m pretty confident eventually they will be awesome.  For now, there&#8217;s some growing pains, and for some folks like myself, it&#8217;s just easier/more efficient/more productive to use project linking.  I have been using project linking for some time, and it&#8217;s honestly not driven me too mad yet!</p>
 
-<p>Thanks to Xamarin and everyone who made this such a great event!</p>
+<p>First of all, take a look at my simple new solution with two core projects: Core.Android, and Core.iOS.  These are just simply Android Library and iOS Library project types, with nothing changed from how Xamarin Studio created them for me.  You can also see in the diagram below, that I&#8217;ve created a new folder called &#8216;Core&#8217; in the same folder as the solution.  This is where we&#8217;re going to store our common Core files that should be linked to both our projects.</p>
 
-<!-- more -->
+<p><a href="/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-01.png">Xamarin Studio Project Linking - Blank Setup</a></p>
+
+<p>The next step is to go into each of our projects&#8217; settings.  Under the &#8216;General -> Main Settings&#8217; area, there&#8217;s at least three things we need to change (optionally, four).</p>
+
+<p><a href="/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-02.png">Xamarin Studio Project Linking - Project Settings</a></p>
+
+<ol>
+<li><strong>Default Namespace:</strong> This will be <strong><em>Core.Android</em></strong> or <strong><em>Core.iOS</em></strong>.  We want a common namespace, so let&#8217;s change it to <strong><em>Core</em></strong></li>
+<li><strong>On Project Load</strong> Here&#8217;s the magic, make sure <strong><em>Search for new files on load</em></strong> is <strong><em>Checked</em></strong></li>
+<li><strong>Automatically include found files</strong> Now this is optional, and I typically leave it off.  If we leave this unchecked, we will be prompted when new files are found and asked if we would like them included.  I am a control freak and like to retain absolute power.  The choice is yours!</li>
+<li><strong>Location of Files -> Root Directory</strong> By default this path will point to the project folders (so <strong><em>&#8230;/Core.Android</em></strong> and <strong><em>&#8230;/Core.iOS</em></strong>).  We need to change it to the location of the common folder we created (in this case <strong><em>&#8230;/Core</em></strong>).</li>
+</ol>
 
 
-<h2>Push Notifications with PushSharp</h2>
+<p>Ok, so I lied, there&#8217;s one more step.  Since we moved the location of the project, any files that exist and were referenced by the .csproj from the old location will be MIA.  In the case of an empty iOS library, there are no files added for us.  In the case of Android, there&#8217;s a couple.  I chose to remove the references to them in the project, but you could also choose to just manually move the files over to the new folder!</p>
 
-<p>Push Notifications are a great way to update users of you app with alerts and information in an effective, standard, and efficient way.  Come and learn about what Push Notifications are and how they work on all the mobile platforms, and how you can use PushSharp to deliver notifications to your apps!</p>
-
-<p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-push-notifications-with-pushsharp">Speaker Deck - Push Notifications with PushSharp</a></p>
-
-<script async="true" class="speakerdeck-embed" data-id="bea8f1408c130130cb61123138155451" src="//speakerdeck.com/assets/embed.js"> </script>
-
-
-<h2>Barcode Scanning with ZXing</h2>
-
-<p>Barcodes have become increasingly popular in the Mobile space.  Learn how you can easily include scanning support with custom overlays using the ZXing.Net.Mobile component.  You will also learn how to generate barcodes from within your apps.  This session will also discuss various barcode scanning options, and the making of the ZXing.Net.Mobile component.</p>
-
-<p><a href="https://speakerdeck.com/redth/xamarin-evolve-2013-cross-platform-barcode-scanning-with-zxing#">Speaker Deck - Cross Platform Barcode Scanning with ZXing</a></p>
-
-<script async="true" class="speakerdeck-embed" data-id="4640de208c160130007512313d181421" src="//speakerdeck.com/assets/embed.js"> </script>
-
+<p>Ok, so now it&#8217;s time to watch it happen!  After you&#8217;ve changed both projects&#8217; settings, try adding a new C# class file to one of them, and voila!  Xamarin Studio should ask you if you&#8217;d like to add the new file to the other project as well, or if you set the files to be automatically included when found, it will just appear!</p>
 </div>
 
 
@@ -153,7 +150,7 @@
   
 
 
-<time datetime="2013-04-20T00:00:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+<time datetime="2013-08-29T00:00:00-04:00" pubdate data-updated="true">Aug 29<span>th</span>, 2013</time>
       
 
 
@@ -161,7 +158,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/xamarin-evolve-2013" data-via="redth" data-counturl="http://redth.info/xamarin-evolve-2013" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/Xamarin-Studio-Project-Linking" data-via="redth" data-counturl="http://redth.info/Xamarin-Studio-Project-Linking" >Tweet</a>
   
   
   
@@ -172,10 +169,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/month-with-android" title="Previous Post: A Month With Android">&laquo; A Month With Android</a>
+        <a class="basic-alignment left" href="/Auto-Wire-Up-Views-Xamarin-Activity" title="Previous Post: How to Auto Wire Up Android Activity Views in Xamarin.Android">&laquo; How to Auto Wire Up Android Activity Views in Xamarin.Android</a>
       
       
-        <a class="basic-alignment right" href="/MobiDevDay-Detroit-2013" title="Next Post: MobiDevDay Detroit 2013">MobiDevDay Detroit 2013 &raquo;</a>
+        <a class="basic-alignment right" href="/ios7-recipe-background-fetching" title="Next Post: iOS7 Recipe: Background Fetching">iOS7 Recipe: Background Fetching &raquo;</a>
       
     </p>
   </footer>
@@ -279,8 +276,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://redth.info/xamarin-evolve-2013';
-        var disqus_url = 'http://redth.info/xamarin-evolve-2013';
+        var disqus_identifier = 'http://redth.info/Xamarin-Studio-Project-Linking';
+        var disqus_url = 'http://redth.info/Xamarin-Studio-Project-Linking';
         var disqus_script = 'embed.js';
       
     (function () {

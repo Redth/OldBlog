@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-07-23T15:09:36-04:00</updated>
+  <updated>2013-09-22T09:38:54-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS7 Recipe: Background Fetching]]></title>
+    <link href="http://redth.info/ios7-recipe-background-fetching"/>
+    <updated>2013-09-22T00:00:00-04:00</updated>
+    <id>http://redth.info/ios7-recipe-background-fetching</id>
+    <content type="html"><![CDATA[<p>This is my entry into the <a href="http://blog.xamarin.com/xamarin-recipe-cook-off/">Xamarin Recipe Cook-Off</a>.  Recipes, in Xamarin terms, are very simple demonstrations of how a single feature or piece of functionality is implemented.  I thought background fetching would be useful to many developers, and it&#8217;s pretty easy to implement, especially after reading this recipe.</p>
+
+<ul>
+<li><a href="https://github.com/Redth/iOS/">View the entire Recipe &amp; Source Code</a></li>
+</ul>
+
+
+<p>I&#8217;ve also included the recipe in this blog post:</p>
+
+<h2>Background Fetching Data</h2>
+
+<p>This recipe shows how to register your application to perform background fetching on intervals.</p>
+
+<h4>1. Recipe</h4>
+
+<p>In your application&#8217;s <code>Info.plist</code> file, add the value <code>fetch</code> to the <code>UIBackgroundModes</code> (<em>Required background modes</em>) property.</p>
+
+<p>Next, in your <code>AppDelegate</code> class, in the <code>FinishedLaunching</code> override method, add the following code to register your application for background fetching:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">UIApplication</span><span class="p">.</span><span class="n">SharedApplication</span><span class="p">.</span><span class="n">SetMinimumBackgroundFetchInterval</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">BackgroundFetchIntervalMinimum</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, in your <code>AppDelegate</code> class, override the <code>PerformFetch</code> method.</p>
+
+<p>This method will be executed by the operating system when it sees best fit (eg: when the device is awake and connected already).  You do not have complete control over how often or when fetching happens.</p>
+
+<p>You should execute your own code to fetch new data in this method.  It&#8217;s important to call the <code>Action&lt;UIBackgroundFetchResult&gt; completionHandler</code> parameter which is passed into this method with the appropriate result when you are done.</p>
+
+<h4>2. Sample PerformFetch</h4>
+
+<p>In this sample, a weather service is called by background fetching so that when the user opens the app, recent weather is available.  The weather is cached locally after it&#8217;s fetched in the background, and the UI is also updated if there is new weather info.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">async</span> <span class="k">void</span> <span class="nf">PerformFetch</span> <span class="p">(</span><span class="n">UIApplication</span> <span class="n">application</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">UIBackgroundFetchResult</span><span class="p">&gt;</span> <span class="n">completionHandler</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="p">(</span><span class="s">&quot;PerformFetch called...&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//Return no new data by default</span>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NoData</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Get latest weather</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">w</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GetWeatherAsync</span><span class="p">(</span><span class="s">&quot;Windsor, Canada&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Cache the weather locally</span>
+</span><span class='line'>      <span class="n">CacheWeatherAsync</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Update the UI</span>
+</span><span class='line'>      <span class="n">weatherViewController</span><span class="p">.</span><span class="n">UpdateWeather</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Indicate we have new data</span>
+</span><span class='line'>      <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NewData</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Indicate a failed fetch if there was an exception</span>
+</span><span class='line'>    <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">Failed</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">finally</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//We really should call the completion handler with our result</span>
+</span><span class='line'>    <span class="n">completionHandler</span> <span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Additional Information</h4>
+
+<ul>
+<li>Your <code>PerformFetch</code> has about <strong>30</strong> seconds to run before it&#8217;s killed</li>
+<li>The operating system is more likely to grant more time (and more often) to your application for background fetching if you are efficient, which means executing quickly, and always calling <code>completionHandler</code> with an accurate result</li>
+<li>You can tell the operating system  the minimum time to sleep between waking up your application and calling its <code>PerformFetch</code> method if you know your app only updates at a certain interval, to avoid extra calls to <code>PerformFetch</code> and wasting battery life.  You would specify the minimum time in seconds in the <code>UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval (double minimumBackgroundFetchInterval)</code> method</li>
+<li>You can actually make calls to update your UI from the <code>PerformFetch</code> method so that the next time the user launches the app, everything is up to date</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xamarin Studio: Project Linking]]></title>
+    <link href="http://redth.info/Xamarin-Studio-Project-Linking"/>
+    <updated>2013-08-29T00:00:00-04:00</updated>
+    <id>http://redth.info/Xamarin-Studio-Project-Linking</id>
+    <content type="html"><![CDATA[<p>I hope to blow some minds here today.  At least, that&#8217;s what happened to my mind when Clancey showed me this neat little trick awhile back.  I find most people still aren&#8217;t aware of it, so I thought I&#8217;d share it!  It&#8217;s not quite as powerful as the Visual Studio project linker add-in, but it&#8217;s pretty close!</p>
+
+<p>PCL&#8217;s are the up and coming.  I&#8217;m pretty confident eventually they will be awesome.  For now, there&#8217;s some growing pains, and for some folks like myself, it&#8217;s just easier/more efficient/more productive to use project linking.  I have been using project linking for some time, and it&#8217;s honestly not driven me too mad yet!</p>
+
+<p>First of all, take a look at my simple new solution with two core projects: Core.Android, and Core.iOS.  These are just simply Android Library and iOS Library project types, with nothing changed from how Xamarin Studio created them for me.  You can also see in the diagram below, that I&#8217;ve created a new folder called &#8216;Core&#8217; in the same folder as the solution.  This is where we&#8217;re going to store our common Core files that should be linked to both our projects.</p>
+
+<p><a href="http://redth.info/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-01.png">Xamarin Studio Project Linking - Blank Setup</a></p>
+
+<p>The next step is to go into each of our projects&#8217; settings.  Under the &#8216;General -> Main Settings&#8217; area, there&#8217;s at least three things we need to change (optionally, four).</p>
+
+<p><a href="http://redth.info/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-02.png">Xamarin Studio Project Linking - Project Settings</a></p>
+
+<ol>
+<li><strong>Default Namespace:</strong> This will be <strong><em>Core.Android</em></strong> or <strong><em>Core.iOS</em></strong>.  We want a common namespace, so let&#8217;s change it to <strong><em>Core</em></strong></li>
+<li><strong>On Project Load</strong> Here&#8217;s the magic, make sure <strong><em>Search for new files on load</em></strong> is <strong><em>Checked</em></strong></li>
+<li><strong>Automatically include found files</strong> Now this is optional, and I typically leave it off.  If we leave this unchecked, we will be prompted when new files are found and asked if we would like them included.  I am a control freak and like to retain absolute power.  The choice is yours!</li>
+<li><strong>Location of Files -> Root Directory</strong> By default this path will point to the project folders (so <strong><em>&#8230;/Core.Android</em></strong> and <strong><em>&#8230;/Core.iOS</em></strong>).  We need to change it to the location of the common folder we created (in this case <strong><em>&#8230;/Core</em></strong>).</li>
+</ol>
+
+
+<p>Ok, so I lied, there&#8217;s one more step.  Since we moved the location of the project, any files that exist and were referenced by the .csproj from the old location will be MIA.  In the case of an empty iOS library, there are no files added for us.  In the case of Android, there&#8217;s a couple.  I chose to remove the references to them in the project, but you could also choose to just manually move the files over to the new folder!</p>
+
+<p>Ok, so now it&#8217;s time to watch it happen!  After you&#8217;ve changed both projects&#8217; settings, try adding a new C# class file to one of them, and voila!  Xamarin Studio should ask you if you&#8217;d like to add the new file to the other project as well, or if you set the files to be automatically included when found, it will just appear!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to Auto Wire Up Android Activity Views in Xamarin.Android]]></title>
