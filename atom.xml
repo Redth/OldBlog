@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-22T09:40:08-04:00</updated>
+  <updated>2013-09-22T09:41:25-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>This is my entry into the <a href="http://blog.xamarin.com/xamarin-recipe-cook-off/">Xamarin Recipe Cook-Off</a>.  Recipes, in Xamarin terms, are very simple demonstrations of how a single feature or piece of functionality is implemented.  I thought background fetching would be useful to many developers, and it&#8217;s pretty easy to implement, especially after reading this recipe.</p>
 
 <ul>
-<li><a href="https://github.com/Redth/iOS/">View the entire Recipe &amp; Source Code</a></li>
+<li><a href="https://github.com/Redth/iOS.BackgroundFetch.Sample">View the entire Recipe &amp; Source Code</a></li>
 </ul>
 
 
