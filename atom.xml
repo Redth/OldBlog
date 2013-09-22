@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-22T09:38:54-04:00</updated>
+  <updated>2013-09-22T09:40:08-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -134,37 +134,6 @@
 <li>You can actually make calls to update your UI from the <code>PerformFetch</code> method so that the next time the user launches the app, everything is up to date</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Xamarin Studio: Project Linking]]></title>
-    <link href="http://redth.info/Xamarin-Studio-Project-Linking"/>
-    <updated>2013-08-29T00:00:00-04:00</updated>
-    <id>http://redth.info/Xamarin-Studio-Project-Linking</id>
-    <content type="html"><![CDATA[<p>I hope to blow some minds here today.  At least, that&#8217;s what happened to my mind when Clancey showed me this neat little trick awhile back.  I find most people still aren&#8217;t aware of it, so I thought I&#8217;d share it!  It&#8217;s not quite as powerful as the Visual Studio project linker add-in, but it&#8217;s pretty close!</p>
-
-<p>PCL&#8217;s are the up and coming.  I&#8217;m pretty confident eventually they will be awesome.  For now, there&#8217;s some growing pains, and for some folks like myself, it&#8217;s just easier/more efficient/more productive to use project linking.  I have been using project linking for some time, and it&#8217;s honestly not driven me too mad yet!</p>
-
-<p>First of all, take a look at my simple new solution with two core projects: Core.Android, and Core.iOS.  These are just simply Android Library and iOS Library project types, with nothing changed from how Xamarin Studio created them for me.  You can also see in the diagram below, that I&#8217;ve created a new folder called &#8216;Core&#8217; in the same folder as the solution.  This is where we&#8217;re going to store our common Core files that should be linked to both our projects.</p>
-
-<p><a href="http://redth.info/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-01.png">Xamarin Studio Project Linking - Blank Setup</a></p>
-
-<p>The next step is to go into each of our projects&#8217; settings.  Under the &#8216;General -> Main Settings&#8217; area, there&#8217;s at least three things we need to change (optionally, four).</p>
-
-<p><a href="http://redth.info/images/Xamarin-Studio-Project-Linking/XS-Prj-Linking-02.png">Xamarin Studio Project Linking - Project Settings</a></p>
-
-<ol>
-<li><strong>Default Namespace:</strong> This will be <strong><em>Core.Android</em></strong> or <strong><em>Core.iOS</em></strong>.  We want a common namespace, so let&#8217;s change it to <strong><em>Core</em></strong></li>
-<li><strong>On Project Load</strong> Here&#8217;s the magic, make sure <strong><em>Search for new files on load</em></strong> is <strong><em>Checked</em></strong></li>
-<li><strong>Automatically include found files</strong> Now this is optional, and I typically leave it off.  If we leave this unchecked, we will be prompted when new files are found and asked if we would like them included.  I am a control freak and like to retain absolute power.  The choice is yours!</li>
-<li><strong>Location of Files -> Root Directory</strong> By default this path will point to the project folders (so <strong><em>&#8230;/Core.Android</em></strong> and <strong><em>&#8230;/Core.iOS</em></strong>).  We need to change it to the location of the common folder we created (in this case <strong><em>&#8230;/Core</em></strong>).</li>
-</ol>
-
-
-<p>Ok, so I lied, there&#8217;s one more step.  Since we moved the location of the project, any files that exist and were referenced by the .csproj from the old location will be MIA.  In the case of an empty iOS library, there are no files added for us.  In the case of Android, there&#8217;s a couple.  I chose to remove the references to them in the project, but you could also choose to just manually move the files over to the new folder!</p>
-
-<p>Ok, so now it&#8217;s time to watch it happen!  After you&#8217;ve changed both projects&#8217; settings, try adding a new C# class file to one of them, and voila!  Xamarin Studio should ask you if you&#8217;d like to add the new file to the other project as well, or if you set the files to be automatically included when found, it will just appear!</p>
 ]]></content>
   </entry>
   
