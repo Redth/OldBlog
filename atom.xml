@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-26T15:29:48-04:00</updated>
+  <updated>2013-09-26T15:30:11-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -93,7 +93,7 @@
 
 <h3>Also, don&#8217;t get caught with your pants down!</h3>
 
-<p>If you haven&#8217;t already guessed it, some of these properties are iOS7 only.  So if you&#8217;re targetting iOS6 still, you&#8217;ll have to do some sort of version checking to make sure you only use these API&#8217;s when the app is running under iOS7!</p>
+<p>If you haven&#8217;t already guessed it, some of these properties are iOS7 only.  So if you&#8217;re targeting iOS6 still, you&#8217;ll have to do some sort of version checking to make sure you only use these API&#8217;s when the app is running under iOS7!</p>
 
 <hr />
 
