@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-26T15:35:21-04:00</updated>
+  <updated>2013-09-26T15:37:30-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -53,7 +53,7 @@
 
 <p>It&#8217;s important to note that Apple tries to help us out here.  By default the <code>UIViewController</code> property <code>AutomaticallyAdjustsScrollViewInsets</code> is set to <code>true</code>, which means that in many cases, this will just work, and you won&#8217;t have to think about it.  However, in practice you might run into some edge cases (haha, get it?) where the inset cannot automatically be inferred correctly, like I did.</p>
 
-<p>In the case of one of my <code>UITableView</code>&#8217;s was not automatically adjusting the inset correctly (long story why, I&#8217;ll save you the boring details).  Long story short, I had to account for a status bar (<strong>20pt</strong>), and a navigation bar (<strong>44pt</strong>) for a total of (<strong>64pt</strong>) inset from the top edge of the screen.  That meant I needed to set my <code>UITableView.ContentInset = new UIEdgeInsets (64, 0, 0, 0);</code>.  The result was my UITableView still taking up the entire screen, but not making the top row initially hidden behind the navigation bar, while still taking advantage of the nice blurred scrolling underneath it.</p>
+<p>In one case, my <code>UITableView</code> was not automatically adjusting the inset correctly.  Long story short, I had to account for a status bar (<strong>20pt</strong>), and a navigation bar (<strong>44pt</strong>) for a total of (<strong>64pt</strong>) inset from the top edge of the screen.  That meant I needed to set my <code>UITableView.ContentInset = new UIEdgeInsets (64, 0, 0, 0);</code>.  The result was my UITableView still taking up the entire screen, but not making the top row initially hidden behind the navigation bar, while still taking advantage of the nice blurred scrolling underneath of it.</p>
 
 <h3>More dynamic?</h3>
 
