@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-26T15:37:30-04:00</updated>
+  <updated>2013-09-26T15:38:39-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -66,7 +66,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Oops, there&#8217;s another catch.  This property doesn&#8217;t seem to return > 0 until the views have all been layed out.  So, you may consider doing something like this:</p>
+<p>Oops, there&#8217;s another catch.  This property doesn&#8217;t seem to return > 0 until the views have all been laid out.  So, you may consider doing something like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
