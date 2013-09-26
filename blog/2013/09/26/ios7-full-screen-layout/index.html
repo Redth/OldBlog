@@ -1,0 +1,90 @@
+<hr />
+
+<p>layout: post
+title: &#8220;iOS7: Fun times with the new Full Screen Layout!&#8221;
+date: 2013-09-26
+comments: true
+description: &#8220;iOS7 gives your view controllers domain over the full screen!  Let&#8217;s make the most of it!&#8221;</p>
+
+<h2>permalink: &#8220;/ios7-full-screen-layout&#8221;</h2>
+
+<p>In a mad rush, I had to prepare an app for iOS7 <em>after</em> its release.  Yes, I know, shame on me for not listening to everyone telling me to start getting my apps ready early.  How bad could it be anyway?</p>
+
+<p>For the most part, not too bad.  The worst part for me came in the shape of dealing with this new idea that every <code>UIViewController</code> now expands the bounds of the entire screen, including where the status bar and navigation bars could be.  In any case, I had to do a bit of learning really quickly.  If you don&#8217;t already know what I&#8217;m talking about, here&#8217;s a picture of one unpleasant conversion experience:</p>
+
+<p><img src="/images/ios7-full-screen-layout/navigation-bar-overlapping.png" alt="" /></p>
+
+<!-- more -->
+
+
+<p>At this point, many thoughts went through my head.  I could just change the table view&#8217;s Frame right? Well then I would have to check if it&#8217;s iOS7 or not, and adjust according to iOS version, and and and… that just doesn&#8217;t seem right.  Why would you do this to me, Apple?!  At this point I took a deep breath, relaxed, and did what any competent developer would do: I Googled it.</p>
+
+<p>This of course led me to StackOverflow, and several people asking the same thing.  <a href="http://stackoverflow.com/questions/17074365/status-bar-and-navigation-bar-appear-over-my-views-bounds-in-ios-7">Why is my navigation bar and status bar appearing over my view?</a>.  There&#8217;s some pretty good answers there no doubt.</p>
+
+<h3>Everything new is old again!</h3>
+
+<p>Of course, the easiest way is just: make it work like it used to!  This is entirely possible!  All it requires really, is setting your view controller&#8217;s <code>EdgesForExtendedLayout</code> property to <code>UIRectEdge.None</code>.  This was a quick fix, and ended up getting me up and running again until I could figure things out (you can of course choose some, all, or none of the edges to be used for extended layout with this property.  For example, you might want the top to blur under the navigation bar, but the bottom to not blur underneath the tabs).</p>
+
+<p>This was a workable solution, but I still wasn&#8217;t really happy with it.  After all, the cool kids were all using the fancy blurred view scrolling behind the navigation and status bars like in the image below.  Who doesn&#8217;t want new and shiny?</p>
+
+<p><img src="/images/ios7-full-screen-layout/blurred.png" alt="" /></p>
+
+<h3>Newfangledness $#&amp;@*</h3>
+
+<p>So, what Apple really intends is to get a nice effect of the contents of a scrollable view that happen to be <em>under</em> navigation bars, status bars, tab bars, etc., to show the contents blurred.  It&#8217;s really a nice effect if you haven&#8217;t seen it for yourself yet.</p>
+
+<p>To make this happen, we essentially need to project our view to the bounds of the entire screen.  The problem with this of course, is that we don&#8217;t want the top parts of our scrollable view to be initially hidden behind these bars.</p>
+
+<h3>Content Insets to the rescue! (grab a coffee first)</h3>
+
+<p>If our view fills up the entire bounds of the screen, yet there&#8217;s still a status bar and navigation bar to show over top of it, we need a way to make sure the contents of our view aren&#8217;t initially hidden by the navigation and status bars.</p>
+
+<p>For this purpose, we can take advantage of the <code>ContentInset</code> property that exists on any kind of scrollable view (eg: <code>UITableView</code>, <code>UIWebView</code>, <code>UIScrollView</code>, etc).  This little gem of a property allows us to specify where our content should initially start, offset from the edges of the view that is holding it.</p>
+
+<p>It&#8217;s important to note that Apple tries to help us out here.  By default the <code>UIViewController</code> property <code>AutomaticallyAdjustsScrollViewInsets</code> is set to <code>true</code>, which means in many cases, this will just work, and you won&#8217;t have to think about it.  However, in practice you might run into some edge cases where the inset cannot automatically be inferred, like I did.</p>
+
+<p>In the case of one of my <code>UITableView</code>&#8217;s was not automatically adjusting the inset correctly (long story why, I&#8217;ll save you the boring details).  Long story short, I had to account for a status bar (<strong>20pt</strong>), and a navigation bar (<strong>44pt</strong>) for a total of (<strong>64pt</strong>) inset from the top edge of the screen.  That meant I needed to set my <code>UITableView.ContentInset = new UIEdgeInsets (64, 0, 0, 0);</code>.  The result was my UITableView still taking up the entire screen, but not making the top row initially hidden behind the navigation bar, while still taking advantage of the nice blurred scrolling underneath it.</p>
+
+<h3>More dynamic?</h3>
+
+<p>You may have scoffed at my example of hard-coding the inset.  All I can say is that sometimes you just need it to work immediately.  If you&#8217;d like to do this more properly, you should consider the other new properties Apple has included on the <code>UIViewController</code> which are: <code>TopLayoutGuide</code> and <code>BottomLayoutGuide</code>.  These serve as a reference  to us to let us know what the <em>top</em> (and <em>bottom</em>) of our content should be within the bounds of the screen (by using the <code>.Length</code> property of Top/Bottom layout guides).</p>
+
+<p>Now, there is one catch.  As of this article being published, the <code>.Length</code> property was missing from the Xamarin API.  There&#8217;s already a bug in for a fix, and in the meantime there&#8217;s a work around:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">length</span> <span class="p">=</span> <span class="n">MonoTouch</span><span class="p">.</span><span class="n">ObjCRuntime</span><span class="p">.</span><span class="n">Messaging</span><span class="p">.</span><span class="n">float_objc_msgSend</span> <span class="p">(</span><span class="n">TopLayoutGuide</span><span class="p">.</span><span class="n">Handle</span><span class="p">,</span> <span class="p">(</span><span class="k">new</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&quot;length&quot;</span><span class="p">)).</span><span class="n">Handle</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oops, there&#8217;s another catch.  This property doesn&#8217;t seem to return > 0 until the views have all been layed out.  So, you may consider doing something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">ViewDidLayoutSubviews</span> <span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">base</span><span class="p">.</span><span class="n">ViewDidLayoutSubviews</span> <span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="kt">var</span> <span class="n">length</span> <span class="p">=</span> <span class="n">MonoTouch</span><span class="p">.</span><span class="n">ObjCRuntime</span><span class="p">.</span><span class="n">Messaging</span><span class="p">.</span><span class="n">float_objc_msgSend</span> <span class="p">(</span>
+</span><span class='line'>                 <span class="n">TopLayoutGuide</span><span class="p">.</span><span class="n">Handle</span><span class="p">,</span>
+</span><span class='line'>                 <span class="p">(</span><span class="k">new</span> <span class="n">Selector</span><span class="p">(</span><span class="s">&quot;length&quot;</span><span class="p">)).</span><span class="n">Handle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">TableView</span><span class="p">.</span><span class="n">ContentInset</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UIEdgeInsets</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Also, don&#8217;t get caught with your pants down!</h3>
+
+<p>If you haven&#8217;t already guessed it, some of these properties are iOS7 only.  So if you&#8217;re targetting iOS6 still, you&#8217;ll have to do some sort of version checking to make sure you only use these API&#8217;s when the app is running under iOS7!</p>
+
+<hr />
+
+<p>Anyway, I hope this finds its way to someone else who is going through the same learning pain as I did, to get their app ready for iOS7!</p>
