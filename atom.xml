@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-26T15:30:11-04:00</updated>
+  <updated>2013-09-26T15:33:22-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -33,9 +33,9 @@
 
 <h3>Everything new is old again!</h3>
 
-<p>Of course, the easiest way is just: make it work like it used to!  This is entirely possible!  All it requires really, is setting your view controller&#8217;s <code>EdgesForExtendedLayout</code> property to <code>UIRectEdge.None</code>.  This was a quick fix, and ended up getting me up and running again until I could figure things out (you can of course choose some, all, or none of the edges to be used for extended layout with this property.  For example, you might want the top to blur under the navigation bar, but the bottom to not blur underneath the tabs).</p>
+<p>Of course, the easiest way is just: make it work like it used to!  This is entirely possible!  All it requires really, is setting your view controller&#8217;s <code>EdgesForExtendedLayout</code> property to <code>UIRectEdge.None</code>.  This was a quick fix, and ended up getting me up and running again until I could figure things out (you can of course choose some, all, or none of the edges to be used for extended layout with this property - for example, you might want the top to blur under the navigation bar, but the bottom to not blur underneath the tabs).</p>
 
-<p>This was a workable solution, but I still wasn&#8217;t really happy with it.  After all, the cool kids were all using the fancy blurred view scrolling behind the navigation and status bars like in the image below.  Who doesn&#8217;t want new and shiny?</p>
+<p>This was a workable solution, but I still wasn&#8217;t really happy with it.  After all, the cool kids were all using the fancy blurred view scrolling behind the navigation and status bars like in the image below, and, who doesn&#8217;t want shiny and new?</p>
 
 <p><img src="http://redth.info/images/ios7-full-screen-layout/blurred.png" alt="" /></p>
 
