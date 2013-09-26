@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-09-26T15:19:27-04:00</updated>
+  <updated>2013-09-26T15:21:02-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -14,21 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ios7 Full Screen Layout]]></title>
-    <link href="http://redth.info/blog/2013/09/26/ios7-full-screen-layout/"/>
+    <title type="html"><![CDATA[iOS7: Fun times with the new Full Screen Layout!]]></title>
+    <link href="http://redth.info/ios7-full-screen-layout"/>
     <updated>2013-09-26T00:00:00-04:00</updated>
-    <id>http://redth.info/blog/2013/09/26/ios7-full-screen-layout</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>layout: post
-title: &#8220;iOS7: Fun times with the new Full Screen Layout!&#8221;
-date: 2013-09-26
-comments: true
-description: &#8220;iOS7 gives your view controllers domain over the full screen!  Let&#8217;s make the most of it!&#8221;</p>
-
-<h2>permalink: &#8220;/ios7-full-screen-layout&#8221;</h2>
-
-<p>In a mad rush, I had to prepare an app for iOS7 <em>after</em> its release.  Yes, I know, shame on me for not listening to everyone telling me to start getting my apps ready early.  How bad could it be anyway?</p>
+    <id>http://redth.info/ios7-full-screen-layout</id>
+    <content type="html"><![CDATA[<p>In a mad rush, I had to prepare an app for iOS7 <em>after</em> its release.  Yes, I know, shame on me for not listening to everyone telling me to start getting my apps ready early.  How bad could it be anyway?</p>
 
 <p>For the most part, not too bad.  The worst part for me came in the shape of dealing with this new idea that every <code>UIViewController</code> now expands the bounds of the entire screen, including where the status bar and navigation bars could be.  In any case, I had to do a bit of learning really quickly.  If you don&#8217;t already know what I&#8217;m talking about, here&#8217;s a picture of one unpleasant conversion experience:</p>
 
