@@ -113,9 +113,29 @@
 <p><img src="/images/itunes-media-hotkey-disabler/itunes-media-hotkey-disabler.png" alt="" /></p>
 
 <ul>
-<li><a href="/files/itunes-media-hotkey-disabler/iTunes-Media-HotJey-Disabler.1.0.0.dmg">Download <strong>iTunes.Media.HotKey.Disabler.1.0.0.dmg</strong></a></li>
+<li><a href="https://googledrive.com/host/0B5rPKkNu1C2INC13ZEV5dGFmYk0/iTunes.Media.HotKey.Disabler.1.0.0.dmg">Download <strong>iTunes.Media.HotKey.Disabler.1.0.0.dmg</strong></a></li>
 </ul>
 
+
+<p><strong>Why create this app?</strong></p>
+
+<p>While working on an upcoming Google Music app (gTunes) that&#8217;s currently waiting for approval on the app store, I wanted to make use of the media keys (Play/Pause, Next, Prev, etc.).  This was easily enough done, however there was one major issue.  Apple does not expose any API&#8217;s to prevent iTunes from opening when the Play/Pause keyboard button is pressed on a Mac.  There are ways around this, but to my limited Mac development knowledge, none of them would be allowed on the App Store.</p>
+
+<p><strong>How does it work?</strong></p>
+
+<p>The most consistent and easiest way I&#8217;ve found to stop iTunes from listening for the Play/Pause button key was to stop the Launch Agent <strong><em>com.apple.rcd</em></strong></p>
+
+<p>If you&#8217;re more comfortable with Terminal, you can do the exact same thing that this app does with the command:</p>
+
+<blockquote><p><code>unload -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
+
+<p>Similarly, the Launch agent can be re-enabled so that iTunes listens for the Play / Pause key again with the command:</p>
+
+<blockquote><p><code>load -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
+
+<p><strong>More interesting things</strong></p>
+
+<p>It&#8217;s worth noting I don&#8217;t know a lot yet about Mac development, but I&#8217;ve been able to create this app (and the upcoming gTunes) using <a href="http://xamarin.com/mac">Xamarin.Mac</a>, creating a fully native app all in C#!  You should check out <a href="http://xamarin.com/">Xamarin</a>!</p>
 </div>
   
   
