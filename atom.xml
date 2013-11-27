@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-11-27T11:03:23-05:00</updated>
+  <updated>2013-11-27T11:04:14-05:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-11-27T00:00:00-05:00</updated>
     <id>http://redth.info/itunes-media-hotkey-disabler</id>
     <content type="html"><![CDATA[<p>This simple application will allow you to disable or enable iTunes from listening to when you press the media keys (Play / Pause) on your keyboard.  This is great for applications such as gTunes which make use of the hot keys but cannot themselves prevent iTunes from also responding to those keyboard keys.</p>
+
+<!-- More -->
+
 
 <p><img src="http://redth.info/images/itunes-media-hotkey-disabler/itunes-media-hotkey-disabler.png" alt="" /></p>
 
