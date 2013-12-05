@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2013-11-27T11:04:44-05:00</updated>
+  <updated>2013-12-05T12:57:59-05:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -40,11 +40,11 @@
 
 <p>If you&#8217;re more comfortable with Terminal, you can do the exact same thing that this app does with the command:</p>
 
-<blockquote><p><code>unload -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
+<blockquote><p><code>launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
 
 <p>Similarly, the Launch agent can be re-enabled so that iTunes listens for the Play / Pause key again with the command:</p>
 
-<blockquote><p><code>load -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
+<blockquote><p><code>launchctl load -w /System/Library/LaunchAgents/com.apple.rcd.plist</code></p></blockquote>
 
 <p><strong>More interesting things</strong></p>
 
