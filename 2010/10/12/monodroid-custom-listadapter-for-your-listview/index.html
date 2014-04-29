@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>MonoDroid - Custom ListAdapter for your ListView - Redth</title>
+  <meta name="author" content="Jon">
+
+  
+  <meta name="description" content="I don’t know about you, but the main thing I’m interested in on any new mobile development platform for some reason, is LISTS. I think I’m so fixated &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6465612-17']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Redth</a></h1>
+  
+    <h2>code, ramblings, rants</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:redth.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">MonoDroid - Custom ListAdapter for Your ListView</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-13T00:00:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I don’t know about you, but the main thing I’m interested in on any new mobile development platform for some reason, is LISTS. I think I’m so fixated on lists is because of the way the iPhone so successfully introduced the paradigm of list based navigation. Everything can be done in a series of lists (ok not really, but they are crucial to many apps!).</p>
+
+<blockquote><p><img src="/images/MonoDroid-Custom-ListAdapter/CustomList.png" alt="" /></p></blockquote>
+
+<p>Naturally then, the first thing I sought out to do on MonoDroid was to create a list. Easy, piece of cake… If you want to create a boring old list with a single line of text for each item. This is no doubt, an important part of every developer’s Hello World development phase, but it doesn’t take long before you’re craving images, several text elements, and possibly even some checkboxes and/or buttons (easy there tiger). For every ListView in Android, there is a prince charming Listview Adapter to save the day.</p>
+
+<!-- more -->
+
+
+<p>The most basic of examples which you’ve no doubt seen involve an ArrayAdapter of some sort, with the default <em>Android.R.Layout.SimpleListItem</em> or whatever it is called. BOOORING. What we need to do to make something exciting is create our own custom ListView Adapter. Now, you could use a SimpleAdapter to map fields to certain resource id’s of a layout, but if you look at a java example of this, ‘Simple’ quickly becomes a relative term. What I like to do is create my own adapter deriving from the BaseAdapter class (how fitting).</p>
+
+<p>Here’s some code for my custom list adapter (explanation to follow):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.App</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Content</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.OS</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Runtime</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Views</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Widget</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Graphics.Drawables</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">MonoDroid.CustomList</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">CustomListAdapter</span> <span class="p">:</span> <span class="n">BaseAdapter</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">Activity</span> <span class="n">context</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;</span> <span class="n">items</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">CustomListAdapter</span><span class="p">(</span><span class="n">Activity</span> <span class="n">context</span><span class="p">)</span> <span class="c1">//We need a context to inflate our row view from</span>
+</span><span class='line'>          <span class="p">:</span> <span class="k">base</span><span class="p">()</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="n">context</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//For demo purposes we hard code some data here</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Elephant&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Big and Gray, but what the hey&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">elephant</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Chinchilla&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Little people of the andes&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">chinchilla</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Lion&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Cowardly lion, anyone?&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">lion</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Skunk&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Ello, baby. I am ze locksmith of love, no?&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">skunk</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Rhino&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Most live to about 60, pretty old eh?&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">rhino</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Zebra&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Stripes maybe not so great for hiding&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">zebra</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Squirrel&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Nuts nuts, where&#39;s my nuts?!&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">squirrel</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Walrus&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;I am he as you are he as you are me&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">walrus</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Giraffe&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Bigger than your ford pinto&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">giraffe</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Chicken&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;I&#39;ll take 2 eggs over easy&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">chicken</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Duck&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;He&#39;s all quacked up&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">duck</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Hawk&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;He needs to be on a t-shirt&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">hawk</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Lobster&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;We were at the beach...&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">lobster</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Pig&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Babe, Orson, Piglet, whatever&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">pig</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Rabbit&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Thumper is the best rabbit name ever&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">rabbit</span> <span class="p">},</span>
+</span><span class='line'>              <span class="k">new</span> <span class="nf">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;Turtle&quot;</span><span class="p">,</span> <span class="n">Description</span> <span class="p">=</span> <span class="s">&quot;Slow and steady wins the race&quot;</span><span class="p">,</span> <span class="n">Image</span> <span class="p">=</span> <span class="n">Resource</span><span class="p">.</span><span class="n">drawable</span><span class="p">.</span><span class="n">turtle</span> <span class="p">},</span>
+</span><span class='line'>          <span class="p">};</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="k">override</span> <span class="kt">int</span> <span class="n">Count</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="k">override</span> <span class="n">Java</span><span class="p">.</span><span class="n">Lang</span><span class="p">.</span><span class="n">Object</span> <span class="n">GetItem</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">position</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="k">override</span> <span class="kt">long</span> <span class="nf">GetItemId</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">position</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="k">override</span> <span class="n">View</span> <span class="nf">GetView</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="n">View</span> <span class="n">convertView</span><span class="p">,</span> <span class="n">ViewGroup</span> <span class="n">parent</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="c1">//Get our object for this position</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">item</span> <span class="p">=</span> <span class="n">items</span><span class="p">[</span><span class="n">position</span><span class="p">];</span>           
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Try to reuse convertView if it&#39;s not  null, otherwise inflate it from our item layout</span>
+</span><span class='line'>          <span class="c1">// This gives us some performance gains by not always inflating a new view</span>
+</span><span class='line'>          <span class="c1">// This will sound familiar to MonoTouch developers with UITableViewCell.DequeueReusableCell()</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">view</span> <span class="p">=</span> <span class="p">(</span><span class="n">convertView</span> <span class="p">??</span>
+</span><span class='line'>              <span class="n">context</span><span class="p">.</span><span class="n">LayoutInflater</span><span class="p">.</span><span class="n">Inflate</span><span class="p">(</span>
+</span><span class='line'>                  <span class="n">Resource</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">customlistitem</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">parent</span><span class="p">,</span>
+</span><span class='line'>                  <span class="k">false</span><span class="p">))</span> <span class="k">as</span> <span class="n">LinearLayout</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Find references to each subview in the list item&#39;s view</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">imageItem</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">FindViewById</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">imageItem</span><span class="p">)</span> <span class="k">as</span> <span class="n">ImageView</span><span class="p">;</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">textTop</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">FindViewById</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">textTop</span><span class="p">)</span> <span class="k">as</span> <span class="n">TextView</span><span class="p">;</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">textBottom</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">FindViewById</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">textBottom</span><span class="p">)</span> <span class="k">as</span> <span class="n">TextView</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Assign this item&#39;s values to the various subviews</span>
+</span><span class='line'>          <span class="n">imageItem</span><span class="p">.</span><span class="n">SetImageResource</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Image</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">textTop</span><span class="p">.</span><span class="n">SetText</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">TextView</span><span class="p">.</span><span class="n">BufferType</span><span class="p">.</span><span class="n">Normal</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">textBottom</span><span class="p">.</span><span class="n">SetText</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Description</span><span class="p">,</span> <span class="n">TextView</span><span class="p">.</span><span class="n">BufferType</span><span class="p">.</span><span class="n">Normal</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Finally return the view</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">view</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="n">Animal</span> <span class="nf">GetItemAtPosition</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">return</span> <span class="n">items</span><span class="p">[</span><span class="n">position</span><span class="p">];</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oh, and here’s the Animal class if you’re curious:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">MonoDroid.CustomList</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">Animal</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">get</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">set</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="kt">string</span> <span class="n">Description</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">get</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">set</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="kt">int</span> <span class="n">Image</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">get</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">set</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now for the sake of the demo, I create my own data inside the adapter, and of course nothing is stopping you from getting that data from a webservice, or somewhere more fashionable. The first thing to note is that I’m requiring an Activity object in the <em>ctor</em>. This really is only used to get the <em>LayoutInflator</em> for the given Activity so that we can inflate our row’s View later on, but it is important to have it. Next thing of interest is the overrides. All we really need to override is the <em>Count</em> property, <em>GetItem</em> method, <em>GetItemId</em> method, and <em>GetView</em> method. The last method (<em>GetItemAtPosition</em>) is my own addition so that I can read out the object for a given position elsewhere in the project (in this case, when a <em>ListView.ItemClicked</em> event is fired).</p>
+
+<p><em>Count</em> is easy, just return your object list’s count (duh). <em>GetItem</em> and <em>GetItemId</em> I’m still not convinced are necessary, but I override them anyways and just return the position in each case. The only significance I know of so far with these properties is in some ListView events, the item Id is passed as an event arg. However, in these same events, we also get the item’s position, which is why I have the <em>GetItemAtPosition</em> method, so I can retrieve the relevant object for the event. I’d love to hear from anyone who knows more about why I might want to pay more attention to the GetItem and <em>GetItemId</em> methods.</p>
+
+<p><em>GetView</em> is where the magic happens. Basically, I get the item for the given position first. Next, I determine if the <em>convertView</em> parameter is null or not, and inflate my CustomListItem’s layout into a usable View (<em>LinearLayout</em> to be specific). This is basically a way for us to reuse resources. Anyone familiar with MonoTouch and the Reusable <em>UITableViewCell</em> will feel right at home here. We could inflate the resource every time, but that would waste unnecessary resources. So, best practice here is to always reuse if the <em>convertView</em> is not null. Now then, with my <em>LinearLayout</em> instance, I can locate all of the views within that I want to assign information to, for the given row. As you can see in this case, I have an <em>ImageView</em>, and two <em>TextView</em>’s.</p>
+
+<p>Here is what the layout xml looks like for my custom list item:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/widget28&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;80px&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ImageView</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/imageItem&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_gravity=</span><span class="s">&quot;center_vertical&quot;</span>
+</span><span class='line'>      <span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ImageView&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;LinearLayout</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/linearText&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_marginLeft=</span><span class="s">&quot;10px&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_marginTop=</span><span class="s">&quot;10px&quot;</span>
+</span><span class='line'>      <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;TextView</span>
+</span><span class='line'>      <span class="na">android:id=</span><span class="s">&quot;@+id/textTop&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:text=</span><span class="s">&quot;TextView&quot;</span>
+</span><span class='line'>          <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/TextView&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;TextView</span>
+</span><span class='line'>      <span class="na">android:id=</span><span class="s">&quot;@+id/textBottom&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+</span><span class='line'>      <span class="na">android:text=</span><span class="s">&quot;TextView&quot;</span>
+</span><span class='line'>          <span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/TextView&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/LinearLayout&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once I have found references to these, I can set their text and image. Finally, I can return the <em>LinearLayout</em> View that I’ve been working on for this row. That wasn’t so hard, was it? Last, but not least, we need to actually deal with our <em>Activity</em> that holds the <em>ListView</em>. Up until now we had just created the adapter that our <em>ListView</em> was going to use. Now we need to actually hook an adapta’ up.</p>
+
+<p>Here’s what my Activity code looks like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.App</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Content</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Runtime</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Views</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.Widget</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Android.OS</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">MonoDroid.CustomList</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="na"> [Activity(Label = &quot;1 CustomList&quot;, MainLauncher = true)]</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">CustomList</span> <span class="p">:</span> <span class="n">Activity</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">CustomListAdapter</span> <span class="n">listAdapter</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">public</span> <span class="nf">CustomList</span><span class="p">(</span><span class="n">IntPtr</span> <span class="n">handle</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span><span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Set the Activity&#39;s view to our list layout       </span>
+</span><span class='line'>          <span class="n">SetContentView</span><span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">customlist</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Create our adapter</span>
+</span><span class='line'>          <span class="n">listAdapter</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CustomListAdapter</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Find the listview reference</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">listView</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ListView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">listView</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Hook up our adapter to our ListView</span>
+</span><span class='line'>          <span class="n">listView</span><span class="p">.</span><span class="n">Adapter</span> <span class="p">=</span> <span class="n">listAdapter</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Wire up the click event</span>
+</span><span class='line'>          <span class="n">listView</span><span class="p">.</span><span class="n">ItemClick</span> <span class="p">+=</span> <span class="k">new</span> <span class="n">EventHandler</span><span class="p">&lt;</span><span class="n">ItemEventArgs</span><span class="p">&gt;(</span><span class="n">listView_ItemClick</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">void</span> <span class="nf">listView_ItemClick</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">ItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="c1">//Get our item from the list adapter</span>
+</span><span class='line'>          <span class="kt">var</span> <span class="n">item</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">listAdapter</span><span class="p">.</span><span class="n">GetItemAtPosition</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Position</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="c1">//Make a toast with the item name just to show it was clicked</span>
+</span><span class='line'>          <span class="n">Toast</span><span class="p">.</span><span class="n">MakeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; Clicked!&quot;</span><span class="p">,</span> <span class="n">ToastLength</span><span class="p">.</span><span class="n">Short</span><span class="p">).</span><span class="n">Show</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here’s the layout xml behind this activity:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;LinearLayout</span>
+</span><span class='line'><span class="na">android:id=</span><span class="s">&quot;@+id/widget28&quot;</span>
+</span><span class='line'><span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
+</span><span class='line'><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ListView</span>
+</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/listView&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'>  <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span>
+</span><span class='line'><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/ListView&gt;</span>
+</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So you can see in my Activity’s <em>OnCreate</em>, I’m calling the base method (important), and then setting the activity’s content view to the layout xml that I showed you above. I’m also creating an instance of the <em>CustomListAdapter</em> I made earlier, and finding a reference to my ListView, so that I can set my <em>ListView</em>’s .<em>Adapter</em> property to the instance of the <em>CustomListAdapter</em>. As a bonus, I register the <em>ItemClick</em> event of my <em>ListView</em>, and in it, retrieve the item for the given position, from my <em>CustomListAdapter</em>, using the method I added to the adapter (<em>GetItemPositionAt</em>). I then display a Toast with the name of the Animal clicked.</p>
+
+<p>Hopefully this little tutorial enlightens you on how to make some fancy lists (not those boring default ones). I’ve also made the source code of the entire project available:</p>
+
+<p>http://goo.gl/AcGI</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jon</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-13T00:00:00-04:00" pubdate data-updated="true">May 13<span>th</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview" data-via="redth" data-counturl="http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/why-we-needed-facebook-messenger" title="Next Post: Why we needed Facebook Messenger">Why we needed Facebook Messenger &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  	<br />
+  	<p><img src="/images/Site/Redth.png" alt="Redth" /></p>
+  
+  	<p>
+   	 <a href="http://www.amazon.com/gp/product/1118026438/ref=as_li_tf_il?ie=UTF8&camp=1789&creative=9325&creativeASIN=1118026438&linkCode=as2&tag=red082-20"><img border="0" src="http://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1118026438&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=red082-20" ></a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=red082-20&l=as2&o=1&a=1118026438" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+     </p>
+
+     <p><a href="http://gonemobile.io" target="_blank"><img src="/images/Site/Gone-Mobile-Podcast.png" alt="Gone Mobile Podcast" title="Gone Mobile Podcast" /></a></p>
+
+     <p><a href="http://planet.xamarin.com" target="_blank"><img src="/images/Site/Xamarin-Planet-Badge.png" alt="Featured Xamarin Planet Community Blog" title="Featured Xamarin Planet Community Blog" /></a></p>
+
+     <p> 
+      <iframe src="http://githubbadge.appspot.com/badge/Redth?a=0" style="border: 0;height: 108px;width: 200px;overflow: hidden;" frameBorder=0></iframe>     
+     </p>
+     
+     <p>
+      <a href="http://ca.linkedin.com/pub/jonathan-dick/3/a60/2b5"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Jonathan Dick's profile on LinkedIn"></a>
+      </p>
+
+
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <a href="http://xamarin.com/mvp" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-MVP-Badge.png" alt="Xamarin Most Valuable Professional" /></a>
+          </td>
+          <td>
+            <a href="http://xamarin.com/consulting-partners" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-Certified-Developer.png" alt="Xamarin Certified Developer" /></a>
+          </td>         
+        </tr>
+      </table>
+      <br />
+      
+
+      <a class="twitter-timeline" data-dnt=true href="https://twitter.com/redth" data-widget-id="253917988271562752">Tweets by @redth</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/such-android-api-levels-much-confuse-wow">Such Android API levels, much confuse. Wow.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/itunes-media-hotkey-disabler">iTunes Media HotKey Disabler</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ios7-full-screen-layout">iOS7: Fun times with the new Full Screen Layout!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ios7-recipe-background-fetching">iOS7 Recipe: Background Fetching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Auto-Wire-Up-Views-Xamarin-Activity">How to Auto Wire Up Android Activity Views in Xamarin.Android</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Jon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'redth';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview';
+        var disqus_url = 'http://redth.info/2010/10/12/monodroid-custom-listadapter-for-your-listview';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

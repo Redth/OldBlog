@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Redth</title>
+  <meta name="author" content="Jon">
+
+  
+  <meta name="description" content="I have been bitten more than once by the confusion of Android&#8217;s many API levels when building Xamarin.Android apps. It gets even more complex &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://redth.info">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6465612-17']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Redth</a></h1>
+  
+    <h2>code, ramblings, rants</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:redth.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/such-android-api-levels-much-confuse-wow">Such Android API Levels, Much Confuse. Wow.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-29T00:00:00-04:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
+        
+         | <a href="/such-android-api-levels-much-confuse-wow#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img style="float: right" src="/images/Android-API-Levels/Doge-API-Level.png" /></p>
+
+<p>I have been bitten more than once by the confusion of Android&#8217;s many API levels when building Xamarin.Android apps.  It gets even more complex when you start referencing other libraries that target different API levels.  Just the other day I had an <a href="https://github.com/Redth/AndHUD/issues/9">issue come up with AndHUD</a> where the resolution for a runtime error had nothing to do with the code itself.  I decided it was time to finally write this post.</p>
+
+<p>As if it weren&#8217;t confusing enough, Google generally gives three names to every API level: an integer API Level number, a version number, and a delicious sounding dessert name.</p>
+
+<p>For example, Gingerbread was version 2.3 or API Level 9 (also Gingerbread had 2.3.7 and API level 10 as an update).  Kit Kat is version 4.4, API level 19.  Luckily <a href="http://developer.android.com/guide/topics/manifest/uses-sdk-element.html">Google has published</a> the various versions in a table so you can figure out what is what.</p>
+
+<p>When it comes to your Xamarin.Android apps, it&#8217;s important to be aware of all of the spots you can set API levels in your project settings.  In particular, there are three places of interest:</p>
+
+<ol>
+<li>Project Settings -> General -> Target Framework</li>
+<li>Project Settings -> Android Application -> Minimum Android Version</li>
+<li>Project Settings -> Android Application -> Target Android Version</li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/such-android-api-levels-much-confuse-wow">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/itunes-media-hotkey-disabler">iTunes Media HotKey Disabler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-27T00:00:00-05:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+        
+         | <a href="/itunes-media-hotkey-disabler#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This simple application will allow you to disable or enable iTunes from listening to when you press the media keys (Play / Pause) on your keyboard.  This is great for applications such as gTunes which make use of the hot keys but cannot themselves prevent iTunes from also responding to those keyboard keys.</p>
+
+<p><img src="/images/itunes-media-hotkey-disabler/itunes-media-hotkey-disabler.png" alt="" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/itunes-media-hotkey-disabler">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ios7-full-screen-layout">iOS7: Fun Times With the New Full Screen Layout!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-26T00:00:00-04:00" pubdate data-updated="true">Sep 26<span>th</span>, 2013</time>
+        
+         | <a href="/ios7-full-screen-layout#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a mad rush, I had to prepare an app for iOS7 <em>after</em> its release.  Yes, I know, shame on me for not listening to everyone telling me to start getting my apps ready early.  How bad could it be anyway?</p>
+
+<p>For the most part, not too bad.  The worst part for me came in the shape of dealing with this new idea that every <code>UIViewController</code> now expands the bounds of the entire screen, including where the status bar and navigation bars could be.  In any case, I had to do a bit of learning really quickly.  If you don&#8217;t already know what I&#8217;m talking about, here&#8217;s a picture of one unpleasant conversion experience:</p>
+
+<p><img src="/images/ios7-full-screen-layout/navigation-bar-overlapping.png" alt="" /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/ios7-full-screen-layout">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ios7-recipe-background-fetching">iOS7 Recipe: Background Fetching</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-22T00:00:00-04:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
+        
+         | <a href="/ios7-recipe-background-fetching#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is my entry into the <a href="http://blog.xamarin.com/xamarin-recipe-cook-off/">Xamarin Recipe Cook-Off</a>.  Recipes, in Xamarin terms, are very simple demonstrations of how a single feature or piece of functionality is implemented.  I thought background fetching would be useful to many developers, and it&#8217;s pretty easy to implement, especially after reading this recipe.</p>
+
+<ul>
+<li><a href="https://github.com/Redth/iOS.BackgroundFetch.Sample">View the entire Recipe &amp; Source Code</a></li>
+</ul>
+
+
+<p>I&#8217;ve also included the recipe in this blog post:</p>
+
+<h2>Background Fetching Data</h2>
+
+<p>This recipe shows how to register your application to perform background fetching on intervals.</p>
+
+<h4>1. Recipe</h4>
+
+<p>In your application&#8217;s <code>Info.plist</code> file, add the value <code>fetch</code> to the <code>UIBackgroundModes</code> (<em>Required background modes</em>) property.</p>
+
+<p>Next, in your <code>AppDelegate</code> class, in the <code>FinishedLaunching</code> override method, add the following code to register your application for background fetching:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">UIApplication</span><span class="p">.</span><span class="n">SharedApplication</span><span class="p">.</span><span class="n">SetMinimumBackgroundFetchInterval</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">BackgroundFetchIntervalMinimum</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, in your <code>AppDelegate</code> class, override the <code>PerformFetch</code> method.</p>
+
+<p>This method will be executed by the operating system when it sees best fit (eg: when the device is awake and connected already).  You do not have complete control over how often or when fetching happens.</p>
+
+<p>You should execute your own code to fetch new data in this method.  It&#8217;s important to call the <code>Action&lt;UIBackgroundFetchResult&gt; completionHandler</code> parameter which is passed into this method with the appropriate result when you are done.</p>
+
+<h4>2. Sample PerformFetch</h4>
+
+<p>In this sample, a weather service is called by background fetching so that when the user opens the app, recent weather is available.  The weather is cached locally after it&#8217;s fetched in the background, and the UI is also updated if there is new weather info.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">async</span> <span class="k">void</span> <span class="nf">PerformFetch</span> <span class="p">(</span><span class="n">UIApplication</span> <span class="n">application</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">UIBackgroundFetchResult</span><span class="p">&gt;</span> <span class="n">completionHandler</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="p">(</span><span class="s">&quot;PerformFetch called...&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//Return no new data by default</span>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NoData</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Get latest weather</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">w</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GetWeatherAsync</span><span class="p">(</span><span class="s">&quot;Windsor, Canada&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Cache the weather locally</span>
+</span><span class='line'>      <span class="n">CacheWeatherAsync</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Update the UI</span>
+</span><span class='line'>      <span class="n">weatherViewController</span><span class="p">.</span><span class="n">UpdateWeather</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Indicate we have new data</span>
+</span><span class='line'>      <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NewData</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Indicate a failed fetch if there was an exception</span>
+</span><span class='line'>    <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">Failed</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">finally</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//We really should call the completion handler with our result</span>
+</span><span class='line'>    <span class="n">completionHandler</span> <span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Additional Information</h4>
+
+<ul>
+<li>Your <code>PerformFetch</code> has about <strong>30</strong> seconds to run before it&#8217;s killed</li>
+<li>The operating system is more likely to grant more time (and more often) to your application for background fetching if you are efficient, which means executing quickly, and always calling <code>completionHandler</code> with an accurate result</li>
+<li>You can tell the operating system  the minimum time to sleep between waking up your application and calling its <code>PerformFetch</code> method if you know your app only updates at a certain interval, to avoid extra calls to <code>PerformFetch</code> and wasting battery life.  You would specify the minimum time in seconds in the <code>UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval (double minimumBackgroundFetchInterval)</code> method</li>
+<li>You can actually make calls to update your UI from the <code>PerformFetch</code> method so that the next time the user launches the app, everything is up to date</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Auto-Wire-Up-Views-Xamarin-Activity">How to Auto Wire Up Android Activity Views in Xamarin.Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-23T00:00:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
+        
+         | <a href="/Auto-Wire-Up-Views-Xamarin-Activity#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbosity monstrosity:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span> <span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span> <span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">SetContentView</span> <span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Layout</span><span class="p">.</span><span class="n">RandomDataLayout</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">button1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">button2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button2</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">button3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button3</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">button4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button4</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">textView1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView2</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView3</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView4</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView5</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView5</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView6</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView6</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView7</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView7</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView8</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView8</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">textView9</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView9</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">imageView1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">imageView2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView2</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">imageView3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView3</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">imageView4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView4</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">imageView5</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView5</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">imageView6</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView6</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that&#8217;s a lot of code to do something really simple.  Plumbing code that&#8217;s so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span> <span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span> <span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">SetContentView</span> <span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Layout</span><span class="p">.</span><span class="n">RandomDataLayout</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="n">WireUpViews</span> <span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here&#8217;s the extension method I created to do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">ActivityExtensions</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">WireUpViews</span><span class="p">(</span><span class="k">this</span> <span class="n">Activity</span> <span class="n">activity</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Get all the View fields from the activity</span>
+</span><span class='line'>      <span class="kt">var</span> <span class="n">members</span> <span class="p">=</span> <span class="k">from</span> <span class="n">m</span> <span class="k">in</span> <span class="n">activity</span><span class="p">.</span><span class="n">GetType</span> <span class="p">().</span><span class="n">GetFields</span> <span class="p">(</span><span class="n">BindingFlags</span><span class="p">.</span><span class="n">NonPublic</span> <span class="p">|</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">Instance</span><span class="p">)</span>
+</span><span class='line'>                    <span class="k">where</span> <span class="n">m</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">IsSubclassOf</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">View</span><span class="p">))</span>
+</span><span class='line'>                    <span class="k">select</span> <span class="n">m</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(!</span><span class="n">members</span><span class="p">.</span><span class="n">Any</span> <span class="p">())</span>
+</span><span class='line'>          <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">members</span><span class="p">.</span><span class="n">ToList</span> <span class="p">().</span><span class="n">ForEach</span> <span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">try</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="c1">//Find the android identifier with the same name</span>
+</span><span class='line'>              <span class="kt">var</span> <span class="n">id</span> <span class="p">=</span> <span class="n">activity</span><span class="p">.</span><span class="n">Resources</span><span class="p">.</span><span class="n">GetIdentifier</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">activity</span><span class="p">.</span><span class="n">PackageName</span><span class="p">);</span>
+</span><span class='line'>              <span class="c1">//Set the activity field&#39;s value to the view with that identifier</span>
+</span><span class='line'>              <span class="n">m</span><span class="p">.</span><span class="n">SetValue</span> <span class="p">(</span><span class="n">activity</span><span class="p">,</span> <span class="n">activity</span><span class="p">.</span><span class="n">FindViewById</span> <span class="p">(</span><span class="n">id</span><span class="p">));</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="k">throw</span> <span class="k">new</span> <span class="nf">MissingFieldException</span> <span class="p">(</span><span class="s">&quot;Failed to wire up the field &quot;</span>
+</span><span class='line'>                                               <span class="p">+</span> <span class="n">m</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; to a View in your layout with a corresponding identifier&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared as a code field.  There&#8217;s also room for improvement in my extension method, for example, what if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  Well, I don&#8217;t want to do <strong><em>ALL</em></strong> your work for you ;)</p>
+
+<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!  Happy Coding!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Xamarin-Studio-Launcher">Xamarin Studio Launcher</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-31T00:00:00-04:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
+        
+         | <a href="/Xamarin-Studio-Launcher#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
+
+<p>I&#8217;ve recently converted to a Mac.  As a long time Windows user, one thing I was very accustomed to was keeping multiple visual studio, or more recently, Xamarin Studio instances open at any given time.  Switching to a Mac I found this isn&#8217;t so easy, so I decided to make a nice little Launcher application to open new Xamarin Studio instances at will!</p>
+
+<p>So, without further ado, please download the Xamarin Studio Launcher!</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/56106/Xamarin.Studio.Launcher.dmg">Download Xamarin Studio Launcher</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/MobiDevDay-Detroit-2013">MobiDevDay Detroit 2013</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-04T00:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2013</time>
+        
+         | <a href="/MobiDevDay-Detroit-2013#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Had a great turnout and lots of solid questions at my talk on Xamarin and C# at <a href="http://mobidevdaydetroit.com">Detroit MobiDevDay 2013</a>.  I&#8217;ve got my slides posted for anyone who cares to have a look!</p>
+
+<p>Thanks to <a href="http://twitter.com/@MobiDevDay">@MobiDevDay</a> for having me, and to all those who came out!</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/MobiDevDay-Detroit-2013">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/xamarin-evolve-2013">Xamarin Evolve 2013</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-20T00:00:00-04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2013</time>
+        
+         | <a href="/xamarin-evolve-2013#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Xamarin Evolve 2013 was an Awesome conference!  I got to see a lot of familiar faces, and meet plenty of new ones!  It&#8217;s such a great experience to see and talk with such great people who I&#8217;d only otherwise know online!</p>
+
+<p>I also had the great privilege to do some speaking at Evolve!  I&#8217;ve posted my slides below and will update the post with links to the videos when they are available!</p>
+
+<p>Thanks to Xamarin and everyone who made this such a great event!</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/xamarin-evolve-2013">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/month-with-android">A Month With Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-28T00:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2013</time>
+        
+         | <a href="/month-with-android#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just before the new year, <a href="/why-i-am-looking-forward-to-android">I wrote a post about switching back to Android</a> (to a Nexus 4), and I was excited at the prospect.  I explained that I’d been a long time iOS user (quite happily so), except for a brief stint on Android 2.3 (Gingerbread) which ended not so well.</p>
+
+<p>Well, it’s been about a month now since I’ve switched back to Android, and I’m not looking back anytime soon!  I’m going to do a quick recap about the things I love, and the things I miss:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/month-with-android">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/why-i-am-looking-forward-to-android">Why I&#8217;m Looking Forward to Android</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-28T00:00:00-05:00" pubdate data-updated="true">Dec 28<span>th</span>, 2012</time>
+        
+         | <a href="/why-i-am-looking-forward-to-android#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/Android-And-Back/iOS-to-Android.jpg" alt="Mou icon" /></p>
+
+<h2>The Back Story</h2>
+
+<p>Way back in Froyo days, I took the leap from my iPhone 3G to Android as my daily device with a Samsung Galaxy S.  I was co-authoring a book <strong><a href="http://www.amazon.com/gp/product/1118026438/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1118026438&amp;linkCode=as2&amp;tag=red082-20">Professional Android Development with Mono and C#/.NET</a></strong></p>
+
+<p>Android was new, it was exciting, it was <em>different</em>.  It was also slower, higher maintenance, and had me flashing roms weekly.  Not necessarily a problem for a supergeek like me, but still tiresome and prone to moments of <em>Oh sorry, that&#8217;s a bug in my phone&#8217;s rom</em> or <em>my battery&#8217;s dead because of all the services i have running</em>.</p>
+
+<p>Needless to say, it wasn&#8217;t very long before I was back on the iPhone train.  I was content with the iPhone 4, and then the iPhone 4S, and now the iPhone 5.  They&#8217;re all great devices, they just work… as long as you want to use them how Apple intends.</p>
+
+<p>The primary reasn I&#8217;m switching back to Android, is my Galaxy S just doesn&#8217;t cut it for development anymore.  My wonderful wife will inherit my iPhone 5 (like she does all my devices), and I&#8217;ll have a Nexus 4 to test on soon.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/why-i-am-looking-forward-to-android">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  	<br />
+  	<p><img src="/images/Site/Redth.png" alt="Redth" /></p>
+  
+  	<p>
+   	 <a href="http://www.amazon.com/gp/product/1118026438/ref=as_li_tf_il?ie=UTF8&camp=1789&creative=9325&creativeASIN=1118026438&linkCode=as2&tag=red082-20"><img border="0" src="http://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1118026438&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=red082-20" ></a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=red082-20&l=as2&o=1&a=1118026438" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+     </p>
+
+     <p><a href="http://gonemobile.io" target="_blank"><img src="/images/Site/Gone-Mobile-Podcast.png" alt="Gone Mobile Podcast" title="Gone Mobile Podcast" /></a></p>
+
+     <p><a href="http://planet.xamarin.com" target="_blank"><img src="/images/Site/Xamarin-Planet-Badge.png" alt="Featured Xamarin Planet Community Blog" title="Featured Xamarin Planet Community Blog" /></a></p>
+
+     <p> 
+      <iframe src="http://githubbadge.appspot.com/badge/Redth?a=0" style="border: 0;height: 108px;width: 200px;overflow: hidden;" frameBorder=0></iframe>     
+     </p>
+     
+     <p>
+      <a href="http://ca.linkedin.com/pub/jonathan-dick/3/a60/2b5"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Jonathan Dick's profile on LinkedIn"></a>
+      </p>
+
+
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <a href="http://xamarin.com/mvp" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-MVP-Badge.png" alt="Xamarin Most Valuable Professional" /></a>
+          </td>
+          <td>
+            <a href="http://xamarin.com/consulting-partners" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-Certified-Developer.png" alt="Xamarin Certified Developer" /></a>
+          </td>         
+        </tr>
+      </table>
+      <br />
+      
+
+      <a class="twitter-timeline" data-dnt=true href="https://twitter.com/redth" data-widget-id="253917988271562752">Tweets by @redth</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/such-android-api-levels-much-confuse-wow">Such Android API levels, much confuse. Wow.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/itunes-media-hotkey-disabler">iTunes Media HotKey Disabler</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ios7-full-screen-layout">iOS7: Fun times with the new Full Screen Layout!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ios7-recipe-background-fetching">iOS7 Recipe: Background Fetching</a>
+      </li>
+    
+      <li class="post">
+        <a href="/Auto-Wire-Up-Views-Xamarin-Activity">How to Auto Wire Up Android Activity Views in Xamarin.Android</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Jon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'redth';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
