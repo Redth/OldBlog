@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-05-08T16:26:42-04:00</updated>
+  <updated>2014-05-08T17:53:15-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -77,14 +77,16 @@
 
 <p>On iOS, you would basically replace:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UIApplication.SharedApplication.OpenURL("http://amzn.com/B007Q4OVHQ");</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">UIApplication</span><span class="p">.</span><span class="n">SharedApplication</span><span class="p">.</span><span class="n">OpenURL</span><span class="p">(</span><span class="s">&quot;http://amzn.com/B007Q4OVHQ&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>With this:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var result = await Rivets.AppLinks.Navigator.Navigate("http://amzn.com/B007Q4OVHQ");</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Rivets</span><span class="p">.</span><span class="n">AppLinks</span><span class="p">.</span><span class="n">Navigator</span><span class="p">.</span><span class="n">Navigate</span><span class="p">(</span><span class="s">&quot;http://amzn.com/B007Q4OVHQ&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>What this does is instead of directly navigating to the URL, it loads the URL first, checks for App Link metadata, and if it finds it, navigates to the appropriate app URL instead of the web URL.</p>
@@ -99,10 +101,11 @@
 
 <p>The example we looked at was specifically about iOS, but make no mistake, Android and Windows Phone are along for the ride.  I won&#8217;t go over the entire specification here, you can <a href="http://applinks.org/documentation/">visit the documentation</a> for that, but basically each platform has its own specific metadata property tags.  So on Android you&#8217;d have something like:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;metadata property="al:android:url" content="amazon://content/item?id=B007Q4OVHQ" /&gt;
-</span><span class='line'>&lt;metadata property="al:android:package" content="com.amazon" /&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;metadata</span> <span class="na">property=</span><span class="s">&quot;al:android:url&quot;</span> <span class="na">content=</span><span class="s">&quot;amazon://content/item?id=B007Q4OVHQ&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;metadata</span> <span class="na">property=</span><span class="s">&quot;al:android:package&quot;</span> <span class="na">content=</span><span class="s">&quot;com.amazon&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Windows Phone is included in the standard right now, but sadly Windows Store and Windows Universal are not.  I&#8217;ve already petitioned to have them supported, though there&#8217;s really nothing stopping us from adopting them as part of the standard as long as we are consistent on the keys used (eg: <code>al:windows_store:url</code> and <code>al:windows_universal:url</code>).</p>
