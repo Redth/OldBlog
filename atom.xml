@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-05-10T11:48:45-04:00</updated>
+  <updated>2014-05-13T17:02:36-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -95,7 +95,7 @@
 
 <p>See what I did there? Obviously <code>Rivets.AppLinks.Navigator.Navigate(..)</code> is not part of the iOS SDK.</p>
 
-<p>I&#8217;ve been working on a C# implementation for App Links called <a href="https://github.com/Redth/Rivets">Rivets</a>.  If you have read anything about app Links so far, you&#8217;ll probably have heard of <a href="https://github.com/BoltsFramework/">Bolts</a> which is an implementation of App Links for iOS (obj-c) and Android (java) created by Facebook.  So, <em>Rivets</em> is the Xamarin Android, Xamarin iOS, Windows Phone (and hopefully Windows Store soon) equivalent of Bolts!</p>
+<p>I&#8217;ve been working on a C# implementation for App Links called <a href="https://github.com/xamarin/Rivets">Rivets</a>.  If you have read anything about app Links so far, you&#8217;ll probably have heard of <a href="https://github.com/BoltsFramework/">Bolts</a> which is an implementation of App Links for iOS (obj-c) and Android (java) created by Facebook.  So, <em>Rivets</em> is the Xamarin Android, Xamarin iOS, Windows Phone (and hopefully Windows Store soon) equivalent of Bolts!</p>
 
 <h3>Other Platforms <em>ahem, Android and Windows Phone</em></h3>
 
