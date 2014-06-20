@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-06-20T16:09:22-04:00</updated>
+  <updated>2014-06-20T16:12:18-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -18,7 +18,9 @@
     <link href="http://redth.info/android-keystore-signatures-md5-sha1"/>
     <updated>2014-06-20T00:00:00-04:00</updated>
     <id>http://redth.info/Android-Keystore-Signatures-MD5-SHA1</id>
-    <content type="html"><![CDATA[<p>If you&#8217;ve ever used Google Maps or Amazon App Services in your Android app, you&#8217;ve probably gone through the pain of having to find an MD5 or SHA1 signature to give to the service so they could generate an API Key for you.</p>
+    <content type="html"><![CDATA[<p><img style="float: right" src="http://redth.info/images/android-keystore-signatures-md5-sha1/keystore-grumpy-cat.jpg" /></p>
+
+<p>If you&#8217;ve ever used Google Maps or Amazon App Services in your Android app, you&#8217;ve probably gone through the pain of having to find an MD5 or SHA1 signature to give to the service so they could generate an API Key for you.</p>
 
 <p>If you haven&#8217;t been through this experience, let me assure you: It&#8217;s painful, tedious, and annoying.</p>
 
