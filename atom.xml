@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-05-13T17:02:36-04:00</updated>
+  <updated>2014-06-20T16:08:25-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Finding your Android app's MD5 or SHA1 Signature from your keystore]]></title>
+    <link href="http://redth.info/android-keystore-signatures-md5-sha1"/>
+    <updated>2014-06-20T00:00:00-04:00</updated>
+    <id>http://redth.info/Android-Keystore-Signatures-MD5-SHA1</id>
+    <content type="html"><![CDATA[<p>If you&#8217;ve ever used Google Maps or Amazon App Services in your Android app, you&#8217;ve probably gone through the pain of having to find an MD5 or SHA1 signature to give to the service so they could generate an API Key for you.</p>
+
+<p>If you haven&#8217;t been through this experience, let me assure you: It&#8217;s painful, tedious, and annoying.</p>
+
+<!-- more -->
+
+
+<p>First of all, you need to find out which .keystore file was used to sign your app.  This is probably different depending on if you&#8217;re running a debug build versus a signed build for the app store.</p>
+
+<p>If you&#8217;re a <a href="http://xamarin.com/android">Xamarin.Android</a> user, you may not have even been aware that a <code>debug.keystore</code> file was created for you at some point and is used to sign all of your debug builds, so you can remain blissfully unaware that it exists, or where it even lives.</p>
+
+<p>There&#8217;s a great article on the <a href="">Xamarin Docs Site: Finding your Keystore&#8217;s MD5 or SHA1 Signature</a> that shows you how to generate these values step by step.  Put aside 15 minutes to go through it though (and hey, I wrote the initial draft of the doc, it&#8217;s as short as Google allowed me to make it, I swear!).</p>
+
+<h3>Enter, Android Signature Tool.</h3>
+
+<p>If you&#8217;ve been to my blog, you probably know that I don&#8217;t like to complain about problems that I can&#8217;t offer a solution for, so today is your lucky day!</p>
+
+<p>&lt;img src=&#8221;/images/android-keystore-signatures-md5-sha1/android-signature-tool-screenshot.png&#8221; /</p>
+
+<p>I&#8217;ve created a little tool called <strong><em><a href="https://github.com/Redth/Android.Signature.Tool/">Android Signature Tool</a></em></strong> (yes, the creative juices were flowing with that one).  It&#8217;s a simply GUI app (with a GUI for both Mac and Windows) that aims to minimize the tears spent on getting MD5 and SHA1 signatures.</p>
+
+<p>It&#8217;s very simple.  It will try and first find java&#8217;s <strong><em>keytool</em></strong> executable on your machine (which is needed to generate the signatures).  The default option is to try and find your Xamarin generated <strong><em>debug.keystore</em></strong> file for you, and spit out the MD5 and SHA1 signatures with the click of a button!  You can also specify your own .keystore file (for which you need to know the alias, storepass, and keypass you used when you created it).</p>
+
+<p>Hopefully this tool makes your life just a little bit more simple.  Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What are App Links?]]></title>
