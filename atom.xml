@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-06-20T16:12:18-04:00</updated>
+  <updated>2014-09-08T10:27:31-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -762,7 +762,9 @@
     <link href="http://redth.info/Xamarin-Studio-Launcher"/>
     <updated>2013-05-31T00:00:00-04:00</updated>
     <id>http://redth.info/xamarin-studio-launcher</id>
-    <content type="html"><![CDATA[<p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
+    <content type="html"><![CDATA[<p><strong>UPDATE: Sep 8, 2014</strong>: The original launcher works well, but after Xamarin 3.0, it didn&#8217;t look so up to date.  There were a couple people that took it upon themselves to update it, and thanks for that!  Now, I&#8217;ve released my own updated copy, so please download and try again!</p>
+
+<p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
 
 <p>I&#8217;ve recently converted to a Mac.  As a long time Windows user, one thing I was very accustomed to was keeping multiple visual studio, or more recently, Xamarin Studio instances open at any given time.  Switching to a Mac I found this isn&#8217;t so easy, so I decided to make a nice little Launcher application to open new Xamarin Studio instances at will!</p>
 
