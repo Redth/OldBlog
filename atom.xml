@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-09-08T10:27:31-04:00</updated>
+  <updated>2014-09-16T16:24:19-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Unifying Google Play Services]]></title>
+    <link href="http://redth.info/unifying-google-play-services"/>
+    <updated>2014-09-16T00:00:00-04:00</updated>
+    <id>http://redth.info/Android-Support-v4-v13-Google-Play-Services</id>
+    <content type="html"><![CDATA[<p>Once upon a time, you may have noticed there were a lot of choices when it came to adding Google Play Services to your Xamarin.Android apps.</p>
+
+<p><img src="http://redth.info/images/unifying-google-play-services/xamarin-google-play-services-components.png" alt="Google Play Services Chaos" /></p>
+
+<!-- more -->
+
+
+<p>This was always a bit confusing.  Which version should you use for your app?  Should you use the version for the highest API level you&#8217;re targeting, or the lowest one?  The answer wasn&#8217;t always clear.</p>
+
+<p>I won&#8217;t go into great detail as to why we did this in the past, because the good news is, there have been improvements in more recent versions of Xamarin.Android which have allowed us to unify many of these packages into one!</p>
+
+<p>Starting today, we have simplified Google Play Services bindings into the two following packages (both for NuGet and Component Store):</p>
+
+<ul>
+<li>Google Play Services (Froyo)</li>
+<li>Google Play Services</li>
+</ul>
+
+
+<p>This mirrors exactly what Google releases to developers: a .jar file frozen in time for Froyo compatibility, and the new, frequently updated .jar file for Gingerbread and above.</p>
+
+<p><strong>Which one do I use?</strong></p>
+
+<p>As a general rule, you should almost always use Google Play Services, unless you have a special need to target Froyo, however given that Froyo is now only 0.7% of devices, you are most likely safe to drop support for it.</p>
+
+<p><em>There is one caveat:</em> If you are targeting Gingerbread, there will be some classes in Google Play Services that you aren&#8217;t able to use while running on Gingerbread (eg: <a href="http://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html">MapFragment</a>).  You should take care to avoid using these if you are running on an API Level they aren&#8217;t compatible with (<a href="http://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html">Google has documented this</a>).</p>
+
+<p><strong>Updated &amp; Disabled/Delisted Components/NuGets</strong></p>
+
+<p>Finally, if you have referenced the <em>Google Play Services (ICS)</em> Component or NuGet, you should update it (it will now appear as simply <em>Google Play Services</em>).  This also means we have disabled and delisted the following Components and NuGet packages:</p>
+
+<ul>
+<li>Google Play Services (Gingerbread)</li>
+<li>Google Play Services (JellyBean)</li>
+<li>Google Play Services (KitKat)</li>
+</ul>
+
+
+<p>If you were using any of those packages, now is a good time to update them to use the new packages!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Finding your Android app's MD5 or SHA1 Signature from your keystore]]></title>
