@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-09-16T16:24:19-04:00</updated>
+  <updated>2014-09-16T16:25:39-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -17,7 +17,7 @@
     <title type="html"><![CDATA[Unifying Google Play Services]]></title>
     <link href="http://redth.info/unifying-google-play-services"/>
     <updated>2014-09-16T00:00:00-04:00</updated>
-    <id>http://redth.info/Android-Support-v4-v13-Google-Play-Services</id>
+    <id>http://redth.info/Unifying-Google-Play-Services</id>
     <content type="html"><![CDATA[<p>Once upon a time, you may have noticed there were a lot of choices when it came to adding Google Play Services to your Xamarin.Android apps.</p>
 
 <p><img src="http://redth.info/images/unifying-google-play-services/xamarin-google-play-services-components.png" alt="Google Play Services Chaos" /></p>
