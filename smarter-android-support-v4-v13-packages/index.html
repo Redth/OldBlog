@@ -116,29 +116,29 @@
 
 <p>The challenge with these two support libraries is that they are mutually exclusive.  That is, you can&#8217;t have <code>Support-v4</code> and <code>Support-v13</code> referenced in the same app.</p>
 
-<p>There&#8217;s a good reason for this though: <code>Support-v13</code> actually contains all the code and classes that you find in <code>Support-v4</code>, it just adds a bit more on top of them.  So, the answer is, just use <code>Support-v13</code> if you need to instead, right?  <em>If only it were that simple.</em></p>
+<p>There&#8217;s a good reason for this though: <code>Support-v13</code> actually contains all the code and classes that you&#8217;d find in <code>Support-v4</code>, it just adds a bit more on top of them.  So, the answer is, just use <code>Support-v13</code> if you need to instead, right?  <em>If only it were that simple.</em></p>
 
 <p><strong>Trouble in Paradise</strong></p>
 
-<p>Since <code>Support-v4</code> is so prevelant in apps and provides so much to developers, a lot of third party libraries have themselves taken a reference to <code>Support-v4</code>.  <em>Facebook</em>, and even <em>Google Play Services</em> both depend on <code>Support-v4</code>.</p>
+<p>Since <code>Support-v4</code> is so prevalent in apps and provides so much to developers, a lot of third party libraries themselves reference it.  <em>Facebook</em>, and even <em>Google Play Services</em> both depend on <code>Support-v4</code>, for example.</p>
 
-<blockquote><p>Usually 3rd party libraries choose to depend on <code>Support-v4</code> and not <code>Support-v13</code> so that they remain compatible with older API Level apps.</p></blockquote>
+<blockquote><p>Usually 3rd party libraries choose to depend on <code>Support-v4</code> and not <code>Support-v13</code> so that they can be used in apps with older API levels.</p></blockquote>
 
-<p>In the Xamarin world, these libraries (or bindings) are compiled to expect a reference to <code>Xamarin.Support.v4.dll</code>, and if you try and add <code>Xamarin.Support.v13</code> to your project, things explode due to duplicate class definitions, etc.  This has proven to be painful for folks wanting to use the new <code>Support-v13</code> features, but also use things depending on <code>Support-v4</code>.</p>
+<p>In the Xamarin world, these libraries (or bindings) are compiled to expect a reference to <code>Xamarin.Support.v4.dll</code>, and if you try and add <code>Xamarin.Support.v13</code> to your project, things blow up (since <code>Support-v13</code> already contains <code>Support-v4</code>).  This has proven to be painful for developers wanting to use the new <code>Support-v13</code> features, but also any 3rd party libraries which reference <code>Support-v4</code>.</p>
 
 <p><strong>TypeForwardedTo the rescue!</strong></p>
 
-<p>Luckily, fellow Components Team member <a href="https://twitter.com/mattleibow">Matthew</a> thought up a crafty solution to this issue.  There&#8217;s a perhaps little known <code>Assembly</code> level attribute called <a href="http://goo.gl/Whj7Cm">TypeForwardedTo</a>.  This nifty little attribute allows you to forward an expected type declaration in a given assembly to an actual implementation of it that exists in another assembly.</p>
+<p>Luckily, fellow Components Team member <a href="https://twitter.com/mattleibow">Matthew</a> thought up a crafty solution to this issue.  There&#8217;s a somewhat little known <code>Assembly</code> level attribute called <a href="http://goo.gl/Whj7Cm">TypeForwardedTo</a>.  This nifty attribute allows you to forward an expected type declaration in a given assembly to an actual implementation of it which exists in another assembly.</p>
 
-<p>What we&#8217;ve done is created a <code>Xamarin.Android.Support.v4.dll</code> assembly which contains nothing but <code>[assembly: TypeForwardedTo (..)]</code> declarations to forward all of its types to <code>Xamarin.Android.Support.v13.dll</code> instead.</p>
+<p>So, what we&#8217;ve done is created a <code>Xamarin.Android.Support.v4.dll</code> assembly which contains nothing but <code>[assembly: TypeForwardedTo (..)]</code> declarations to forward all of the expected <code>Support-v4</code> types to <code>Xamarin.Android.Support.v13.dll</code> instead.</p>
 
-<p>This means if you&#8217;re using a library which requires a reference to <code>Xamarin.Android.Support.v4.dll</code> (Let&#8217;s say Google Play Services for instance), you can substitute in this &#8216;type-forwarded&#8217; assembly version, and then add a reference to <code>Xamarin.Android.Support.v13.dll</code> as well.  Since <strong><em>v13</em></strong> contains all the implementation which <strong><em>v4</em></strong> has just forwarded to it (and then some), you can then use the new <strong><em>v13</em></strong> fanciness in your app, while still satisfying the <strong><em>v4</em></strong> reference that 3rd party libraries are depending on!</p>
+<p>This means if you&#8217;re using a library which requires a reference to <code>Xamarin.Android.Support.v4.dll</code> (Let&#8217;s say Google Play Services for instance), you can swap in this &#8216;type-forwarded&#8217; assembly, and then add a reference to <code>Xamarin.Android.Support.v13.dll</code> as well.  Since <strong><em>v13</em></strong> contains all the implementation which <strong><em>v4</em></strong> has just forwarded to it (and then some), you can use the new <strong><em>v13</em></strong> fanciness in your app, while still satisfying the <strong><em>v4</em></strong> reference that 3rd party libraries are depending on!</p>
 
 <p><strong>Sprinkle in some magic NuGet dust&#8230;</strong></p>
 
 <p>This wouldn&#8217;t be nearly as fun if you had to worry about which <code>Xamarin.Android.Support.v4.dll</code> you needed to pick (the actual implementation, or the type-forwarded one).  Luckily, in addition to the <code>TypeForwardedTo</code> magic, we&#8217;re adding some NuGet pixie dust to the mix!</p>
 
-<p>If you&#8217;re interested in the mechanics, here&#8217;s the new .nuspec file we&#8217;re using (You can skip ahead to the TL;DR section below otherwise):</p>
+<p>If you&#8217;re interested in the mechanics, this is essentially the new .nuspec file we&#8217;re using (You can skip ahead to the TL;DR section below otherwise):</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -182,10 +182,10 @@
 </span><span class='line'>  <span class="nt">&lt;/metadata&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;files&gt;</span>
 </span><span class='line'>    <span class="c">&lt;!-- Use Support v4 lib for anything up to Android 3.2 --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;..\libs\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid10&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;V4\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid10&quot;</span> <span class="nt">/&gt;</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="c">&lt;!-- Use Support v4 typeforwarded (to v13 types) lib for anything equal or higher than Android 3.2 --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;..\libs\V4TypeForwarded\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid32&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;V4TypeForwarded\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid32&quot;</span> <span class="nt">/&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;/files&gt;</span>
 </span><span class='line'><span class="nt">&lt;/package&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -197,12 +197,14 @@
 
 <ol>
 <li><p>If your app is targeting Android API Level 13 or higher (Honeycomb 3.2), you will automatically get the <code>Xamarin.Android.Support.v13</code> NuGet package as a dependency.</p></li>
-<li><p>If your app is targeting Android API Level 13 or higher, you will also get the <strong><em>Type-Forwarded</em></strong> assembly version of <code>Xamarin.Android.Support.v4.dll</code> installed by the NuGet.  This will work in conjunction with and forward all of its types to the <code>Xamarin.Android.Support.v13.dll</code> assembly that gets installed by the <strong><em>v13</em></strong> NuGet dependency.</p></li>
+<li><p>If your app is targeting Android API Level 13 or higher, you will also get the <strong><em>Type-Forwarded</em></strong> assembly version of <code>Xamarin.Android.Support.v4.dll</code> installed by the NuGet package.  This will work in conjunction with and forward all of its types to the <code>Xamarin.Android.Support.v13.dll</code> assembly that gets installed by the <strong><em>v13</em></strong> NuGet dependency.</p></li>
 <li><p>If your app is targeting anything <strong><em>below</em></strong> API Level 13 (eg: Froyo, Gingerbread), you will get the good old <code>Xamarin.Android.Support.v4.dll</code> assembly that you&#8217;ve come to know and love!</p></li>
 </ol>
 
 
-<p>In case you were wondering, yes, we have decided that if you are targeting API Level 13 or higher, and choose to use the Android Support library <strong><em>v4</em></strong>, we are actually having you use <strong><em>v13</em></strong> instead.  We decided the very arbitrary obligatory size increase was worth the much improved compatibility between your apps and 3rd party libraries.</p>
+<p>To be clear, yes, we have decided that if you are targeting API Level 13 or higher, and choose to use the Android Support library <strong><em>v4</em></strong>, you will actually be using <strong><em>v13</em></strong> instead.  We decided the very small size increase was well worth the much improved compatibility between your apps and 3rd party libraries.</p>
+
+<p>You can use these new packages today!  We will be rolling out updates to our Components to achieve the same results in the near future!</p>
 
 <p>Enjoy!</p>
 </div>
