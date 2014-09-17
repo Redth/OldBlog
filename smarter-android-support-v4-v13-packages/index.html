@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Smarter Xamarin Android Support v4 / v13 Packages - Redth</title>
+  <meta name="author" content="Jon">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://redth.info/smarter-android-support-v4-v13-packages">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6465612-17']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Redth</a></h1>
+  
+    <h2>code, ramblings, rants</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:redth.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Smarter Xamarin Android Support V4 / V13 Packages</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-17T00:00:00-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Warning: This is going to be a bit geeky of a post.  If you don&#8217;t want to know the details, skip down to the <strong>TL;DR</strong> section for the need-to-know bits :)</p>
+
+<p>Now then, if you&#8217;ve ever built an Android app, you&#8217;ve probably used the Android Support libraries.  Google created these as a way to enable developers to use new features on older Android versions.  The most common Support library is arguably <code>Support-v4</code>, however as older Android devices retire and newer versions of Android increase in market share, <code>Support-v13</code> is becoming more commonplace.</p>
+
+<!-- more -->
+
+
+<blockquote><p><code>Support-v4</code> can be used all the way back to Android API Level 4 (Donut - 1.6), but <code>Support-v13</code> is only compatible back to API Level 13 (Honeycomb - 3.2).</p></blockquote>
+
+<p>The challenge with these two support libraries is that they are mutually exclusive.  That is, you can&#8217;t have <code>Support-v4</code> and <code>Support-v13</code> referenced in the same app.</p>
+
+<p>There&#8217;s a good reason for this though: <code>Support-v13</code> actually contains all the code and classes that you find in <code>Support-v4</code>, it just adds a bit more on top of them.  So, the answer is, just use <code>Support-v13</code> if you need to instead, right?  <em>If only it were that simple.</em></p>
+
+<p><strong>Trouble in Paradise</strong></p>
+
+<p>Since <code>Support-v4</code> is so prevelant in apps and provides so much to developers, a lot of third party libraries have themselves taken a reference to <code>Support-v4</code>.  <em>Facebook</em>, and even <em>Google Play Services</em> both depend on <code>Support-v4</code>.</p>
+
+<blockquote><p>Usually 3rd party libraries choose to depend on <code>Support-v4</code> and not <code>Support-v13</code> so that they remain compatible with older API Level apps.</p></blockquote>
+
+<p>In the Xamarin world, these libraries (or bindings) are compiled to expect a reference to <code>Xamarin.Support.v4.dll</code>, and if you try and add <code>Xamarin.Support.v13</code> to your project, things explode due to duplicate class definitions, etc.  This has proven to be painful for folks wanting to use the new <code>Support-v13</code> features, but also use things depending on <code>Support-v4</code>.</p>
+
+<p><strong>TypeForwardedTo the rescue!</strong></p>
+
+<p>Luckily, fellow Components Team member <a href="https://twitter.com/mattleibow">Matthew</a> thought up a crafty solution to this issue.  There&#8217;s a perhaps little known <code>Assembly</code> level attribute called <a href="http://goo.gl/Whj7Cm">TypeForwardedTo</a>.  This nifty little attribute allows you to forward an expected type declaration in a given assembly to an actual implementation of it that exists in another assembly.</p>
+
+<p>What we&#8217;ve done is created a <code>Xamarin.Android.Support.v4.dll</code> assembly which contains nothing but <code>[assembly: TypeForwardedTo (..)]</code> declarations to forward all of its types to <code>Xamarin.Android.Support.v13.dll</code> instead.</p>
+
+<p>This means if you&#8217;re using a library which requires a reference to <code>Xamarin.Android.Support.v4.dll</code> (Let&#8217;s say Google Play Services for instance), you can substitute in this &#8216;type-forwarded&#8217; assembly version, and then add a reference to <code>Xamarin.Android.Support.v13.dll</code> as well.  Since <strong><em>v13</em></strong> contains all the implementation which <strong><em>v4</em></strong> has just forwarded to it (and then some), you can then use the new <strong><em>v13</em></strong> fanciness in your app, while still satisfying the <strong><em>v4</em></strong> reference that 3rd party libraries are depending on!</p>
+
+<p><strong>Sprinkle in some magic NuGet dust&#8230;</strong></p>
+
+<p>This wouldn&#8217;t be nearly as fun if you had to worry about which <code>Xamarin.Android.Support.v4.dll</code> you needed to pick (the actual implementation, or the type-forwarded one).  Luckily, in addition to the <code>TypeForwardedTo</code> magic, we&#8217;re adding some NuGet pixie dust to the mix!</p>
+
+<p>If you&#8217;re interested in the mechanics, here&#8217;s the new .nuspec file we&#8217;re using (You can skip ahead to the TL;DR section below otherwise):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;package</span> <span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;metadata&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;id&gt;</span>Xamarin.Android.Support.v4<span class="nt">&lt;/id&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>Xamarin Support Library v4<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;version&gt;</span>20.0.0.4<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c">&lt;!-- Ommitted boring parts --&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;dependencies&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!-- Depend on v13 support nuget if targeting equal or higher than Android 3.2 --&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;group</span> <span class="na">targetFramework=</span><span class="s">&quot;MonoAndroid32&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;dependency</span> <span class="na">id=</span><span class="s">&quot;Xamarin.Android.Support.v13&quot;</span> <span class="na">version=</span><span class="s">&quot;20.0.0.4&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/group&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/dependencies&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/metadata&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;files&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- Use Support v4 lib for anything up to Android 3.2 --&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;..\libs\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid10&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c">&lt;!-- Use Support v4 typeforwarded (to v13 types) lib for anything equal or higher than Android 3.2 --&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;file</span> <span class="na">src=</span><span class="s">&quot;..\libs\V4TypeForwarded\Xamarin.Android.Support.v4.dll&quot;</span> <span class="na">target=</span><span class="s">&quot;lib\MonoAndroid32&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/files&gt;</span>
+</span><span class='line'><span class="nt">&lt;/package&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>TL;DR - The need to know bits</strong></p>
+
+<p>We&#8217;ve made some minor, but important changes to the <code>Xamarin.Android.Support.v4</code> NuGet package:</p>
+
+<ol>
+<li><p>If your app is targeting Android API Level 13 or higher (Honeycomb 3.2), you will automatically get the <code>Xamarin.Android.Support.v13</code> NuGet package as a dependency.</p></li>
+<li><p>If your app is targeting Android API Level 13 or higher, you will also get the <strong><em>Type-Forwarded</em></strong> assembly version of <code>Xamarin.Android.Support.v4.dll</code> installed by the NuGet.  This will work in conjunction with and forward all of its types to the <code>Xamarin.Android.Support.v13.dll</code> assembly that gets installed by the <strong><em>v13</em></strong> NuGet dependency.</p></li>
+<li><p>If your app is targeting anything <strong><em>below</em></strong> API Level 13 (eg: Froyo, Gingerbread), you will get the good old <code>Xamarin.Android.Support.v4.dll</code> assembly that you&#8217;ve come to know and love!</p></li>
+</ol>
+
+
+<p>In case you were wondering, yes, we have decided that if you are targeting API Level 13 or higher, and choose to use the Android Support library <strong><em>v4</em></strong>, we are actually having you use <strong><em>v13</em></strong> instead.  We decided the very arbitrary obligatory size increase was worth the much improved compatibility between your apps and 3rd party libraries.</p>
+
+<p>Enjoy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jon</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-17T00:00:00-04:00" pubdate data-updated="true">Sep 17<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/smarter-android-support-v4-v13-packages" data-via="redth" data-counturl="http://redth.info/smarter-android-support-v4-v13-packages" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/unifying-google-play-services" title="Previous Post: Unifying Google Play Services">&laquo; Unifying Google Play Services</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  	<br />
+  	<p><img src="/images/Site/Redth.png" alt="Redth" /></p>
+  
+  	<p>
+   	 <a href="http://www.amazon.com/gp/product/1118026438/ref=as_li_tf_il?ie=UTF8&camp=1789&creative=9325&creativeASIN=1118026438&linkCode=as2&tag=red082-20"><img border="0" src="http://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1118026438&Format=_SL160_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=red082-20" ></a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=red082-20&l=as2&o=1&a=1118026438" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+     </p>
+
+     <p><a href="http://gonemobile.io" target="_blank"><img src="/images/Site/Gone-Mobile-Podcast.png" alt="Gone Mobile Podcast" title="Gone Mobile Podcast" /></a></p>
+
+     <p><a href="http://planet.xamarin.com" target="_blank"><img src="/images/Site/Xamarin-Planet-Badge.png" alt="Featured Xamarin Planet Community Blog" title="Featured Xamarin Planet Community Blog" /></a></p>
+
+     <p> 
+      <iframe src="http://githubbadge.appspot.com/badge/Redth?a=0" style="border: 0;height: 108px;width: 200px;overflow: hidden;" frameBorder=0></iframe>     
+     </p>
+     
+     <p>
+      <a href="http://ca.linkedin.com/pub/jonathan-dick/3/a60/2b5"><img src="http://www.linkedin.com/img/webpromo/btn_viewmy_160x33.png" width="160" height="33" border="0" alt="View Jonathan Dick's profile on LinkedIn"></a>
+      </p>
+
+
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <a href="http://xamarin.com/mvp" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-MVP-Badge.png" alt="Xamarin Most Valuable Professional" /></a>
+          </td>
+          <td>
+            <a href="http://xamarin.com/consulting-partners" target="_blank" style="border-style: none;"><img src="/images/Site/Xamarin-Certified-Developer.png" alt="Xamarin Certified Developer" /></a>
+          </td>         
+        </tr>
+      </table>
+      <br />
+      
+
+      <a class="twitter-timeline" data-dnt=true href="https://twitter.com/redth" data-widget-id="253917988271562752">Tweets by @redth</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/smarter-android-support-v4-v13-packages">Smarter Xamarin Android Support v4 / v13 Packages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/unifying-google-play-services">Unifying Google Play Services</a>
+      </li>
+    
+      <li class="post">
+        <a href="/android-keystore-signatures-md5-sha1">Finding your Android app's MD5 or SHA1 Signature from your keystore</a>
+      </li>
+    
+      <li class="post">
+        <a href="/what-are-app-links">What are App Links?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/such-android-api-levels-much-confuse-wow">Such Android API levels, much confuse. Wow.</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Jon -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'redth';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://redth.info/smarter-android-support-v4-v13-packages';
+        var disqus_url = 'http://redth.info/smarter-android-support-v4-v13-packages';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
