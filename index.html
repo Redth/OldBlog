@@ -9,7 +9,7 @@
   <meta name="author" content="Jon">
 
   
-  <meta name="description" content="If you&#8217;ve ever built an Android app, you&#8217;ve probably used the Android Support libraries. Google created these as a way to enable &hellip;">
+  <meta name="description" content="Awhile back I made a quick little AppleScript based app called Xamarin Studio Launcher to help launch multiple instances of Xamarin Studio (it had a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Xamarin-Studio-Launcher-v3">New and Improved Xamarin Studio Launcher</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-19T00:00:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
+        
+         | <a href="/Xamarin-Studio-Launcher-v3#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Awhile back I made a quick little AppleScript based app called <a href="/Xamarin-Studio-Launcher/">Xamarin Studio Launcher</a> to help launch multiple instances of Xamarin Studio (it had a pretty little icon that you could keep in your dock to open new instances - which I recently updated to the newer Xamarin look).</p>
+
+<p><img src="/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
+
+<p>While it was cute, and relatively functional, as a recovering ex-Windows user, I found myself still constantly opening <code>.sln</code> files from finder, which would cause them to open in an existing instance of Xamarin Studio, closing whatever current solution happened to be open in that instance.</p>
+
+<p>Now I know about the ability to open multiple solutions in the same Xamarin Studio instance, and generally I&#8217;m pretty good about forcing myself into learning the nuances of the platform I&#8217;m working on, however, having multiple instances of Visual Studio open was something I grew so accustomed to that I just couldn&#8217;t shake the habit of being on a Mac!</p>
+
+<p>Not sure why it took me so long to make this, but here it is, finally!</p>
+
+<h3>Xamarin Studio Launcher v3</h3>
+
+<p>This new launcher app works first and foremost exactly like the <a href="/Xamarin-Studio-Launcher/">previous Xamarin Studio Launcher</a> I released.  You can put it in your dock, and when you open it, it will launch a new, blank instance of Xamarin Studio.</p>
+
+<p><em>The new feature</em> is that it can now handle opening <code>.sln</code> files.  If you choose to open a <code>.sln</code> file with this app, it will open that <code>.sln</code> file in a <em>new</em> instance of Xamarin Studio.</p>
+
+<p>This means you can set Finder to open all <code>.sln</code> files with Xamarin Studio Launcher so any time you double click or otherwise open a <code>.sln</code> file from Finder, it will open in its own instance of Xamarin Studio!</p>
+
+<p><strong>How to set this as the default app for .sln files</strong></p>
+
+<p><img src="/images/Xamarin-Studio-Launcher/Finder.Info.ChangeAll.png" alt="Xamarin Studio Launcher" /></p>
+
+<ol>
+<li>Find a <code>.sln</code> file in Finder</li>
+<li>Right click the <code>.sln</code> file and <code>Get Info</code> (or highlight the file and <code>cmd + i</code></li>
+<li>Under the <em>Open With</em> section, click the drop-down list and click <em>Choose</em></li>
+<li>Navigate to and select <em>Xamarin Studio Launcher</em></li>
+<li>Click <em>Change All</em></li>
+</ol>
+
+
+<p><strong>Download</strong></p>
+
+<p>Here&#8217;s the .zip file containing <em>Xamarin Studio Launcher.app</em>:</p>
+
+<p><a href="/assets/Xamarin.Studio.Launcher.v3.zip">Download Xamarin Studio Launcher v3</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -800,52 +873,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/Xamarin-Studio-Launcher">Xamarin Studio Launcher</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-31T00:00:00-04:00" pubdate data-updated="true">May 31<span>st</span>, 2013</time>
-        
-         | <a href="/Xamarin-Studio-Launcher#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>UPDATE: Sep 8, 2014</strong>: The original launcher works well, but after Xamarin 3.0, it didn&#8217;t look so up to date.  There were a couple people that took it upon themselves to update it, and thanks for that!  Now, I&#8217;ve released my own updated copy, so please download and try again!</p>
-
-<p><img src="/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
-
-<p>I&#8217;ve recently converted to a Mac.  As a long time Windows user, one thing I was very accustomed to was keeping multiple visual studio, or more recently, Xamarin Studio instances open at any given time.  Switching to a Mac I found this isn&#8217;t so easy, so I decided to make a nice little Launcher application to open new Xamarin Studio instances at will!</p>
-
-<p>So, without further ado, please download the Xamarin Studio Launcher!</p>
-
-<p><a href="https://dl.dropboxusercontent.com/u/56106/Xamarin.Studio.Launcher.dmg">Download Xamarin Studio Launcher</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -900,6 +927,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Xamarin-Studio-Launcher-v3">New and Improved Xamarin Studio Launcher</a>
+      </li>
+    
+      <li class="post">
         <a href="/smarter-android-support-v4-v13-packages">Smarter Xamarin Android Support v4 / v13 Packages</a>
       </li>
     
@@ -913,10 +944,6 @@
     
       <li class="post">
         <a href="/what-are-app-links">What are App Links?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/such-android-api-levels-much-confuse-wow">Such Android API levels, much confuse. Wow.</a>
       </li>
     
   </ul>

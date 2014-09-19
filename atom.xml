@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-09-17T08:50:53-04:00</updated>
+  <updated>2014-09-19T09:54:10-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New and Improved Xamarin Studio Launcher]]></title>
+    <link href="http://redth.info/Xamarin-Studio-Launcher-v3"/>
+    <updated>2014-09-19T00:00:00-04:00</updated>
+    <id>http://redth.info/new-and-improved-xamarin-studio-launcher</id>
+    <content type="html"><![CDATA[<p>Awhile back I made a quick little AppleScript based app called <a href="http://redth.info/Xamarin-Studio-Launcher/">Xamarin Studio Launcher</a> to help launch multiple instances of Xamarin Studio (it had a pretty little icon that you could keep in your dock to open new instances - which I recently updated to the newer Xamarin look).</p>
+
+<p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
+
+<p>While it was cute, and relatively functional, as a recovering ex-Windows user, I found myself still constantly opening <code>.sln</code> files from finder, which would cause them to open in an existing instance of Xamarin Studio, closing whatever current solution happened to be open in that instance.</p>
+
+<p>Now I know about the ability to open multiple solutions in the same Xamarin Studio instance, and generally I&#8217;m pretty good about forcing myself into learning the nuances of the platform I&#8217;m working on, however, having multiple instances of Visual Studio open was something I grew so accustomed to that I just couldn&#8217;t shake the habit of being on a Mac!</p>
+
+<p>Not sure why it took me so long to make this, but here it is, finally!</p>
+
+<h3>Xamarin Studio Launcher v3</h3>
+
+<p>This new launcher app works first and foremost exactly like the <a href="http://redth.info/Xamarin-Studio-Launcher/">previous Xamarin Studio Launcher</a> I released.  You can put it in your dock, and when you open it, it will launch a new, blank instance of Xamarin Studio.</p>
+
+<p><em>The new feature</em> is that it can now handle opening <code>.sln</code> files.  If you choose to open a <code>.sln</code> file with this app, it will open that <code>.sln</code> file in a <em>new</em> instance of Xamarin Studio.</p>
+
+<p>This means you can set Finder to open all <code>.sln</code> files with Xamarin Studio Launcher so any time you double click or otherwise open a <code>.sln</code> file from Finder, it will open in its own instance of Xamarin Studio!</p>
+
+<p><strong>How to set this as the default app for .sln files</strong></p>
+
+<p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Finder.Info.ChangeAll.png" alt="Xamarin Studio Launcher" /></p>
+
+<ol>
+<li>Find a <code>.sln</code> file in Finder</li>
+<li>Right click the <code>.sln</code> file and <code>Get Info</code> (or highlight the file and <code>cmd + i</code></li>
+<li>Under the <em>Open With</em> section, click the drop-down list and click <em>Choose</em></li>
+<li>Navigate to and select <em>Xamarin Studio Launcher</em></li>
+<li>Click <em>Change All</em></li>
+</ol>
+
+
+<p><strong>Download</strong></p>
+
+<p>Here&#8217;s the .zip file containing <em>Xamarin Studio Launcher.app</em>:</p>
+
+<p><a href="http://redth.info/assets/Xamarin.Studio.Launcher.v3.zip">Download Xamarin Studio Launcher v3</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Smarter Xamarin Android Support v4 / v13 Packages]]></title>
@@ -919,7 +963,9 @@
     <link href="http://redth.info/Xamarin-Studio-Launcher"/>
     <updated>2013-05-31T00:00:00-04:00</updated>
     <id>http://redth.info/xamarin-studio-launcher</id>
-    <content type="html"><![CDATA[<p><strong>UPDATE: Sep 8, 2014</strong>: The original launcher works well, but after Xamarin 3.0, it didn&#8217;t look so up to date.  There were a couple people that took it upon themselves to update it, and thanks for that!  Now, I&#8217;ve released my own updated copy, so please download and try again!</p>
+    <content type="html"><![CDATA[<p><strong>UPDATE: Sep 19, 2014</strong>: Yet another new Launcher!  This time I&#8217;m calling it v3, and it can now handle <code>.sln</code> files (opening them in a new instance of Xamarin Studio).  <a href="http://redth.info/Xamarin-Studio-Launcher-v3">Check out the new blog post for more info</a>!</p>
+
+<p><strong>UPDATE: Sep 8, 2014</strong>: The original launcher works well, but after Xamarin 3.0, it didn&#8217;t look so up to date.  There were a couple people that took it upon themselves to update it, and thanks for that!  Now, I&#8217;ve released my own updated copy, so please download and try again!</p>
 
 <p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
 

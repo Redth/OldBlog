@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Unifying Google Play Services - Redth</title>
+  <title>New and Improved Xamarin Studio Launcher - Redth</title>
   <meta name="author" content="Jon">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="An update to my Launcher tool for Mac OSX to launch multiple instances of Xamarin Studio">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://redth.info/unifying-google-play-services">
+  <link rel="canonical" href="http://redth.info/Xamarin-Studio-Launcher-v3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Redth" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Unifying Google Play Services</h1>
+      <h1 class="entry-title">New and Improved Xamarin Studio Launcher</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-09-16T00:00:00-04:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-09-19T00:00:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,45 +105,42 @@
   </header>
 
 
-<div class="entry-content"><p>Once upon a time, you may have noticed there were a lot of choices when it came to adding Google Play Services to your Xamarin.Android apps.</p>
+<div class="entry-content"><p>Awhile back I made a quick little AppleScript based app called <a href="/Xamarin-Studio-Launcher/">Xamarin Studio Launcher</a> to help launch multiple instances of Xamarin Studio (it had a pretty little icon that you could keep in your dock to open new instances - which I recently updated to the newer Xamarin look).</p>
 
-<p><img src="/images/unifying-google-play-services/xamarin-google-play-services-components.png" alt="Google Play Services Chaos" /></p>
+<p><img src="/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
 
-<!-- more -->
+<p>While it was cute, and relatively functional, as a recovering ex-Windows user, I found myself still constantly opening <code>.sln</code> files from finder, which would cause them to open in an existing instance of Xamarin Studio, closing whatever current solution happened to be open in that instance.</p>
 
+<p>Now I know about the ability to open multiple solutions in the same Xamarin Studio instance, and generally I&#8217;m pretty good about forcing myself into learning the nuances of the platform I&#8217;m working on, however, having multiple instances of Visual Studio open was something I grew so accustomed to that I just couldn&#8217;t shake the habit of being on a Mac!</p>
 
-<p>This was always a bit confusing.  Which version should you use for your app?  Should you use the version for the highest API level you&#8217;re targeting, or the lowest one?  The answer wasn&#8217;t always clear.</p>
+<p>Not sure why it took me so long to make this, but here it is, finally!</p>
 
-<p>I won&#8217;t go into great detail as to why we did this in the past, because the good news is, there have been improvements in more recent versions of Xamarin.Android which have allowed us to unify many of these packages into one!</p>
+<h3>Xamarin Studio Launcher v3</h3>
 
-<p>Starting today, we have simplified Google Play Services bindings into the two following packages (both for NuGet and Component Store):</p>
+<p>This new launcher app works first and foremost exactly like the <a href="/Xamarin-Studio-Launcher/">previous Xamarin Studio Launcher</a> I released.  You can put it in your dock, and when you open it, it will launch a new, blank instance of Xamarin Studio.</p>
 
-<ul>
-<li>Google Play Services (Froyo)</li>
-<li>Google Play Services</li>
-</ul>
+<p><em>The new feature</em> is that it can now handle opening <code>.sln</code> files.  If you choose to open a <code>.sln</code> file with this app, it will open that <code>.sln</code> file in a <em>new</em> instance of Xamarin Studio.</p>
 
+<p>This means you can set Finder to open all <code>.sln</code> files with Xamarin Studio Launcher so any time you double click or otherwise open a <code>.sln</code> file from Finder, it will open in its own instance of Xamarin Studio!</p>
 
-<p>This mirrors exactly what Google releases to developers: a .jar file frozen in time for Froyo compatibility, and the new, frequently updated .jar file for Gingerbread and above.</p>
+<p><strong>How to set this as the default app for .sln files</strong></p>
 
-<p><strong>Which one do I use?</strong></p>
+<p><img src="/images/Xamarin-Studio-Launcher/Finder.Info.ChangeAll.png" alt="Xamarin Studio Launcher" /></p>
 
-<p>As a general rule, you should almost always use Google Play Services, unless you have a special need to target Froyo, however given that Froyo is now only 0.7% of devices, you are most likely safe to drop support for it.</p>
-
-<p><em>There is one caveat:</em> If you are targeting Gingerbread, there will be some classes in Google Play Services that you aren&#8217;t able to use while running on Gingerbread (eg: <a href="http://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html">MapFragment</a>).  You should take care to avoid using these if you are running on an API Level they aren&#8217;t compatible with (<a href="http://developer.android.com/reference/com/google/android/gms/maps/MapFragment.html">Google has documented this</a>).  Luckily Google also provides <code>Support*</code> versions of these classes (eg: <a href="http://developer.android.com/reference/com/google/android/gms/maps/SupportMapFragment.html">SupportMapFragment</a>).</p>
-
-<p><strong>Updated &amp; Disabled/Delisted Components/NuGets</strong></p>
-
-<p>Finally, if you have referenced the <em>Google Play Services (ICS)</em> Component or NuGet, you should update it (it will now appear as simply <em>Google Play Services</em>).  This also means we have disabled and delisted the following Components and NuGet packages:</p>
-
-<ul>
-<li>Google Play Services (Gingerbread)</li>
-<li>Google Play Services (JellyBean)</li>
-<li>Google Play Services (KitKat)</li>
-</ul>
+<ol>
+<li>Find a <code>.sln</code> file in Finder</li>
+<li>Right click the <code>.sln</code> file and <code>Get Info</code> (or highlight the file and <code>cmd + i</code></li>
+<li>Under the <em>Open With</em> section, click the drop-down list and click <em>Choose</em></li>
+<li>Navigate to and select <em>Xamarin Studio Launcher</em></li>
+<li>Click <em>Change All</em></li>
+</ol>
 
 
-<p>If you were using any of those packages, now is a good time to update them to use the new packages!</p>
+<p><strong>Download</strong></p>
+
+<p>Here&#8217;s the .zip file containing <em>Xamarin Studio Launcher.app</em>:</p>
+
+<p><a href="/assets/Xamarin.Studio.Launcher.v3.zip">Download Xamarin Studio Launcher v3</a></p>
 </div>
 
 
@@ -166,7 +163,7 @@
   
 
 
-<time datetime="2014-09-16T00:00:00-04:00" pubdate data-updated="true">Sep 16<span>th</span>, 2014</time>
+<time datetime="2014-09-19T00:00:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2014</time>
       
 
 
@@ -174,7 +171,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/unifying-google-play-services" data-via="redth" data-counturl="http://redth.info/unifying-google-play-services" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://redth.info/Xamarin-Studio-Launcher-v3" data-via="redth" data-counturl="http://redth.info/Xamarin-Studio-Launcher-v3" >Tweet</a>
   
   
   
@@ -185,10 +182,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/android-keystore-signatures-md5-sha1" title="Previous Post: Finding your Android app's MD5 or SHA1 Signature from your keystore">&laquo; Finding your Android app's MD5 or SHA1 Signature from your keystore</a>
+        <a class="basic-alignment left" href="/smarter-android-support-v4-v13-packages" title="Previous Post: Smarter Xamarin Android Support v4 / v13 Packages">&laquo; Smarter Xamarin Android Support v4 / v13 Packages</a>
       
-      
-        <a class="basic-alignment right" href="/smarter-android-support-v4-v13-packages" title="Next Post: Smarter Xamarin Android Support v4 / v13 Packages">Smarter Xamarin Android Support v4 / v13 Packages &raquo;</a>
       
     </p>
   </footer>
@@ -293,8 +288,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://redth.info/unifying-google-play-services';
-        var disqus_url = 'http://redth.info/unifying-google-play-services';
+        var disqus_identifier = 'http://redth.info/Xamarin-Studio-Launcher-v3';
+        var disqus_url = 'http://redth.info/Xamarin-Studio-Launcher-v3';
         var disqus_script = 'embed.js';
       
     (function () {
