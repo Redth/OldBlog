@@ -218,6 +218,10 @@
 
 <p>There are some edge cases you might need to set this property different, but I haven&#8217;t run across any myself yet.</p>
 
+<p><strong>UPDATE:</strong> There is one fairly popular edge case that has come to light since I originally wrote this post.  You might want to use a higher Target Android Version than your Target Framework to satisfy <strong>aapt.exe</strong>&#8217;s compilation.</p>
+
+<p>For example, with the AppCompat v7 bindings that Xamarin provides, Google has used some resource attributes that only exist in Lollipop (v5.0, API Level 21).  You could set your Target Framework to v5.0 and everything will compile, but you might not want to have to worry about not using that many new API&#8217;s in your app.  It is possible to set your Target Framework to v4.0.3 but set your Target Android Version to v5.0 to satisfy <strong>aapt</strong>.</p>
+
 <h3>But wait, there&#8217;s more (complexity)</h3>
 
 <p>Now that you understand the difference between Target and minimum Android version settings there&#8217;s one more curve ball to throw at you.</p>

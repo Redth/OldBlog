@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-09-19T09:54:10-04:00</updated>
+  <updated>2014-12-22T10:05:58-05:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -482,6 +482,10 @@
 <p>I left this one until the end for a reason.  It&#8217;s probably not something you need to change unless you know exactly why you need to change it.  My recommendation here is to leave this one set to <em>Automatic - use target framework version</em> which will automatically target the same version you picked for <strong>#1 Target Framework</strong>.</p>
 
 <p>There are some edge cases you might need to set this property different, but I haven&#8217;t run across any myself yet.</p>
+
+<p><strong>UPDATE:</strong> There is one fairly popular edge case that has come to light since I originally wrote this post.  You might want to use a higher Target Android Version than your Target Framework to satisfy <strong>aapt.exe</strong>&#8217;s compilation.</p>
+
+<p>For example, with the AppCompat v7 bindings that Xamarin provides, Google has used some resource attributes that only exist in Lollipop (v5.0, API Level 21).  You could set your Target Framework to v5.0 and everything will compile, but you might not want to have to worry about not using that many new API&#8217;s in your app.  It is possible to set your Target Framework to v4.0.3 but set your Target Android Version to v5.0 to satisfy <strong>aapt</strong>.</p>
 
 <h3>But wait, there&#8217;s more (complexity)</h3>
 
