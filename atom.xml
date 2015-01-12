@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2014-12-22T10:05:58-05:00</updated>
+  <updated>2015-01-12T11:36:07-05:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -16,9 +16,11 @@
   <entry>
     <title type="html"><![CDATA[New and Improved Xamarin Studio Launcher]]></title>
     <link href="http://redth.info/Xamarin-Studio-Launcher-v3"/>
-    <updated>2014-09-19T00:00:00-04:00</updated>
+    <updated>2015-01-12T00:00:00-05:00</updated>
     <id>http://redth.info/new-and-improved-xamarin-studio-launcher</id>
-    <content type="html"><![CDATA[<p>Awhile back I made a quick little AppleScript based app called <a href="http://redth.info/Xamarin-Studio-Launcher/">Xamarin Studio Launcher</a> to help launch multiple instances of Xamarin Studio (it had a pretty little icon that you could keep in your dock to open new instances - which I recently updated to the newer Xamarin look).</p>
+    <content type="html"><![CDATA[<p><strong>UPDATE - Jan 12, 2015:</strong> Thanks to the wonderful <a href="http://twitter.com/vancura">@Vaclav</a>, Xamarin Studio Launcher now has a proper icon!  Please download the much prettier v4 at the end of this post!</p>
+
+<p>Awhile back I made a quick little AppleScript based app called <a href="http://redth.info/Xamarin-Studio-Launcher/">Xamarin Studio Launcher</a> to help launch multiple instances of Xamarin Studio (it had a pretty little icon that you could keep in your dock to open new instances - which I recently updated to the newer Xamarin look).</p>
 
 <p><img src="http://redth.info/images/Xamarin-Studio-Launcher/Xamarin.Studio.Launcher.Icon.png" alt="Xamarin Studio Launcher" /></p>
 
@@ -53,7 +55,7 @@
 
 <p>Here&#8217;s the .zip file containing <em>Xamarin Studio Launcher.app</em>:</p>
 
-<p><a href="http://redth.info/assets/Xamarin.Studio.Launcher.v3.zip">Download Xamarin Studio Launcher v3</a></p>
+<p><a href="http://redth.info/assets/Xamarin.Studio.Launcher.v4.zip">Download Xamarin Studio Launcher v4</a></p>
 ]]></content>
   </entry>
   
