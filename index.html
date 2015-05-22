@@ -9,7 +9,7 @@
   <meta name="author" content="Jon">
 
   
-  <meta name="description" content="UPDATE - Jan 12, 2015: Thanks to the wonderful @Vaclav, Xamarin Studio Launcher now has a proper icon! Please download the much prettier v4 at the &hellip;">
+  <meta name="description" content="Google Play Services is a rapidly evolving library that Google has been using to combat fragmentation on the platform, and ensure their developers &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,125 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Xamarin-Google-Play-Services-Improvements">Improvements Coming to Xamarin Google Play Services</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-22T00:00:00-04:00" pubdate data-updated="true">May 22<span>nd</span>, 2015</time>
+        
+         | <a href="/Xamarin-Google-Play-Services-Improvements#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Google Play Services is a rapidly evolving library that Google has been using to combat fragmentation on the platform, and ensure their developers have access to great new API&#8217;s without having to worry about what Android version their users are actually on.</p>
+
+<p>The rate at which this library has evolved recently has been especially challenging for us to keep pace with in getting bindings out for Xamarin.Android, but, rest assured, we are committed to bringing out a great Google Play Services experience in your Xamarin apps.  Here are some of the improvements we&#8217;ve been making that are now available as pre-release!</p>
+
+<h2>Latest and Greatest</h2>
+
+<p>Google has rapidly iterated in the last few revisions.  We went from 6.5 to 7.0 to 7.3 very quickly, and we&#8217;re happy to say we&#8217;re shipping the latest and greatest and expect to keep a better track record going forward on getting the latest out quickly!</p>
+
+<p><strong>NOTE:</strong> As of this post, the improvements are available on NuGet as <strong><em>24.0.0-rc1</em></strong> versioned pacakges.</p>
+
+<h2>NuGet what you Want</h2>
+
+<p>We&#8217;ve now split up Google Play Services into many NuGet packages to match the changes Google made to split them up into many .jar files.  Using NuGet we&#8217;re able to manage the dependencies between all of the packages.  For example, all packages depend on the <em>Google Play Services - Base</em> package, while others such as <em>Location</em> depend on <em>Maps</em> as well.</p>
+
+<p>You can now grab only the packages you need in your app without bringing in everything else.  This should help keep your app size down as Google continues to expand Play Services adding more and more features and API&#8217;s.</p>
+
+<p>Finally, the old <em>Google Play Services - All</em> package has been kept around to help make the transition easier.  It now depends on all of the individual NuGet packages.</p>
+
+<h2>Breaking Changes, Nicer Naming</h2>
+
+<p>In the process of binding libraries to make them more C# friendly, we often run into cases where casing is different between java and C#.  For example, in java, we have <code>cast.Cast</code> which in C# translates into <code>Cast.Cast</code>.  Since we cannot have a class named the same as its namespace in C#, this presents a problem.  Traditionally we have renamed the class, for example to <code>Cast.CastClass</code>.  This isn&#8217;t always very discoverable or nice to look at.</p>
+
+<p>We&#8217;ve now decided to change the namespaces instead of renaming the conflicting classes.  All namespaces now have <em>Sdk</em> appended to them, so we now have <code>CastSdk.Cast</code> for instance.  This should be much more consistent and discoverable going foward.</p>
+
+<p>The other area where this is a problem is with fields in java.  For instance, <code>Fitness.FITNESS_API</code> and <code>Fitness.FitnessApi</code> in java both transform into <code>Fitness.FitnessApi</code> in a C# binding by default.  To avoid conflicts and bring consistency across the bindings, we&#8217;ve decided to keep the java naming conventions in the C# binding.</p>
+
+<p>You&#8217;ll now use the upper-cased <code>Fitness.FITNESS_API</code> fields to specify an Api to add in your <code>IGoogleApiClient.AddApi (..)</code> calls, whereas you&#8217;ll use the lower-cased <code>Fitness.FitnessApi</code> fields to actually invoke methods of the given Api.</p>
+
+<h2>Happier C# Developers</h2>
+
+<p>Our binding tooling generally does a good job at making java libraries more C#-ified.  Google Play Services has a number of cases that are less friendly to our tooling and often this has created a sub-par developer experience from a C# perspective.</p>
+
+<p>We&#8217;re continuing to work at improving this story in Google Play Services, and there are a couple of changes that should make life better:</p>
+
+<h3>IPendingResult.AsAsync</h3>
+
+<p>A very common pattern in Google Play Services is to make use of the interface <code>IPendingResult</code>.  This is sort of like a <code>Task</code> - it&#8217;s a promise or a future.  You can <code>.Await()</code> it in a blocking manner (though you must do so off the UI thread), or you can <code>.SetResultCallback (IResultCallback)</code> which means you need to pass in an implementation of the interface which usually means creating an implementor class with some Actions or Events to make the code a bit less ugly (since we don&#8217;t have anonymous classes in C#).</p>
+
+<p>You now have more options with <code>IPendingIntent</code> instances through some extension methods:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">// 1. Turn it into a Task with the desired result type</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">SomeMethodReturningPendingIntent</span> <span class="p">(...)</span>
+</span><span class='line'>  <span class="p">.</span><span class="n">AsAsync</span><span class="p">&lt;</span><span class="n">TypeOfStatus</span><span class="p">&gt;</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 2. Pass in an Action&lt;T&gt; to the callback</span>
+</span><span class='line'><span class="n">SomeMethodReturningPendingIntent</span> <span class="p">(...)</span>
+</span><span class='line'>  <span class="p">.</span><span class="n">SetResultCallback</span><span class="p">&lt;</span><span class="n">TypeOfStatus</span><span class="p">&gt;</span> <span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// ...</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Helper Implementor Classes</h3>
+
+<p>There&#8217;s still a lot of areas that require you pass in some sort of class implementing a listener type of interface.  <code>ILocationListener</code> is a good example.  Instead of having to build your own class which implements this simple interface, we&#8217;ve added a class <code>LocationListener</code> which implements <code>ILocationListener</code> and exposes an event for you.  Nothing earth-shattering here, but hopefully it saves you from writing the same boiler plate code over and over.</p>
+
+<p>You can expect more implementation classes like this going forward.</p>
+
+<h3>GoogleApiClientBuilder</h3>
+
+<p>The first place you&#8217;ll probably notice the heavy use of interfaces is in the <code>GoogleApiClientBuilder</code>.  The <code>.AddConnectionCallbacks (..)</code> and <code>.AddOnConnectionFailedListener (..)</code> methods both require instances of interface implementations as parameters.  You can still call these methods like normal, but now there&#8217;s extension methods allowing you to pass Action&#8217;s into them as appropriate.  Again, this is code you could easily write, but shouldn&#8217;t have to.</p>
+
+<h3>Less p0, p1, p2</h3>
+
+<p>This has always been a bit of an eye-sore, to see poorly named parameters.  We&#8217;ve made some improvements in our tooling that are going to continue to help get better parameter names.  We&#8217;ve started trying some of these techniques out already in Google Play Services!</p>
+
+<h2>Feedback?</h2>
+
+<p>I don&#8217;t always get to explore all of the API&#8217;s inside Google Play Services on a day to day basis, so I&#8217;m not always aware of where the pain points are.</p>
+
+<p>I&#8217;m very open to feedback if there&#8217;s other areas you&#8217;d like to see some C# improvements to like we&#8217;ve started.</p>
+
+<p>Please don&#8217;t be shy, mention me on twitter with any suggestions you have!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -640,241 +759,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/Auto-Wire-Up-Views-Xamarin-Activity">How to Auto Wire Up Android Activity Views in Xamarin.Android</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-23T00:00:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
-        
-         | <a href="/Auto-Wire-Up-Views-Xamarin-Activity#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity.  I finally was fed up enough to write a simple little helper that does this based on reflection.  Consider the following verbosity monstrosity:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span> <span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span> <span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">SetContentView</span> <span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Layout</span><span class="p">.</span><span class="n">RandomDataLayout</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">button1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button1</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">button2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button2</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">button3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button3</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">button4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">button4</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">textView1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView1</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView2</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView3</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView4</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView5</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView5</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView6</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView6</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView7</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView7</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView8</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView8</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">textView9</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">TextView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">textView9</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">imageView1</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView1</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">imageView2</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView2</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">imageView3</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView3</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">imageView4</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView4</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">imageView5</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView5</span><span class="p">);</span>
-</span><span class='line'>      <span class="n">imageView6</span> <span class="p">=</span> <span class="n">FindViewById</span><span class="p">&lt;</span><span class="n">ImageView</span><span class="p">&gt;(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">imageView6</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that&#8217;s a lot of code to do something really simple.  Plumbing code that&#8217;s so simple I&#8217;d rather not, and <em>shouldn&#8217;t have to</em> waste my time on it!  How about this instead:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Activity (Label = &quot;RandomDataActivity&quot;)]</span>            
-</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">RandomDataActivity</span> <span class="p">:</span> <span class="n">Activity</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">Button</span> <span class="n">button1</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button2</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button3</span><span class="p">;</span> <span class="n">Button</span> <span class="n">button4</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView1</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView2</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView4</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView5</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView6</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">TextView</span> <span class="n">textView7</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView8</span><span class="p">;</span> <span class="n">TextView</span> <span class="n">textView9</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView1</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView2</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">ImageView</span> <span class="n">imageView4</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView5</span><span class="p">;</span> <span class="n">ImageView</span> <span class="n">imageView6</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnCreate</span> <span class="p">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="k">base</span><span class="p">.</span><span class="n">OnCreate</span> <span class="p">(</span><span class="n">bundle</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">SetContentView</span> <span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Layout</span><span class="p">.</span><span class="n">RandomDataLayout</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="n">WireUpViews</span> <span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here&#8217;s the extension method I created to do this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">ActivityExtensions</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">WireUpViews</span><span class="p">(</span><span class="k">this</span> <span class="n">Activity</span> <span class="n">activity</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>      <span class="c1">//Get all the View fields from the activity</span>
-</span><span class='line'>      <span class="kt">var</span> <span class="n">members</span> <span class="p">=</span> <span class="k">from</span> <span class="n">m</span> <span class="k">in</span> <span class="n">activity</span><span class="p">.</span><span class="n">GetType</span> <span class="p">().</span><span class="n">GetFields</span> <span class="p">(</span><span class="n">BindingFlags</span><span class="p">.</span><span class="n">NonPublic</span> <span class="p">|</span> <span class="n">BindingFlags</span><span class="p">.</span><span class="n">Instance</span><span class="p">)</span>
-</span><span class='line'>                    <span class="k">where</span> <span class="n">m</span><span class="p">.</span><span class="n">FieldType</span><span class="p">.</span><span class="n">IsSubclassOf</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">View</span><span class="p">))</span>
-</span><span class='line'>                    <span class="k">select</span> <span class="n">m</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(!</span><span class="n">members</span><span class="p">.</span><span class="n">Any</span> <span class="p">())</span>
-</span><span class='line'>          <span class="k">return</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">members</span><span class="p">.</span><span class="n">ToList</span> <span class="p">().</span><span class="n">ForEach</span> <span class="p">(</span><span class="n">m</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>          <span class="k">try</span>
-</span><span class='line'>          <span class="p">{</span>
-</span><span class='line'>              <span class="c1">//Find the android identifier with the same name</span>
-</span><span class='line'>              <span class="kt">var</span> <span class="n">id</span> <span class="p">=</span> <span class="n">activity</span><span class="p">.</span><span class="n">Resources</span><span class="p">.</span><span class="n">GetIdentifier</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">activity</span><span class="p">.</span><span class="n">PackageName</span><span class="p">);</span>
-</span><span class='line'>              <span class="c1">//Set the activity field&#39;s value to the view with that identifier</span>
-</span><span class='line'>              <span class="n">m</span><span class="p">.</span><span class="n">SetValue</span> <span class="p">(</span><span class="n">activity</span><span class="p">,</span> <span class="n">activity</span><span class="p">.</span><span class="n">FindViewById</span> <span class="p">(</span><span class="n">id</span><span class="p">));</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>          <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">{</span>
-</span><span class='line'>              <span class="k">throw</span> <span class="k">new</span> <span class="nf">MissingFieldException</span> <span class="p">(</span><span class="s">&quot;Failed to wire up the field &quot;</span>
-</span><span class='line'>                                               <span class="p">+</span> <span class="n">m</span><span class="p">.</span><span class="n">Name</span> <span class="p">+</span> <span class="s">&quot; to a View in your layout with a corresponding identifier&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
-</span><span class='line'>          <span class="p">}</span>
-</span><span class='line'>      <span class="p">});</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ok, ok, I know it&#8217;s not perfect, but it&#8217;s a bit of a time saver, and keeps my code looking a bit neater.  In a perfect world I should just be able to use an android identifier as if it were already a declared as a code field.  There&#8217;s also room for improvement in my extension method, for example, what if you declare a field that&#8217;s a View but not in the layout, but you did this intentionally?  Well, I don&#8217;t want to do <strong><em>ALL</em></strong> your work for you ;)</p>
-
-<p>Just wanted to share this little bit with you.  Hopefully it sparks some ideas for something greater in your day!  Happy Coding!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -929,6 +813,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/Xamarin-Google-Play-Services-Improvements">Improvements coming to Xamarin Google Play Services</a>
+      </li>
+    
+      <li class="post">
         <a href="/Xamarin-Studio-Launcher-v3">New and Improved Xamarin Studio Launcher</a>
       </li>
     
@@ -942,10 +830,6 @@
     
       <li class="post">
         <a href="/android-keystore-signatures-md5-sha1">Finding your Android app&#8217;s MD5 or SHA1 Signature from your keystore</a>
-      </li>
-    
-      <li class="post">
-        <a href="/what-are-app-links">What are App Links?</a>
       </li>
     
   </ul>
