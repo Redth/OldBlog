@@ -9,7 +9,7 @@
   <meta name="author" content="Jon">
 
   
-  <meta name="description" content="One thing that&#8217;s occasionally bothered me was how verbose it is in Android to wire up views from a layout, in an activity. I finally was fed up &hellip;">
+  <meta name="description" content="This is my entry into the Xamarin Recipe Cook-Off. Recipes, in Xamarin terms, are very simple demonstrations of how a single feature or piece of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,159 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ios7-recipe-background-fetching">iOS7 Recipe: Background Fetching</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-22T00:00:00-04:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
+        
+         | <a href="/ios7-recipe-background-fetching#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is my entry into the <a href="http://blog.xamarin.com/xamarin-recipe-cook-off/">Xamarin Recipe Cook-Off</a>.  Recipes, in Xamarin terms, are very simple demonstrations of how a single feature or piece of functionality is implemented.  I thought background fetching would be useful to many developers, and it&#8217;s pretty easy to implement, especially after reading this recipe.</p>
+
+<ul>
+<li><a href="https://github.com/Redth/iOS.BackgroundFetch.Sample">View the entire Recipe &amp; Source Code</a></li>
+</ul>
+
+
+<p>I&#8217;ve also included the recipe in this blog post:</p>
+
+<h2>Background Fetching Data</h2>
+
+<p>This recipe shows how to register your application to perform background fetching on intervals.</p>
+
+<h4>1. Recipe</h4>
+
+<p>In your application&#8217;s <code>Info.plist</code> file, add the value <code>fetch</code> to the <code>UIBackgroundModes</code> (<em>Required background modes</em>) property.</p>
+
+<p>Next, in your <code>AppDelegate</code> class, in the <code>FinishedLaunching</code> override method, add the following code to register your application for background fetching:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">UIApplication</span><span class="p">.</span><span class="n">SharedApplication</span><span class="p">.</span><span class="n">SetMinimumBackgroundFetchInterval</span> <span class="p">(</span><span class="n">UIApplication</span><span class="p">.</span><span class="n">BackgroundFetchIntervalMinimum</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, in your <code>AppDelegate</code> class, override the <code>PerformFetch</code> method.</p>
+
+<p>This method will be executed by the operating system when it sees best fit (eg: when the device is awake and connected already).  You do not have complete control over how often or when fetching happens.</p>
+
+<p>You should execute your own code to fetch new data in this method.  It&#8217;s important to call the <code>Action&lt;UIBackgroundFetchResult&gt; completionHandler</code> parameter which is passed into this method with the appropriate result when you are done.</p>
+
+<h4>2. Sample PerformFetch</h4>
+
+<p>In this sample, a weather service is called by background fetching so that when the user opens the app, recent weather is available.  The weather is cached locally after it&#8217;s fetched in the background, and the UI is also updated if there is new weather info.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">async</span> <span class="k">void</span> <span class="nf">PerformFetch</span> <span class="p">(</span><span class="n">UIApplication</span> <span class="n">application</span><span class="p">,</span> <span class="n">Action</span><span class="p">&lt;</span><span class="n">UIBackgroundFetchResult</span><span class="p">&gt;</span> <span class="n">completionHandler</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="p">(</span><span class="s">&quot;PerformFetch called...&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//Return no new data by default</span>
+</span><span class='line'>  <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NoData</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Get latest weather</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">w</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GetWeatherAsync</span><span class="p">(</span><span class="s">&quot;Windsor, Canada&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//Cache the weather locally</span>
+</span><span class='line'>      <span class="n">CacheWeatherAsync</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Update the UI</span>
+</span><span class='line'>      <span class="n">weatherViewController</span><span class="p">.</span><span class="n">UpdateWeather</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">//Indicate we have new data</span>
+</span><span class='line'>      <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">NewData</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Indicate a failed fetch if there was an exception</span>
+</span><span class='line'>    <span class="n">result</span> <span class="p">=</span> <span class="n">UIBackgroundFetchResult</span><span class="p">.</span><span class="n">Failed</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">finally</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//We really should call the completion handler with our result</span>
+</span><span class='line'>    <span class="n">completionHandler</span> <span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>3. Additional Information</h4>
+
+<ul>
+<li>Your <code>PerformFetch</code> has about <strong>30</strong> seconds to run before it&#8217;s killed</li>
+<li>The operating system is more likely to grant more time (and more often) to your application for background fetching if you are efficient, which means executing quickly, and always calling <code>completionHandler</code> with an accurate result</li>
+<li>You can tell the operating system  the minimum time to sleep between waking up your application and calling its <code>PerformFetch</code> method if you know your app only updates at a certain interval, to avoid extra calls to <code>PerformFetch</code> and wasting battery life.  You would specify the minimum time in seconds in the <code>UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval (double minimumBackgroundFetchInterval)</code> method</li>
+<li>You can actually make calls to update your UI from the <code>PerformFetch</code> method so that the next time the user launches the app, everything is up to date</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -688,52 +841,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/why-we-needed-facebook-messenger">Why We Needed Facebook Messenger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-10T00:00:00-04:00" pubdate data-updated="true">Aug 10<span>th</span>, 2011</time>
-        
-         | <a href="/why-we-needed-facebook-messenger#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p><img src="/images/FB-MSG/01.png" alt="" /></p></blockquote>
-
-<p>So if you haven’t heard yet, Facebook has come out with their own BBM slash iMessage slash Kik slash WhatsApp slash slash slash…  Oh great, another messenger app that we don’t need?
-I live in a world where I’m geeked out for every new gadget and service on the planet.  I sign up first, I play around with the service, and I daydream about how wonderful my life would be if all my friends got onboard and started using this newfangled, awesome, life altering service!  Unfortunately, that’s all just a daydream.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/why-we-needed-facebook-messenger">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -790,6 +897,10 @@ I live in a world where I’m geeked out for every new gadget and service on the
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/CyanogenMod-for-your-Xamarin-apps">CyanogenMod for your Xamarin apps</a>
+      </li>
+    
+      <li class="post">
         <a href="/Xamarin-Google-Play-Services-Improvements">Improvements coming to Xamarin Google Play Services</a>
       </li>
     
@@ -803,10 +914,6 @@ I live in a world where I’m geeked out for every new gadget and service on the
     
       <li class="post">
         <a href="/unifying-google-play-services">Unifying Google Play Services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/android-keystore-signatures-md5-sha1">Finding your Android app&#8217;s MD5 or SHA1 Signature from your keystore</a>
       </li>
     
   </ul>

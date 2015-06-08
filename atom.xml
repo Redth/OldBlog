@@ -4,7 +4,7 @@
   <title><![CDATA[Redth]]></title>
   <link href="http://redth.info/atom.xml" rel="self"/>
   <link href="http://redth.info/"/>
-  <updated>2015-05-22T11:13:02-04:00</updated>
+  <updated>2015-06-08T09:27:28-04:00</updated>
   <id>http://redth.info/</id>
   <author>
     <name><![CDATA[Jon]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CyanogenMod for your Xamarin apps]]></title>
+    <link href="http://redth.info/CyanogenMod-for-your-Xamarin-apps"/>
+    <updated>2015-06-08T00:00:00-04:00</updated>
+    <id>http://redth.info/cyanogenmod-for-your-xamarin-apps</id>
+    <content type="html"><![CDATA[<p><img style="float: right" src="http://redth.info/images/CyanogenMod-on-Xamarin/CyanogenMod-SDK.png" /></p>
+
+<p>CyanogenMod is an aftermarket Android firmware which keeps growing in popularity.  With the first release of their platform SDK, it&#8217;s now possible to harness the power of the Quick Settings pulldown menu in your own apps running on CyanogenMod.</p>
+
+<p>Quick Settings Custom Tiles are a great way to add an easy, global way for your users to do things like toggle a feature of your app on and off.</p>
+
+<p>Adding a Quick Settings Custom Tile to your Xamarin.Android app is easy now with the new <a href="https://components.xamarin.com/view/cyanogen-platform-sdk">CyanogenMod SDK Component</a> on the Xamarin Component Store.</p>
+
+<p>After you&#8217;ve added the component to your project, you can use the <code>CustomTile.Builder</code> to build your tile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">customTile</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CustomTile</span><span class="p">.</span><span class="n">Builder</span> <span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">.</span><span class="n">SetOnClickIntent</span> <span class="p">(</span><span class="n">pendingIntent</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">.</span><span class="n">SetContentDescription</span> <span class="p">(</span><span class="s">&quot;Monkey Toggler&quot;</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">.</span><span class="n">SetLabel</span> <span class="p">(</span><span class="s">&quot;Monkeys &quot;</span> <span class="p">+</span> <span class="n">States</span><span class="p">.</span><span class="n">Off</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">.</span><span class="n">SetIcon</span> <span class="p">(</span><span class="n">Resource</span><span class="p">.</span><span class="n">Drawable</span><span class="p">.</span><span class="n">ic_launcher</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">.</span><span class="n">Build</span> <span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once you&#8217;ve created your custom tile, you can publish it with the <code>CMStatusBarManager</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">CMStatusBarManager</span><span class="p">.</span><span class="n">GetInstance</span> <span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="n">PublishTile</span> <span class="p">(</span><span class="n">CustomTileId</span><span class="p">,</span> <span class="n">customTile</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>CustomTileId</code> is a unique ID associated with your tile.  When you publish a new tile with the same ID, it will update the existing tile under that identifier.  This makes it possible to change the appearance based on the current state of your app.</p>
+
+<p>Don&#8217;t worry if your app isn&#8217;t running on CyanogenMod, in that case the SDK gracefully fails.  You won&#8217;t see any exceptions, but rather, no Custom Tiles will be published on platforms which do not support it.  You can feel safe in adding this feature to your app!</p>
+
+<p>This is the first and only feature that CyanogenMod has released in its Platform SDK.  I&#8217;m excited to see what new features they add in the near future!  Go grab the component today and give your CyanogenMod users a greater user experience!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Improvements coming to Xamarin Google Play Services]]></title>
@@ -1688,70 +1733,6 @@ Add this file to your MonoTouch Application Project, and make sure the Build mod
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why we needed Facebook Messenger]]></title>
-    <link href="http://redth.info/why-we-needed-facebook-messenger"/>
-    <updated>2011-08-10T00:00:00-04:00</updated>
-    <id>http://redth.info/why-we-needed-facebook-messenger</id>
-    <content type="html"><![CDATA[<blockquote><p><img src="http://redth.info/images/FB-MSG/01.png" alt="" /></p></blockquote>
-
-<p>So if you haven’t heard yet, Facebook has come out with their own BBM slash iMessage slash Kik slash WhatsApp slash slash slash…  Oh great, another messenger app that we don’t need?
-I live in a world where I’m geeked out for every new gadget and service on the planet.  I sign up first, I play around with the service, and I daydream about how wonderful my life would be if all my friends got onboard and started using this newfangled, awesome, life altering service!  Unfortunately, that’s all just a daydream.</p>
-
-<!-- more -->
-
-
-<h3>My friends aren’t all Geeks</h3>
-
-<blockquote><p><img src="http://redth.info/images/FB-MSG/02.png" alt="" /></p></blockquote>
-
-<p>In the real world, most of my friends don’t care.  They are normal people, who can still sleep at night without a Google+ invite.  At the end of the day, if tech makes their life better, easier, or otherwise more fulfilling, they will use it.  If it doesn’t meet these requirements, why should they care?  I can’t disagree with this sentiment either looking at things from their perspective.  In fact I’ve made it a priority lately to not try and get all my family and friends using the latest and greatest new thing, or trying to get them to buy this device or that device.  Instead, I’m trying to practice restraint, and help them get what best suits THEIR needs, not my own desires projected onto their experiences.
-I recently bit my tongue as my sister decided a blackberry was the best device for her, simply because her husband has one for work, and they could chat for free over BBM.  I tried to explain to her that data is data, and they could easily use WhatsApp or Google Talk to chat no matter which device she picked.  In the end, I realized BBM would just work for them.  It wouldn’t matter if Whatsapp’s servers went down, or if her work’s firewall would block WhatsApp, it would JUST WORK, period.</p>
-
-<p>Messaging has long been a frustration for me.  I can remember at some points in my life having at least 5 or 6 different IM accounts running under Gaim (rockin’ it old school) or Trillian or some other software as such.  Eventually most of my contacts seemed to stick to a couple main networks, and recently I have taken to only using Google Talk and Skype as my main messaging platforms.</p>
-
-<h3>Mobile: This changes everything</h3>
-
-<p>As mobile came along, the game changed again.  Eventually it became universal that everyone should have texting capabilities.  This has been pretty good, but recently texting has become more and more frustrating for a number of reasons:</p>
-
-<ol>
-<li><p><strong><em>It’s not necessarily cheap.</em></strong>  Phone companies love to charge outrageous amounts for a service which essentially costs them nothing.  For shame.</p></li>
-<li><p><strong><em>It’s not reliable.</em></strong>  In Canada we have 3 major networks: Rogers, Bell, Telus.  Usually sending messages within the same network is fairly reliable (although recently it took 3 hours for a text to arrive from my wife, we sat in the same room and watched it happen).  Unfortunately my friends are on different networks and we have nothing but problems with texts being delayed for hours, or never reaching their destination
-at all.  This problem seems to be amplified on weekends, when reliability is most critical.  The carriers all like to pass the buck to each other on this issue.</p></li>
-<li><p><strong><em>It’s not cross-platform / cross-device.</em></strong>  If I’m sitting at a computer, with a full keyboard, why the heck would I want to type a message on my phone? I shouldn’t have to shift between SMS and GTalk just because I’m moving between devices.</p></li>
-</ol>
-
-
-<h3>Data for the masses:  This changes everything.  Again.</h3>
-
-<blockquote><p><img src="http://redth.info/images/FB-MSG/03.png" alt="" /></p></blockquote>
-
-<p>Data has become fairly ubiquitous now for mobile users.  Almost all of my close friends have smartphones, and most of them have some sort of data plan.  Companies such as Kik or WhatsApp have tried to stick it to the man by making applications that replace traditional SMS’ing which use data instead of SMS.  They’re better, stronger, faster, and usually more reliable (or at least as reliable as Amazon’s cloud services).
-These applications are great.  I’ve even got some of my friends using them, and why not?  They seem to be more reliable, and have better features (like not having to pay $0.25 to send a picture!).  This fixes the problems of Reliability and Price, but it introduces a new problem: Ubiquity.  Check out this compatibility matrix, there is not one data based messenger app that covers all platforms.  How can I expect to get all my friends on board with this?</p>
-
-<blockquote><p><img src="http://redth.info/images/FB-MSG/table.png" alt="" /></p></blockquote>
-
-<p>Even if one app covered all the platforms, there’s still the difficulty of getting friend buy-in.  They need to get the app, register, and start using it.  Not an easy feat.  Plus, I’d still be stuck using SMS for the few friends still without data plans or smartphones.  This scenario would be better, but not perfect.</p>
-
-<h3>Your mom is on facebook</h3>
-
-<blockquote><p><img src="http://redth.info/images/FB-MSG/04.png" alt="" /></p></blockquote>
-
-<p>And your aunt, and your grandma!  Seriously, facebook has taken the world by storm.  It’s like one of those geek daydreams that actually came true, where ALL my friends actually signed up for and used the new geeky service (ok there’s a few stragglers and defiant friends, but heck, it’s their loss!).</p>
-
-<p>Let’s talk about ubiquity here.  All my friends are already registered for facebook .  Check!  Facebook Messenger supports iOS and Android, and according to a very small blurb in their help center, Blackberry support is coming soon.  I’d also be extremely surprised if we did not see a Windows Phone 7 app released when Mango is officially out in the wild.  That leaves Nokia and Meego.  Now, to be fair, a lot of people outside of North America may still use Nokia.  In my world, nobody with a smartphone has anything other than iOS, Android, or Blackberry (I’m the only person I know who owns a WP7 device even).</p>
-
-<p>In my world, once the Blackberry app is released, all my friends (who have smartphones and data plans) have no excuse not to use Facebook Messenger.  In addition, all my friends who text can still be included, as the Facebook Messenger creators were smart enough to incorporate the ability to include normal SMS numbers in your chats.  That means ideally, I still have to go into one app only to communicate with all my friends.
-Finally, Facebook Messenger integrates with Facebook Messages and Chat on the regular website.  I can finally transition from my desktop, to my phone, to my iPad, and back to my desktop seamlessly, without my friends knowing any different, and without losing my conversation history.  This is a big win for me!</p>
-
-<blockquote><p><img src="http://redth.info/images/FB-MSG/05.png" alt="" /></p></blockquote>
-
-<h3>Ok Fanboy, settle down!</h3>
-
-<p>Honestly, I’m not trying to be a fanboy.  I don’t even like facebook as a company that much, but I can’t help but love the possibilities that facebook messenger brings to my world.  If I can get my friends on board (and I don’t think it will be an issue), we can finally chat reliably, seamlessly, for less money!  Good bye SMS plan!</p>
 ]]></content>
   </entry>
   
