@@ -141,7 +141,7 @@
 
 <p>In the process of binding libraries to make them more C# friendly, we often run into cases where casing is different between java and C#.  For example, in java, we have <code>cast.Cast</code> which in C# translates into <code>Cast.Cast</code>.  Since we cannot have a class named the same as its namespace in C#, this presents a problem.  Traditionally we have renamed the class, for example to <code>Cast.CastClass</code>.  This isn&#8217;t always very discoverable or nice to look at.</p>
 
-<p><strong>&lt;Update&gt; We will no longer be renaming these classes.  No breaking change here anymore
+<p><strong>&lt;Update&gt; We will no longer be renaming these namespaces and classes.  No breaking changes here anymore!
 &lt;/Update&gt;</strong></p>
 
 <p><del>We&#8217;ve now decided to change the namespaces instead of renaming the conflicting classes.  All namespaces now have <em>Sdk</em> appended to them, so we now have <code>CastSdk.Cast</code> for instance.  This should be much more consistent and discoverable going foward.</del></p>
